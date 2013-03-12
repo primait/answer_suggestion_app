@@ -1,0 +1,11 @@
+<div class="well well-small">
+  {{#if results}}
+  <ul class="entries">
+    {{#each results}}
+    <li data-url="{{url}}">
+      <a href="{{url}}">{{title}}</a>
+    </li>
+    {{/each}}
+  </ul>
+  {{/if}}
+</div>
