@@ -3,7 +3,11 @@
     this.ticket = ticket;
 
     this.toSearchQuery = function(){
-      return "";
+      var query = this.ticket.tags().join(' ') + ' ';
+
+      query += this.ticket.subject();
+
+      return query;
     };
   }
 

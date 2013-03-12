@@ -2,5 +2,7 @@
   "app": {
     "description":  "Answer Suggestions from your knowledge base.",
     "name":         "Answer Suggestions"
-  }
+  },
+
+  "no_results": "No suggestions for this ticket."
 }
