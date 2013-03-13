@@ -1,13 +1,13 @@
 <div class="well well-small">
-  {{#if results}}
+  {{#if entries}}
   <ul class="entries">
-    {{#each results}}
+    {{#each entries}}
     <li data-url="{{url}}">
       <a href="{{url}}">{{title}}</a>
     </li>
     {{/each}}
   </ul>
   {{else}}
-  <p>{{t "no_results"}}
+  <p>{{t "no_entries"}}
   {{/if}}
 </div>
