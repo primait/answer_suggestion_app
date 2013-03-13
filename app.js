@@ -75,9 +75,9 @@
       this.self = _.uniq(newSelf, true, function(i){return i.id;});
 
       return this.self;
-    }
+    };
 
-    this.toArray = function(){ return this.self };
+    this.toArray = function(){ return this.self; };
   }
 
   return {
