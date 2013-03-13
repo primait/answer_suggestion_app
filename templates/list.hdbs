@@ -7,7 +7,5 @@
     </li>
     {{/each}}
   </ul>
-  {{else}}
-  <p>{{t "no_entries"}}
   {{/if}}
 </div>

@@ -8,7 +8,7 @@
       // For each word, check all the stop words
       for(y=0; y < stop_words.length; y++) {
         // Get the current word
-        var word = words[x];
+        var word = words[x].replace(/\s+|[^a-z]+\'/ig, "");
 
         // Get the stop word
         var stop_word = stop_words[y];
@@ -23,12 +23,13 @@
 
           var regex = new RegExp(regex_str, "ig");
 
-          // Remove the word from the keywords
           str = str.replace(regex, " ");
         }
       }
     }
-    return str.replace(/^\s+|\s+$/g, "");
+    // Remove punctuation and trim
+    return str.replace(/[\!\?\,\.\;]/g,"")
+      .replace(/^\s+|\s+$/g, "");
   }
 
 
@@ -83,6 +84,7 @@
   return {
     doneLoading: false,
     entries: new EntrySet(),
+    executedSearch: 0,
     events: {
       // APP EVENTS
       'app.activated'           : 'initializeIfReady',
@@ -131,7 +133,12 @@
     },
 
     searchDone: function(data) {
+      this.executedSearch++;
       this.entries.push(data.results);
+
+      if (this.executedSearch == 2 &&
+          _.isEmpty(this.entries.toArray()))
+        return this.$('.well').html('<p>' + this.I18n.t('no_entries') + '</p>');
 
       return this.switchTo('list', {
         entries: new EntriesSerializer(this.entries.toArray(), this.baseUrl()).toList()
