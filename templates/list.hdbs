@@ -1,10 +1,14 @@
 <div class="well well-small">
+  <p>{{t "help_text"}}</p>
   {{#if entries}}
   <ul class="entries">
     {{#each entries}}
-    <li>
-      <a href="{{url}}" class="entry">{{title}}</a>
-    </li>
+      <li>
+        <a href="{{url}}" target="_blank" class="pull-left"><i class="icon-share-alt"></i></a>
+        <div class="truncate">
+          <a href="{{url}}" class="entry">{{title}}</a>
+        </div>
+      </li>
     {{/each}}
   </ul>
   {{/if}}

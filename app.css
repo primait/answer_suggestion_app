@@ -1,0 +1,15 @@
+ul {
+  padding-top: 5px;
+  margin-left: 0.5em;
+}
+
+.entry {
+  padding-left: 0.5em;
+}
+
+.truncate {
+  width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
