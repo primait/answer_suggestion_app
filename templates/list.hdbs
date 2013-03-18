@@ -2,8 +2,8 @@
   {{#if entries}}
   <ul class="entries">
     {{#each entries}}
-    <li data-url="{{url}}">
-      <a href="{{url}}" target="_blank">{{title}}</a>
+    <li>
+      <a href="{{url}}" class="entry">{{title}}</a>
     </li>
     {{/each}}
   </ul>

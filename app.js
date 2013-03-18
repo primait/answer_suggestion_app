@@ -88,15 +88,15 @@
     searchToBeExecuted: 1,
     events: {
       // APP EVENTS
-      'app.activated'           : 'initializeIfReady',
-      'ticket.status.changed'   : 'initializeIfReady',
+      'app.activated'                           : 'initializeIfReady',
+      'ticket.status.changed'                   : 'initializeIfReady',
       // AJAX EVENTS
-      'search.done'             : 'searchDone',
+      'search.done'                             : 'searchDone',
       // DOM EVENTS
-      'dragend ul.entries li'   : function(event){
+      'click,dragend ul.entries a.entry'        : function(event){
         event.preventDefault();
 
-        return this.appendLinkToComment(this.$(event.currentTarget).data('url'));
+        return this.appendLinkToComment(this.$(event.currentTarget).prop('href'));
       }
     },
 
