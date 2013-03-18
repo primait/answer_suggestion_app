@@ -86,6 +86,8 @@
     entries: new EntrySet(),
     executedSearch: 0,
     searchToBeExecuted: 1,
+    defaultNumberOfEntriesToDisplay: 10,
+
     events: {
       // APP EVENTS
       'app.activated'                           : 'initializeIfReady',
@@ -144,7 +146,8 @@
         return this.switchTo('no_entries');
 
       return this.switchTo('list', {
-        entries: new EntriesSerializer(this.entries.toArray(), this.baseUrl()).toList()
+        entries: new EntriesSerializer(this.entries.toArray().slice(0,this.numberOfDisplayableEntries()),
+                                       this.baseUrl()).toList()
       });
     },
 
@@ -158,6 +161,10 @@
 
     stop_words: function(){
       return _.map(this.I18n.t("stop_words").split(','), function(word) { return word.trim(); });
+    },
+
+    numberOfDisplayableEntries: function(){
+      return this.setting('nb_entries') || this.defaultNumberOfEntriesToDisplay;
     }
   };
 

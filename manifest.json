@@ -4,6 +4,12 @@
     "name": "Pierre Nespo",
     "email": "pierre.nespo@gmail.com"
   },
+  "parameters": [
+    {
+      "name": "nb_entries",
+      "type": "number"
+    }
+  ],
   "defaultLocale": "en",
   "private": true,
   "location": "ticket_sidebar",
