@@ -85,6 +85,7 @@
     doneLoading: false,
     entries: new EntrySet(),
     executedSearch: 0,
+    searchToBeExecuted: 1,
     events: {
       // APP EVENTS
       'app.activated'           : 'initializeIfReady',
@@ -126,8 +127,10 @@
     initialize: function(){
       var serializer = new TicketSerializer(this.ticket(), this.stop_words());
 
-      if (!_.isEmpty(this.ticket().tags()))
+      if (!_.isEmpty(this.ticket().tags())){
+        this.searchToBeExecuted = 2;
         this.ajax('search', serializer.toTagsSearchQuery());
+      }
 
       return this.ajax('search', serializer.toSubjectSearchQuery());
     },
@@ -136,9 +139,9 @@
       this.executedSearch++;
       this.entries.push(data.results);
 
-      if (this.executedSearch == 2 &&
+      if (this.executedSearch == this.searchToBeExecuted &&
           _.isEmpty(this.entries.toArray()))
-        return this.$('.well').html('<p>' + this.I18n.t('no_entries') + '</p>');
+        return this.switchTo('no_entries');
 
       return this.switchTo('list', {
         entries: new EntriesSerializer(this.entries.toArray(), this.baseUrl()).toList()
