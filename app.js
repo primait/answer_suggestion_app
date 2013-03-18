@@ -95,10 +95,17 @@
       // AJAX EVENTS
       'search.done'                             : 'searchDone',
       // DOM EVENTS
-      'click,dragend ul.entries a.entry'        : function(event){
+      'click,dragend ul.entries a.copy_link'    : function(event){
         event.preventDefault();
 
-        return this.appendLinkToComment(this.$(event.currentTarget).prop('href'));
+        return this.appendToComment(this.$(event.currentTarget).prop('href'));
+      },
+      'click .copy_description'                 : function(event){
+        var entry = _.filter(this.entries.toArray(),
+                                  function(item){
+                                    return item.id == this.$(event.currentTarget).data('id') ;
+                                  }, this)[0];
+        return this.appendToComment(entry.body);
       }
     },
 
@@ -155,8 +162,8 @@
       return "https://" + this.currentAccount().subdomain() + ".zendesk.com/";
     },
 
-    appendLinkToComment: function(url){
-      return this.comment().text(this.comment().text() + '\n' + url);
+    appendToComment: function(text){
+      return this.comment().text(this.comment().text() + '\n' + text);
     },
 
     stop_words: function(){
