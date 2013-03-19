@@ -99,13 +99,6 @@
         event.preventDefault();
 
         return this.appendToComment(this.$(event.currentTarget).prop('href'));
-      },
-      'click .copy_description'                 : function(event){
-        var entry = _.filter(this.entries.toArray(),
-                                  function(item){
-                                    return item.id == this.$(event.currentTarget).data('id') ;
-                                  }, this)[0];
-        return this.appendToComment(entry.body);
       }
     },
 

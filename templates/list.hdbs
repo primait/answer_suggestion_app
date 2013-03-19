@@ -1,6 +1,6 @@
+{{#if entries}}
 <div class="well well-small">
   <p>{{t "help_text"}}</p>
-  {{#if entries}}
   <ul class="entries">
     {{#each entries}}
       <li>
@@ -13,9 +13,6 @@
             <li>
               <a href="{{url}}" class="copy_link"><i class="icon-th-list"></i> Copy Link in comment</a>
             </li>
-            <li>
-              <a data-id={{id}} class="copy_description"><i class="icon-comment"></i> Copy Description in comment</a>
-            </li>
           </ul>
         </div>
         <div class="truncate">
@@ -24,5 +21,5 @@
       </li>
     {{/each}}
   </ul>
-  {{/if}}
 </div>
+{{/if}}
