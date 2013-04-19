@@ -32,7 +32,6 @@
       .replace(/^\s+|\s+$/g, "");
   }
 
-
   function TicketSerializer(ticket, stop_words){
     this.ticket = ticket;
     this.stop_words = stop_words;
@@ -156,7 +155,8 @@
     },
 
     appendToComment: function(text){
-      return this.comment().text(this.comment().text() + '\n' + text);
+      var old_text = _.isEmpty(this.comment().text()) ? '' : this.comment().text() + '\n';
+      return this.comment().text( old_text + text);
     },
 
     stop_words: function(){
