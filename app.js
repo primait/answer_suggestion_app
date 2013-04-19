@@ -90,7 +90,7 @@
     events: {
       // APP EVENTS
       'app.activated'                           : 'initializeIfReady',
-      'ticket.status.changed'                   : 'initializeIfReady',
+      'ticket.id.changed'                       : 'initializeIfReady',
       // AJAX EVENTS
       'search.done'                             : 'searchDone',
       // DOM EVENTS
