@@ -17,7 +17,9 @@
         event.preventDefault();
 
         return this.appendToComment(this.$(event.currentTarget).prop('href'));
-      }
+      },
+
+      'click .custom-search button'              : 'customSearch'
     },
 
     requests: {
@@ -49,6 +51,13 @@
       }
 
       return this.ajax('search', this.subjectSearchQuery());
+    },
+
+    customSearch: function(){
+      this.searchToBeExecuted = 1;
+      this.entries = [];
+
+      this.ajax('search', this.$('.custom-search input').val());
     },
 
     searchDone: function(data) {

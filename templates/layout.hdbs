@@ -2,5 +2,10 @@
   <span class="logo"/>
   <h3>{{setting "name"}}</h3>
 </header>
-<section data-main/>
 
+<div class="input-append custom-search">
+  <input type="text" placeholder="Results not helpful? Enter keywords here.">
+  <button class="btn" type="button">Search</button>
+</div>
+
+<section data-main/>

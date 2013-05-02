@@ -13,3 +13,7 @@ ul {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.input-append input {
+  width: 75%;
+}
