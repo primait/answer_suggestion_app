@@ -56,6 +56,7 @@
     customSearch: function(){
       this.searchToBeExecuted = 1;
       this.entries = [];
+      this.executedSearch = 0;
 
       this.ajax('search', this.$('.custom-search input').val());
     },
