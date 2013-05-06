@@ -22,7 +22,7 @@
         return this.appendToComment(this.$(event.currentTarget).prop('href'));
       },
 
-      'click .custom-search button'              : 'customSearch'
+      'click .custom-search button'             : 'customSearch'
     },
 
     requests: {
@@ -43,11 +43,13 @@
 
     canInitialize: function(){
       return (!this.doneLoading &&
-              this.ticket() &&
-              this.ticket().id());
+              this.ticket());
     },
 
     initialize: function(){
+      if (_.isEmpty(this.ticket().subject()))
+        return this.switchTo('no_subject');
+
       this.entries = [];
       this.executedSearch = 0;
       this.searchToBeExecuted = 1;
