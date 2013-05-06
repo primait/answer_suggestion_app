@@ -10,6 +10,9 @@
       // APP EVENTS
       'app.activated'                           : 'initializeIfReady',
       'ticket.status.changed'                   : 'initializeIfReady',
+      'ticket.subject.changed'                  : _.debounce(function(){
+        this.initialize();
+      }, 500),
       // AJAX EVENTS
       'search.done'                             : 'searchDone',
       // DOM EVENTS
@@ -45,6 +48,10 @@
     },
 
     initialize: function(){
+      this.entries = [];
+      this.executedSearch = 0;
+      this.searchToBeExecuted = 1;
+
       if (!_.isEmpty(this.ticket().tags())){
         this.searchToBeExecuted = 2;
         this.ajax('search', this.tagsSearchQuery());
