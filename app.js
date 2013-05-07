@@ -95,6 +95,8 @@
     },
 
     baseUrl: function(){
+      if (this.setting('custom_host'))
+        return this.setting('custom_host');
       return "https://" + this.currentAccount().subdomain() + ".zendesk.com/";
     },
 

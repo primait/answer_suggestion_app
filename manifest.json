@@ -8,7 +8,12 @@
     {
       "name": "nb_entries",
       "type": "number"
+    },
+    {
+      "name": "custom_host",
+      "type": "url"
     }
+
   ],
   "defaultLocale": "en",
   "private": true,

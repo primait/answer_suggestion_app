@@ -4,8 +4,12 @@
     "name":         "Answer Suggestions",
     "parameters": {
       "nb_entries": {
-        "Label": "Number of results.",
+        "label": "Number of results.",
         "helpText": "Number of results to display (default: 10, max: 100)."
+      },
+      "custom_host": {
+        "label": "Custom Domain",
+        "helpText": "ie: https://support.mybusiness.com"
       }
     }
   },
