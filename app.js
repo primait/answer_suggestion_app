@@ -21,7 +21,10 @@
 
         return this.appendToComment(this.$(event.currentTarget).prop('href'));
       },
-
+      'keyup .custom-search input'              : function(event){
+        if(event.keyCode === 13)
+          return this.customSearch();
+      },
       'click .custom-search button'             : 'customSearch'
     },
 
