@@ -12,8 +12,11 @@
     {
       "name": "custom_host",
       "type": "url"
+    },
+    {
+      "name": "include_title",
+      "type": "checkbox"
     }
-
   ],
   "defaultLocale": "en",
   "private": true,

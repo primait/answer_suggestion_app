@@ -9,7 +9,11 @@
       },
       "custom_host": {
         "label": "Custom Domain",
-        "helpText": "ie: https://support.mybusiness.com"
+        "helpText": "ie: https://support.mybusiness.com/"
+      },
+      "include_title": {
+        "label": "Copy entry title?",
+        "helpText": "Copy the entry title as well as the entry link."
       }
     }
   },

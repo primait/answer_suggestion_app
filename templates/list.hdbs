@@ -11,12 +11,12 @@
               <a href="{{url}}" target="_blank"><i class="icon-share"></i> Open in new tab.</a>
             </li>
             <li>
-              <a href="{{url}}" class="copy_link"><i class="icon-th-list"></i> Copy Link in comment</a>
+              <a href="{{url}}" title="{{title}}" class="copy_link"><i class="icon-th-list"></i> Copy Link in comment</a>
             </li>
           </ul>
         </div>
         <div class="truncate">
-          <a href="{{url}}" class="copy_link entry">{{title}}</a>
+          <a href="{{url}}" title="{{title}}" class="copy_link entry">{{title}}</a>
         </div>
       </li>
     {{/each}}
