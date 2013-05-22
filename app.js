@@ -1,9 +1,6 @@
 (function() {
   return {
     doneLoading: false,
-    entries: [],
-    executedSearch: 0,
-    searchToBeExecuted: 1,
     defaultNumberOfEntriesToDisplay: 10,
 
     events: {
@@ -49,36 +46,19 @@
       if (_.isEmpty(this.ticket().subject()))
         return this.switchTo('no_subject');
 
-      this.entries = [];
-      this.executedSearch = 0;
-      this.searchToBeExecuted = 1;
-
-      if (!_.isEmpty(this.ticket().tags())){
-        this.searchToBeExecuted = 2;
-        this.ajax('search', this.tagsSearchQuery());
-      }
-
       return this.ajax('search', this.subjectSearchQuery());
     },
 
     customSearch: function(){
-      this.searchToBeExecuted = 1;
-      this.entries = [];
-      this.executedSearch = 0;
-
       this.ajax('search', this.$('.custom-search input').val());
     },
 
     searchDone: function(data) {
-      this.executedSearch++;
-      this.addEntry(data.results);
-
-      if (this.executedSearch == this.searchToBeExecuted &&
-          _.isEmpty(this.entries))
+      if (_.isEmpty(data.results))
         return this.switchTo('no_entries');
-
+      console.log(data);
       return this.switchTo('list', {
-        entries: _.reduce(this.entries.slice(0,this.numberOfDisplayableEntries()),
+        entries: _.reduce(data.results.slice(0,this.numberOfDisplayableEntries()),
                           function(memo, entry){
                             memo.push({
                               id: entry.id,
@@ -155,23 +135,6 @@
 
     subjectSearchQuery: function(s){
       return this.removeStopWords(this.ticket().subject(), this.stop_words());
-    },
-
-    tagsSearchQuery: function(){
-      return _.reduce(this.ticket().tags(),
-                      function(memo, tag){
-                        memo.push('tags:'+tag);
-                        return memo;
-                      },
-                      []).join(' ');
-    },
-
-    addEntry: function(entries){
-      var new_entries = _.union(this.entries, entries);
-
-      this.entries = _.uniq(new_entries, true, function(i){return i.id;});
-
-      return this.entries;
     }
   };
 }());
