@@ -1,6 +1,7 @@
 (function() {
   return {
     doneLoading: false,
+    defaultState: 'spinner',
     defaultNumberOfEntriesToDisplay: 10,
 
     events: {
@@ -23,6 +24,7 @@
 
     requests: {
       search: function(query){
+        this.switchTo('spinner');
         return {
           url: '/api/v2/search.json?query=type:topic ' + query,
           type: 'GET'
@@ -56,7 +58,7 @@
     searchDone: function(data) {
       if (_.isEmpty(data.results))
         return this.switchTo('no_entries');
-      console.log(data);
+
       return this.switchTo('list', {
         entries: _.reduce(data.results.slice(0,this.numberOfDisplayableEntries()),
                           function(memo, entry){
