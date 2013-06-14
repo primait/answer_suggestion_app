@@ -1,8 +1,8 @@
 {
-  "name": "Answer Suggestions",
+  "name": "Answer Suggestion",
   "author": {
-    "name": "Pierre Nespo",
-    "email": "pierre.nespo@gmail.com"
+    "name": "Zendesk",
+    "email": "support@zendesk.com"
   },
   "parameters": [
     {
@@ -19,7 +19,7 @@
     }
   ],
   "defaultLocale": "en",
-  "private": true,
+  "private": false,
   "location": ["ticket_sidebar", "new_ticket_sidebar"],
   "frameworkVersion": "0.5"
 }
