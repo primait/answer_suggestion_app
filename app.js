@@ -1,4 +1,6 @@
 (function() {
+  var searchApiEndpoint;
+
   return {
     doneLoading: false,
     defaultState: 'spinner',
@@ -26,10 +28,14 @@
       search: function(query){
         this.switchTo('spinner');
         return {
-          url: '/api/v2/search.json?query=type:topic ' + query,
+          url: searchApiEndpoint + query,
           type: 'GET'
         };
       }
+    },
+
+    searchUrlPrefix: function() {
+      return this.setting('search_hc') ? '/hc' : '';
     },
 
     initializeIfReady: function(){
@@ -45,6 +51,7 @@
     },
 
     initialize: function(){
+      searchApiEndpoint = this.searchUrlPrefix() + '/api/v2/search.json?query=type:topic ';
       if (_.isEmpty(this.ticket().subject()))
         return this.switchTo('no_subject');
 
@@ -64,8 +71,8 @@
                           function(memo, entry){
                             memo.push({
                               id: entry.id,
-                              url: this.baseUrl() + "entries/" + entry.id,
-                              title: entry.title
+                              url: this.baseUrl() + this.articlePath(entry.id),
+                              title: entry.title || entry.name
                             });
                             return memo;
                           }, [], this)
@@ -76,6 +83,14 @@
       if (this.setting('custom_host'))
         return this.setting('custom_host');
       return "https://" + this.currentAccount().subdomain() + ".zendesk.com/";
+    },
+
+    articlePath: function(articleId) {
+      if (this.setting('search_hc')) {
+        return 'hc/articles/' + articleId;
+      } else {
+        return 'entries/' + articleId;
+      }
     },
 
     copyLink: function(event){
