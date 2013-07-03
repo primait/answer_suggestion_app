@@ -1,7 +1,6 @@
 (function() {
 
   return {
-    searchApiEndpoint: '',
     doneLoading: false,
     defaultState: 'spinner',
     defaultNumberOfEntriesToDisplay: 10,
@@ -28,7 +27,7 @@
       search: function(query){
         this.switchTo('spinner');
         return {
-          url: this.searchApiEndpoint + query,
+          url: this.searchApiEndpoint() + query,
           type: 'GET'
         };
       }
@@ -37,6 +36,10 @@
     searchUrlPrefix: function() {
       return this.setting('search_hc') ? '/hc' : '';
     },
+
+    searchApiEndpoint: _.memoize(function(){
+      return this.searchUrlPrefix() + '/api/v2/search.json?query=type:topic ';
+    }),
 
     initializeIfReady: function(){
       if (this.canInitialize()){
@@ -51,7 +54,6 @@
     },
 
     initialize: function(){
-      this.searchApiEndpoint = this.searchUrlPrefix() + '/api/v2/search.json?query=type:topic ';
       if (_.isEmpty(this.ticket().subject()))
         return this.switchTo('no_subject');
 
