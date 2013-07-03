@@ -1,7 +1,7 @@
 (function() {
-  var searchApiEndpoint;
 
   return {
+    searchApiEndpoint: '',
     doneLoading: false,
     defaultState: 'spinner',
     defaultNumberOfEntriesToDisplay: 10,
@@ -28,7 +28,7 @@
       search: function(query){
         this.switchTo('spinner');
         return {
-          url: searchApiEndpoint + query,
+          url: this.searchApiEndpoint + query,
           type: 'GET'
         };
       }
@@ -51,7 +51,7 @@
     },
 
     initialize: function(){
-      searchApiEndpoint = this.searchUrlPrefix() + '/api/v2/search.json?query=type:topic ';
+      this.searchApiEndpoint = this.searchUrlPrefix() + '/api/v2/search.json?query=type:topic ';
       if (_.isEmpty(this.ticket().subject()))
         return this.switchTo('no_subject');
 
