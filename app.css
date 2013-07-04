@@ -7,13 +7,6 @@ ul {
   padding-left: 0.5em;
 }
 
-.truncate {
-  max-height: 20px !important;
-  white-space: nowrap !important;
-  overflow: hidden !important;
-  text-overflow: ellipsis !important;
-}
-
 .input-append input {
   width: 75%;
 }

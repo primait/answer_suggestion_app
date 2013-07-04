@@ -120,11 +120,7 @@
       if (str.length < limit)
         return str;
       return str.slice(0,limit) + '...';
-    },
-
-    truncateHtml: function(html){
-      return html;
-    },
+    }
 
     copyLink: function(event){
       event.preventDefault();
