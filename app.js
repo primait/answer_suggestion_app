@@ -72,25 +72,34 @@
     },
 
     searchDone: function(data){
-      return this.switchTo('list', this.formatSearchResults(data));
+      var formatted_results = this.formatSearchResults(data);
+
+      if (_.isEmpty(formatted_results.entries))
+        return this.switchTo('no_entries');
+
+      return this.switchTo('list', formatted_results);
     },
 
     formatSearchResults: function(result){
-      var entries = result.topics.slice(0,this.numberOfDisplayableEntries());
+      var entries = _.inject(result.topics, function(memo, entry){
 
-      return { entries: _.inject(entries, function(memo,entry){
         var forum = _.find(result.forums, function(f){ return f.id == entry.forum_id; });
-
-        memo.push({
+        var formatted_entry = {
           id: entry.id,
           url: this.baseUrl() + "entries/" + entry.id,
           title: entry.title,
           truncated_title: this.truncate(entry.title),
-          agent_only: forum.access.match("agents only")
-        });
+          agent_only: !!forum.access.match("agents only")
+        };
+
+        if ( !(this.setting('exclude_agent_only') && formatted_entry.agent_only)){
+          memo.push(formatted_entry);
+        }
 
         return memo;
-      }, [], this) };
+      }, [], this);
+
+      return { entries: entries.slice(0,this.numberOfDisplayableEntries()) };
     },
 
     baseUrl: function(){

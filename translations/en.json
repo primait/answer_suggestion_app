@@ -14,6 +14,9 @@
       "include_title": {
         "label": "Copy entry title?",
         "helpText": "Copy the entry title as well as the entry link."
+      },
+      "exclude_agent_only": {
+        "label": "Exclude 'Agents Only' topics."
       }
     }
   },
