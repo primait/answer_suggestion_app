@@ -16,7 +16,7 @@
           </ul>
         </div>
 
-        <a href="{{url}}" title="{{title}}" class="copy_link entry">{{truncated_title}}</a>
+        <a href="{{url}}" title="{{preview}}" class="copy_link entry">{{truncated_title}}</a>
 
         {{#if agent_only}}
         <i class="icon-lock" title="{{t "agents_only"}}"></i>

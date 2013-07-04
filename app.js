@@ -77,7 +77,12 @@
       if (_.isEmpty(formatted_results.entries))
         return this.switchTo('no_entries');
 
-      return this.switchTo('list', formatted_results);
+      this.switchTo('list', formatted_results);
+
+      this.$('a').tooltip({
+        trigger: 'hover',
+        placement: 'left'
+      });
     },
 
     formatSearchResults: function(result){
@@ -88,6 +93,7 @@
           id: entry.id,
           url: this.baseUrl() + "entries/" + entry.id,
           title: entry.title,
+          preview: this.truncate(entry.body, 100),
           truncated_title: this.truncate(entry.title),
           agent_only: !!forum.access.match("agents only")
         };
@@ -108,12 +114,16 @@
       return "https://" + this.currentAccount().subdomain() + ".zendesk.com/";
     },
 
-    truncate: function(str){
-      var limit = 45;
+    truncate: function(str, custom_limit){
+      var limit = custom_limit|45;
 
       if (str.length < limit)
         return str;
       return str.slice(0,limit) + '...';
+    },
+
+    truncateHtml: function(html){
+      return html;
     },
 
     copyLink: function(event){
