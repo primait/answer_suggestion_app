@@ -12,7 +12,8 @@
         this.initialize();
       }, 500),
       // AJAX EVENTS
-      'search.done'                             : 'searchDone',
+      'search.done'                             : 'preSearchDone',
+      'fetchTopics.done'                        : 'searchDone',
       // DOM EVENTS
       'click,dragend ul.entries a.copy_link'    : 'copyLink',
       'keyup .custom-search input'              : function(event){
@@ -28,6 +29,13 @@
         return {
           url: '/api/v2/search.json?query=type:topic ' + query,
           type: 'GET'
+        };
+      },
+
+      fetchTopics: function(ids){
+        return {
+          url: '/api/v2/topics/show_many.json?ids=' + ids.join(',') + '&include=forums',
+          type: 'POST'
         };
       }
     },
@@ -55,27 +63,48 @@
       this.ajax('search', this.$('.custom-search input').val());
     },
 
-    searchDone: function(data) {
+    preSearchDone: function(data) {
       if (_.isEmpty(data.results))
         return this.switchTo('no_entries');
 
-      return this.switchTo('list', {
-        entries: _.reduce(data.results.slice(0,this.numberOfDisplayableEntries()),
-                          function(memo, entry){
-                            memo.push({
-                              id: entry.id,
-                              url: this.baseUrl() + "entries/" + entry.id,
-                              title: entry.title
-                            });
-                            return memo;
-                          }, [], this)
-      });
+      return this.ajax('fetchTopics', _.map(data.results,
+                                            function(topic) { return topic.id; }));
+    },
+
+    searchDone: function(data){
+      return this.switchTo('list', this.formatSearchResults(data));
+    },
+
+    formatSearchResults: function(result){
+      var entries = result.topics.slice(0,this.numberOfDisplayableEntries());
+
+      return { entries: _.inject(entries, function(memo,entry){
+        var forum = _.find(result.forums, function(f){ return f.id == entry.forum_id; });
+
+        memo.push({
+          id: entry.id,
+          url: this.baseUrl() + "entries/" + entry.id,
+          title: entry.title,
+          truncated_title: this.truncate(entry.title),
+          agent_only: forum.access.match("agents only")
+        });
+
+        return memo;
+      }, [], this) };
     },
 
     baseUrl: function(){
       if (this.setting('custom_host'))
         return this.setting('custom_host');
       return "https://" + this.currentAccount().subdomain() + ".zendesk.com/";
+    },
+
+    truncate: function(str){
+      var limit = 45;
+
+      if (str.length < limit)
+        return str;
+      return str.slice(0,limit) + '...';
     },
 
     copyLink: function(event){
