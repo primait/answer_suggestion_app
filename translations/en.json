@@ -14,6 +14,10 @@
       "include_title": {
         "label": "Copy entry title?",
         "helpText": "Copy the entry title as well as the entry link."
+      },
+      "search_hc": {
+        "label": "Are you using Help Center?",
+        "helpText": "Check this to search the Help Center articles."
       }
     }
   },

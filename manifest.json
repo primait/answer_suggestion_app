@@ -16,6 +16,10 @@
     {
       "name": "include_title",
       "type": "checkbox"
+    },
+    {
+      "name": "search_hc",
+      "type": "checkbox"
     }
   ],
   "defaultLocale": "en",
