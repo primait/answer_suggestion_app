@@ -28,25 +28,25 @@
       search: function(query){
         this.switchTo('spinner');
         return {
-          url: this.searchApiEndpoint() + query,
+          url: this.apiEndpoint() + 'search.json?query=type:topic ' + query,
           type: 'GET'
         };
       },
 
       fetchTopics: function(ids){
         return {
-          url: '/api/v2/topics/show_many.json?ids=' + ids.join(',') + '&include=forums',
+          url: this.apiEndpoint() + 'topics/show_many.json?ids=' + ids.join(',') + '&include=forums',
           type: 'POST'
         };
       }
     },
 
-    searchUrlPrefix: function() {
+    searchUrlPrefix: _.memoize(function() {
       return this.setting('search_hc') ? '/hc' : '';
-    },
+    }),
 
-    searchApiEndpoint: _.memoize(function(){
-      return this.searchUrlPrefix() + '/api/v2/search.json?query=type:topic ';
+    apiEndpoint: _.memoize(function(){
+      return this.searchUrlPrefix() + '/api/v2/';
     }),
 
     initializeIfReady: function(){
