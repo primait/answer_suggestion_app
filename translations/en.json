@@ -18,6 +18,9 @@
       "search_hc": {
         "label": "Are you using Help Center?",
         "helpText": "Check this to search the Help Center articles."
+      },
+      "exclude_agent_only": {
+        "label": "Exclude 'Agents Only' topics."
       }
     }
   },
@@ -25,5 +28,6 @@
   "no_entries": "No suggestions for this ticket.",
   "no_subject": "Waiting for a subject to be defined...",
   "help_text": "Click the link to add it to the comment:",
-  "spinner": "loading"
+  "spinner": "loading",
+  "agents_only": "Agents Only"
 }

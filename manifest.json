@@ -20,6 +20,10 @@
     {
       "name": "search_hc",
       "type": "checkbox"
+    },
+    {
+      "name": "exclude_agent_only",
+      "type": "checkbox"
     }
   ],
   "defaultLocale": "en",

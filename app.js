@@ -13,7 +13,8 @@
         this.initialize();
       }, 500),
       // AJAX EVENTS
-      'search.done'                             : 'searchDone',
+      'search.done'                             : 'preSearchDone',
+      'fetchTopics.done'                        : 'searchDone',
       // DOM EVENTS
       'click,dragend ul.entries a.copy_link'    : 'copyLink',
       'keyup .custom-search input'              : function(event){
@@ -29,6 +30,13 @@
         return {
           url: this.searchApiEndpoint() + query,
           type: 'GET'
+        };
+      },
+
+      fetchTopics: function(ids){
+        return {
+          url: '/api/v2/topics/show_many.json?ids=' + ids.join(',') + '&include=forums',
+          type: 'POST'
         };
       }
     },
@@ -64,21 +72,49 @@
       this.ajax('search', this.$('.custom-search input').val());
     },
 
-    searchDone: function(data) {
+    preSearchDone: function(data) {
       if (_.isEmpty(data.results))
         return this.switchTo('no_entries');
 
-      return this.switchTo('list', {
-        entries: _.reduce(data.results.slice(0,this.numberOfDisplayableEntries()),
-                          function(memo, entry){
-                            memo.push({
-                              id: entry.id,
-                              url: this.baseUrl() + this.articlePath(entry.id),
-                              title: entry.title || entry.name
-                            });
-                            return memo;
-                          }, [], this)
+      return this.ajax('fetchTopics', _.map(data.results,
+                                            function(topic) { return topic.id; }));
+    },
+
+    searchDone: function(data){
+      var formatted_results = this.formatSearchResults(data);
+
+      if (_.isEmpty(formatted_results.entries))
+        return this.switchTo('no_entries');
+
+      this.switchTo('list', formatted_results);
+
+      this.$('a').tooltip({
+        trigger: 'hover',
+        placement: 'left'
       });
+    },
+
+    formatSearchResults: function(result){
+      var entries = _.inject(result.topics, function(memo, entry){
+
+        var forum = _.find(result.forums, function(f){ return f.id == entry.forum_id; });
+        var formatted_entry = {
+          id: entry.id,
+          url: this.baseUrl() + this.articlePath(entry.id),
+          title: entry.title || entry.name,
+          preview: this.truncate(entry.body, 100),
+          truncated_title: this.truncate(entry.title),
+          agent_only: !!forum.access.match("agents only")
+        };
+
+        if ( !(this.setting('exclude_agent_only') && formatted_entry.agent_only)){
+          memo.push(formatted_entry);
+        }
+
+        return memo;
+      }, [], this);
+
+      return { entries: entries.slice(0,this.numberOfDisplayableEntries()) };
     },
 
     baseUrl: function(){
@@ -87,12 +123,21 @@
       return "https://" + this.currentAccount().subdomain() + ".zendesk.com/";
     },
 
+
     articlePath: function(articleId) {
       if (this.setting('search_hc')) {
         return 'hc/articles/' + articleId;
       } else {
         return 'entries/' + articleId;
       }
+    },
+
+    truncate: function(str, custom_limit){
+      var limit = custom_limit|45;
+
+      if (str.length < limit)
+        return str;
+      return str.slice(0,limit) + '...';
     },
 
     copyLink: function(event){
