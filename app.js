@@ -13,15 +13,17 @@
         this.initialize();
       }, 500),
       // AJAX EVENTS
-      'search.done'                             : 'preSearchDone',
-      'fetchTopics.done'                        : 'searchDone',
+      'search.done'                             : 'searchDone',
+      'fetchTopicsWithForums.done'              : function(data){
+        this.renderList(this.formatEntries(data));
+      },
       // DOM EVENTS
       'click,dragend ul.entries a.copy_link'    : 'copyLink',
       'keyup .custom-search input'              : function(event){
         if(event.keyCode === 13)
-          return this.customSearch();
+          return this.processSearchFromInput();
       },
-      'click .custom-search button'             : 'customSearch'
+      'click .custom-search button'             : 'processSearchFromInput'
     },
 
     requests: {
@@ -33,9 +35,9 @@
         };
       },
 
-      fetchTopics: function(ids){
+      fetchTopicsWithForums: function(ids){
         return {
-          url: this.apiEndpoint() + 'topics/show_many.json?ids=' + ids.join(',') + '&include=forums',
+          url: '/api/v2/topics/show_many.json?ids=' + ids.join(',') + '&include=forums',
           type: 'POST'
         };
       }
@@ -64,29 +66,25 @@
     initialize: function(){
       if (_.isEmpty(this.ticket().subject()))
         return this.switchTo('no_subject');
-
       return this.ajax('search', this.subjectSearchQuery());
     },
 
-    customSearch: function(){
-      this.ajax('search', this.$('.custom-search input').val());
-    },
-
-    preSearchDone: function(data) {
+    searchDone: function(data){
       if (_.isEmpty(data.results))
         return this.switchTo('no_entries');
 
-      return this.ajax('fetchTopics', _.map(data.results,
-                                            function(topic) { return topic.id; }));
+      if (this.setting('search_hc')){
+        this.renderList(this.formatHcEntries(data.results));
+      } else {
+        this.ajax('fetchTopicsWithForums', _.map(data.results, function(topic) { return topic.id; }));
+      }
     },
 
-    searchDone: function(data){
-      var formatted_results = this.formatSearchResults(data);
-
-      if (_.isEmpty(formatted_results.entries))
+    renderList: function(data){
+      if (_.isEmpty(data.entries))
         return this.switchTo('no_entries');
 
-      this.switchTo('list', formatted_results);
+      this.switchTo('list', data);
 
       this.$('a').tooltip({
         trigger: 'hover',
@@ -94,14 +92,14 @@
       });
     },
 
-    formatSearchResults: function(result){
+    formatEntries: function(result){
       var entries = _.inject(result.topics, function(memo, entry){
 
         var forum = _.find(result.forums, function(f){ return f.id == entry.forum_id; });
         var formatted_entry = {
           id: entry.id,
-          url: this.baseUrl() + this.articlePath(entry.id),
-          title: entry.title || entry.name,
+          url: this.baseUrl() + 'entries/' + entry.id,
+          title: entry.title,
           preview: this.truncate(entry.body, 100),
           truncated_title: this.truncate(entry.title),
           agent_only: !!forum.access.match("agents only")
@@ -117,19 +115,31 @@
       return { entries: entries.slice(0,this.numberOfDisplayableEntries()) };
     },
 
+    formatHcEntries: function(entries){
+      var entries = _.inject(entries.slice(0,this.numberOfDisplayableEntries()),
+                             function(memo, entry){
+                               var title = entry.name;
+
+                               memo.push({
+                                 id: entry.id,
+                                 url: entry.html_url,
+                                 title: title,
+                                 truncated_title: this.truncate(title)
+                               });
+                               return memo;
+                             }, [], this);
+
+      return { entries: entries };
+    },
+
+    processSearchFromInput: function(){
+      this.ajax('search', this.$('.custom-search input').val());
+    },
+
     baseUrl: function(){
       if (this.setting('custom_host'))
         return this.setting('custom_host');
       return "https://" + this.currentAccount().subdomain() + ".zendesk.com/";
-    },
-
-
-    articlePath: function(articleId) {
-      if (this.setting('search_hc')) {
-        return 'hc/articles/' + articleId;
-      } else {
-        return 'entries/' + articleId;
-      }
     },
 
     truncate: function(str, custom_limit){
