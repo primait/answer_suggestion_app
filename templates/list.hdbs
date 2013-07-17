@@ -15,9 +15,12 @@
             </li>
           </ul>
         </div>
-        <div class="truncate">
-          <a href="{{url}}" title="{{title}}" class="copy_link entry">{{title}}</a>
-        </div>
+
+        <a href="{{url}}" title="{{preview}}" class="copy_link entry">{{truncated_title}}</a>
+
+        {{#if agent_only}}
+        <i class="icon-lock" title="{{t "agents_only"}}"></i>
+        {{/if}}
       </li>
     {{/each}}
   </ul>

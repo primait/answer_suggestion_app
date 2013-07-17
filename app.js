@@ -14,31 +14,41 @@
       }, 500),
       // AJAX EVENTS
       'search.done'                             : 'searchDone',
+      'fetchTopicsWithForums.done'              : function(data){
+        this.renderList(this.formatEntries(data));
+      },
       // DOM EVENTS
       'click,dragend ul.entries a.copy_link'    : 'copyLink',
       'keyup .custom-search input'              : function(event){
         if(event.keyCode === 13)
-          return this.customSearch();
+          return this.processSearchFromInput();
       },
-      'click .custom-search button'             : 'customSearch'
+      'click .custom-search button'             : 'processSearchFromInput'
     },
 
     requests: {
       search: function(query){
         this.switchTo('spinner');
         return {
-          url: this.searchApiEndpoint() + query,
+          url: this.apiEndpoint() + 'search.json?query=type:topic ' + query,
           type: 'GET'
+        };
+      },
+
+      fetchTopicsWithForums: function(ids){
+        return {
+          url: '/api/v2/topics/show_many.json?ids=' + ids.join(',') + '&include=forums',
+          type: 'POST'
         };
       }
     },
 
-    searchUrlPrefix: function() {
+    searchUrlPrefix: _.memoize(function() {
       return this.setting('search_hc') ? '/hc' : '';
-    },
+    }),
 
-    searchApiEndpoint: _.memoize(function(){
-      return this.searchUrlPrefix() + '/api/v2/search.json?query=type:topic ';
+    apiEndpoint: _.memoize(function(){
+      return this.searchUrlPrefix() + '/api/v2/';
     }),
 
     initializeIfReady: function(){
@@ -56,29 +66,74 @@
     initialize: function(){
       if (_.isEmpty(this.ticket().subject()))
         return this.switchTo('no_subject');
-
       return this.ajax('search', this.subjectSearchQuery());
     },
 
-    customSearch: function(){
-      this.ajax('search', this.$('.custom-search input').val());
-    },
-
-    searchDone: function(data) {
+    searchDone: function(data){
       if (_.isEmpty(data.results))
         return this.switchTo('no_entries');
 
-      return this.switchTo('list', {
-        entries: _.reduce(data.results.slice(0,this.numberOfDisplayableEntries()),
-                          function(memo, entry){
-                            memo.push({
-                              id: entry.id,
-                              url: this.baseUrl() + this.articlePath(entry.id),
-                              title: entry.title || entry.name
-                            });
-                            return memo;
-                          }, [], this)
+      if (this.setting('search_hc')){
+        this.renderList(this.formatHcEntries(data.results));
+      } else {
+        this.ajax('fetchTopicsWithForums', _.map(data.results, function(topic) { return topic.id; }));
+      }
+    },
+
+    renderList: function(data){
+      if (_.isEmpty(data.entries))
+        return this.switchTo('no_entries');
+
+      this.switchTo('list', data);
+
+      this.$('a').tooltip({
+        trigger: 'hover',
+        placement: 'left'
       });
+    },
+
+    formatEntries: function(result){
+      var entries = _.inject(result.topics, function(memo, entry){
+
+        var forum = _.find(result.forums, function(f){ return f.id == entry.forum_id; });
+        var formatted_entry = {
+          id: entry.id,
+          url: this.baseUrl() + 'entries/' + entry.id,
+          title: entry.title,
+          preview: this.truncate(entry.body, 100),
+          truncated_title: this.truncate(entry.title),
+          agent_only: !!forum.access.match("agents only")
+        };
+
+        if ( !(this.setting('exclude_agent_only') && formatted_entry.agent_only)){
+          memo.push(formatted_entry);
+        }
+
+        return memo;
+      }, [], this);
+
+      return { entries: entries.slice(0,this.numberOfDisplayableEntries()) };
+    },
+
+    formatHcEntries: function(result){
+      var entries = _.inject(result.slice(0,this.numberOfDisplayableEntries()),
+                             function(memo, entry){
+                               var title = entry.name;
+
+                               memo.push({
+                                 id: entry.id,
+                                 url: entry.html_url,
+                                 title: title,
+                                 truncated_title: this.truncate(title)
+                               });
+                               return memo;
+                             }, [], this);
+
+      return { entries: entries };
+    },
+
+    processSearchFromInput: function(){
+      this.ajax('search', this.$('.custom-search input').val());
     },
 
     baseUrl: function(){
@@ -87,12 +142,12 @@
       return "https://" + this.currentAccount().subdomain() + ".zendesk.com/";
     },
 
-    articlePath: function(articleId) {
-      if (this.setting('search_hc')) {
-        return 'hc/articles/' + articleId;
-      } else {
-        return 'entries/' + articleId;
-      }
+    truncate: function(str, custom_limit){
+      var limit = custom_limit|45;
+
+      if (str.length < limit)
+        return str;
+      return str.slice(0,limit) + '...';
     },
 
     copyLink: function(event){
