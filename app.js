@@ -115,8 +115,8 @@
       return { entries: entries.slice(0,this.numberOfDisplayableEntries()) };
     },
 
-    formatHcEntries: function(entries){
-      var entries = _.inject(entries.slice(0,this.numberOfDisplayableEntries()),
+    formatHcEntries: function(result){
+      var entries = _.inject(result.slice(0,this.numberOfDisplayableEntries()),
                              function(memo, entry){
                                var title = entry.name;
 
