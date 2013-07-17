@@ -29,5 +29,5 @@
   "no_subject": "Waiting for a subject to be defined...",
   "help_text": "Click the link to add it to the comment:",
   "spinner": "loading",
-  "agents_only": "Agents Only"
+  "agents_only": "Private"
 }
