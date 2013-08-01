@@ -3,10 +3,6 @@ ul {
   margin-left: 0.5em;
 }
 
-.entry {
-  padding-left: 0.5em;
-}
-
 .input-append input {
   width: 75%;
 }
@@ -28,4 +24,23 @@ p.spinner_text {
   font-size: 0.8em;
   margin-bottom: 1.5em;
   font-size: italic;
+}
+
+label-warning {
+  font-size: 8px;
+}
+
+.row-fluid [class*="span"] {
+  min-height: 20px;
+}
+
+.entries {
+  padding-top: 10px;
+}
+.entry-text {
+  padding-left: 0.3em;
+  text-overflow: ellipsis; 
+  overflow: hidden; 
+  white-space:nowrap;
+  padding-left:none;
 }

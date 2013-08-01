@@ -1,28 +1,32 @@
 {{#if entries}}
 <div class="well well-small">
   <p>{{t "help_text"}}</p>
-  <ul class="entries">
-    {{#each entries}}
-      <li>
-        <div class="dropdown">
-          <a class="dropdown-toggle pull-left" data-toggle="dropdown"><i class="icon-cog"></i></a>
-          <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-            <li>
-              <a href="{{url}}" target="_blank"><i class="icon-share"></i> Open in new tab.</a>
-            </li>
-            <li>
-              <a href="{{url}}" title="{{title}}" class="copy_link"><i class="icon-th-list"></i> Copy Link in comment</a>
-            </li>
-          </ul>
-        </div>
-
-        <a href="{{url}}" title="{{preview}}" class="copy_link entry">{{truncated_title}}</a>
-
-        {{#if agent_only}}
-        <i class="icon-lock" title="{{t "agents_only"}}"></i>
-        {{/if}}
-      </li>
-    {{/each}}
-  </ul>
+  <div class="entries">
+  {{#each entries}}
+  <div class="row-fluid">
+    <div class="span10 entry">
+      <div class="dropdown">
+        <a class="dropdown-toggle pull-left" data-toggle="dropdown"><i class="icon-cog"></i></a>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+          <li>
+            <a href="{{url}}" target="_blank"><i class="icon-share"></i> Open in new tab.</a>
+          </li>
+          <li>
+            <a href="{{url}}" title="{{title}}" class="copy_link"><i class="icon-th-list"></i> Copy Link in comment</a>
+          </li>
+        </ul>
+      </div>
+      <div class="entry-text">
+        <a href="{{url}}" title="{{preview}}" class="copy_link entry">{{title}}</a>
+      </div>
+    </div>
+    {{#if agent_only}}
+    <div class="span2">
+      <span class="label label-warning">{{t "agents_only"}}</span>
+    </div>
+    {{/if}}
+  </div>
+  {{/each}}
+  </div>
 </div>
 {{/if}}

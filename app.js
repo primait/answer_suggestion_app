@@ -106,7 +106,6 @@
           url: this.baseUrl() + 'entries/' + topic.id,
           title: topic.title,
           preview: this.truncate(topic.body, 100),
-          truncated_title: this.truncate(topic.title),
           agent_only: !!forum.access.match("agents only")
         };
 
