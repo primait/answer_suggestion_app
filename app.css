@@ -26,8 +26,8 @@ p.spinner_text {
   font-size: italic;
 }
 
-label-warning {
-  font-size: 8px;
+.label-warning {
+  font-size: 10px;
   padding: 0px 2px 0px 3px;
 }
 
@@ -40,8 +40,8 @@ label-warning {
 }
 .entry-text {
   padding-left: 0.3em;
-  text-overflow: ellipsis; 
-  overflow: hidden; 
+  text-overflow: ellipsis;
+  overflow: hidden;
   white-space:nowrap;
   padding-left:none;
 }

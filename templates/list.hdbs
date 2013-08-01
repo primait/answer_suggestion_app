@@ -9,10 +9,10 @@
         <a class="dropdown-toggle pull-left" data-toggle="dropdown"><i class="icon-cog"></i></a>
         <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
           <li>
-            <a href="{{url}}" target="_blank"><i class="icon-share"></i> Open in new tab.</a>
+            <a href="{{url}}" target="_blank"><i class="icon-share"></i> {{t "list.newtab_link"}}</a>
           </li>
           <li>
-            <a href="{{url}}" title="{{title}}" class="copy_link"><i class="icon-th-list"></i> Copy Link in comment</a>
+            <a href="{{url}}" title="{{title}}" class="copy_link"><i class="icon-th-list"></i> {{t "list.copylink_link"}}</a>
           </li>
         </ul>
       </div>
