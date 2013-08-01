@@ -27,9 +27,6 @@
       search: function(query){
         this.switchTo('spinner');
 
-        query = query.replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g," ")
-          .replace(/\s{2,}/g," ");
-
         return {
           url: this.apiEndpoint() + 'search.json?query=type:topic ' + query,
           type: 'GET'
@@ -127,7 +124,7 @@
     },
 
     processSearchFromInput: function(){
-      this.ajax('search', this.$('.custom-search input').val());
+      this.ajax('search', this.removePunctuation(this.$('.custom-search input').val()));
     },
 
     baseUrl: function(){
@@ -170,8 +167,9 @@
       return this.setting('nb_entries') || this.defaultNumberOfEntriesToDisplay;
     },
 
-    // extracted from http://geeklad.com/remove-stop-words-in-javascript
     removeStopWords: function(str, stop_words){
+      // Remove punctuation and trim
+      str = this.removePunctuation(str);
       var words = str.match(/[^\s]+|\s+[^\s+]$/g);
       var x,y = 0;
 
@@ -198,9 +196,13 @@
           }
         }
       }
-      // Remove punctuation and trim
-      return str.replace(/[\!\?\,\.\;]/g,"")
-        .replace(/^\s+|\s+$/g, "");
+
+      return str;
+    },
+
+    removePunctuation: function(str){
+      return str.replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g," ")
+        .replace(/\s{2,}/g," ");
     },
 
     subjectSearchQuery: function(s){
