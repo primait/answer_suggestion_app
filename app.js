@@ -13,8 +13,7 @@
       'search.done': 'searchDone',
 
       // DOM EVENTS
-      'click a.copy_link': 'copyLink',
-      'dragend a.drag-entry-text': 'copyLink',
+      'dragend,click a.copy_link': 'copyLink',
       'click .toggle-app': 'toggleAppContainer',
       'keyup .custom-search input': function(event){
         if(event.keyCode === 13)
@@ -78,11 +77,6 @@
         return this.switchTo('no_entries');
 
       this.switchTo('list', data);
-
-      this.$('.entry-text a').tooltip({
-        trigger: 'hover',
-        placement: 'left'
-      });
     },
 
     formatEntries: function(topics, result){
@@ -92,7 +86,6 @@
           id: topic.id,
           url: this.baseUrl() + 'entries/' + topic.id,
           title: topic.title,
-          preview: this.truncate(topic.body, 100),
           agent_only: !!forum.access.match("agents only")
         };
 
@@ -115,7 +108,6 @@
                                  id: entry.id,
                                  url: entry.html_url,
                                  title: title,
-                                 truncated_title: this.truncate(title)
                                });
                                return memo;
                              }, [], this);
@@ -133,20 +125,12 @@
       return "https://" + this.currentAccount().subdomain() + ".zendesk.com/";
     },
 
-    truncate: function(str, custom_limit){
-      var limit = custom_limit|45;
-
-      if (str.length < limit)
-        return str;
-      return str.slice(0,limit) + '...';
-    },
-
     copyLink: function(event){
       event.preventDefault();
       var content = "";
 
       if (this.setting('include_title')) {
-        content = this.$(event.currentTarget).data('title') + ' - ';
+        content = event.target.title + ' - ';
       }
 
       content += event.currentTarget.href;
