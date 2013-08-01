@@ -15,6 +15,7 @@
       // DOM EVENTS
       'click a.copy_link': 'copyLink',
       'dragend a.drag-entry-text': 'copyLink',
+      'click .toggle-app': 'toggleAppContainer',
       'keyup .custom-search input': function(event){
         if(event.keyCode === 13)
           return this.processSearchFromInput();
@@ -204,6 +205,19 @@
 
     subjectSearchQuery: function(s){
       return this.removeStopWords(this.ticket().subject(), this.stop_words());
+    },
+
+    toggleAppContainer: function(){
+      var container = this.$('.app-container');
+      var icon = this.$('.toggle-app i');
+
+      if (container.is(':visible')){
+        container.hide();
+        icon.prop('class', 'icon-plus');
+      } else {
+        container.show();
+        icon.prop('class', 'icon-minus')
+      }
     }
   };
 }());
