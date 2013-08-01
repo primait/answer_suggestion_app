@@ -1,25 +1,25 @@
 (function() {
-
   return {
-    doneLoading: false,
     defaultState: 'spinner',
     defaultNumberOfEntriesToDisplay: 10,
     events: {
       // APP EVENTS
-      'app.activated'                           : 'initializeIfReady',
-      'ticket.status.changed'                   : 'initializeIfReady',
-      'ticket.subject.changed'                  : _.debounce(function(){
-        this.initialize();
+      'app.activated': 'initialize',
+      'ticket.subject.changed': _.debounce(function(){
+        this.initialize({ firstLoad: true });
       }, 500),
+
       // AJAX EVENTS
-      'search.done'                             : 'searchDone',
+      'search.done': 'searchDone',
+
       // DOM EVENTS
-      'click,dragend ul.entries a.copy_link'    : 'copyLink',
-      'keyup .custom-search input'              : function(event){
+      'click a.copy_link': 'copyLink',
+      'dragend a.drag-entry-text': 'copyLink',
+      'keyup .custom-search input': function(event){
         if(event.keyCode === 13)
           return this.processSearchFromInput();
       },
-      'click .custom-search button'             : 'processSearchFromInput'
+      'click .custom-search button': 'processSearchFromInput'
     },
 
     requests: {
@@ -51,19 +51,9 @@
       return this.searchUrlPrefix() + '/api/v2/';
     }),
 
-    initializeIfReady: function(){
-      if (this.canInitialize()){
-        this.initialize();
-        this.doneLoading = true;
-      }
-    },
+    initialize: function(app){
+      if (!app.firstLoad) return;
 
-    canInitialize: function(){
-      return (!this.doneLoading &&
-              this.ticket());
-    },
-
-    initialize: function(){
       if (_.isEmpty(this.ticket().subject()))
         return this.switchTo('no_subject');
       return this.ajax('search', this.subjectSearchQuery());
@@ -91,7 +81,7 @@
 
       this.switchTo('list', data);
 
-      this.$('a').tooltip({
+      this.$('.entry-text a').tooltip({
         trigger: 'hover',
         placement: 'left'
       });
@@ -100,7 +90,6 @@
     formatEntries: function(topics, result){
       var entries = _.inject(topics, function(memo, topic){
         var forum = _.find(result.forums, function(f){ return f.id == topic.forum_id; });
-
         var entry = {
           id: topic.id,
           url: this.baseUrl() + 'entries/' + topic.id,
@@ -158,7 +147,9 @@
       event.preventDefault();
       var content = "";
 
-      if (this.setting('include_title')) { content = event.currentTarget.title + ' - '; }
+      if (this.setting('include_title')) {
+        content = this.$(event.currentTarget).data('title') + ' - ';
+      }
 
       content += event.currentTarget.href;
 
