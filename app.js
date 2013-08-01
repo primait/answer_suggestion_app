@@ -4,7 +4,6 @@
     doneLoading: false,
     defaultState: 'spinner',
     defaultNumberOfEntriesToDisplay: 10,
-
     events: {
       // APP EVENTS
       'app.activated'                           : 'initializeIfReady',
@@ -14,9 +13,6 @@
       }, 500),
       // AJAX EVENTS
       'search.done'                             : 'searchDone',
-      'fetchTopicsWithForums.done'              : function(data){
-        this.renderList(this.formatEntries(data));
-      },
       // DOM EVENTS
       'click,dragend ul.entries a.copy_link'    : 'copyLink',
       'keyup .custom-search input'              : function(event){
@@ -76,7 +72,12 @@
       if (this.setting('search_hc')){
         this.renderList(this.formatHcEntries(data.results));
       } else {
-        this.ajax('fetchTopicsWithForums', _.map(data.results, function(topic) { return topic.id; }));
+        var topics = data.results;
+
+        this.ajax('fetchTopicsWithForums', _.map(topics, function(topic) { return topic.id; }))
+          .done(function(data){
+            this.renderList(this.formatEntries(topics, data));
+          });
       }
     },
 
@@ -92,21 +93,21 @@
       });
     },
 
-    formatEntries: function(result){
-      var entries = _.inject(result.topics, function(memo, entry){
+    formatEntries: function(topics, result){
+      var entries = _.inject(topics, function(memo, topic){
+        var forum = _.find(result.forums, function(f){ return f.id == topic.forum_id; });
 
-        var forum = _.find(result.forums, function(f){ return f.id == entry.forum_id; });
-        var formatted_entry = {
-          id: entry.id,
-          url: this.baseUrl() + 'entries/' + entry.id,
-          title: entry.title,
-          preview: this.truncate(entry.body, 100),
-          truncated_title: this.truncate(entry.title),
+        var entry = {
+          id: topic.id,
+          url: this.baseUrl() + 'entries/' + topic.id,
+          title: topic.title,
+          preview: this.truncate(topic.body, 100),
+          truncated_title: this.truncate(topic.title),
           agent_only: !!forum.access.match("agents only")
         };
 
-        if ( !(this.setting('exclude_agent_only') && formatted_entry.agent_only)){
-          memo.push(formatted_entry);
+        if ( !(this.setting('exclude_agent_only') && entry.agent_only)){
+          memo.push(entry);
         }
 
         return memo;
