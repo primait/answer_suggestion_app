@@ -25,6 +25,10 @@
     requests: {
       search: function(query){
         this.switchTo('spinner');
+
+        query = query.replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g," ")
+          .replace(/\s{2,}/g," ");
+
         return {
           url: this.apiEndpoint() + 'search.json?query=type:topic ' + query,
           type: 'GET'
