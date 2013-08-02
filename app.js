@@ -4,10 +4,8 @@
     defaultNumberOfEntriesToDisplay: 10,
     events: {
       // APP EVENTS
-      'app.activated': 'initialize',
-      'ticket.subject.changed': _.debounce(function(){
-        this.initialize({ firstLoad: true });
-      }, 500),
+      'app.activated': 'activated',
+      'ticket.subject.changed': _.debounce(function(){ this.initialize(); }, 500),
 
       // AJAX EVENTS
       'search.done': 'searchDone',
@@ -48,9 +46,12 @@
       return this.searchUrlPrefix() + '/api/v2/';
     }),
 
-    initialize: function(app){
-      if (!app.firstLoad) return;
+    activated: function(app){
+      if (data.firstLoad)
+        return this.initialize();
+    },
 
+    initialize: function(){
       if (_.isEmpty(this.ticket().subject()))
         return this.switchTo('no_subject');
       return this.ajax('search', this.subjectSearchQuery());
