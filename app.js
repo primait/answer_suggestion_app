@@ -47,7 +47,7 @@
     }),
 
     activated: function(app){
-      if (data.firstLoad)
+      if (app.firstLoad)
         return this.initialize();
     },
 
