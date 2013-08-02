@@ -108,7 +108,7 @@
                                memo.push({
                                  id: entry.id,
                                  url: entry.html_url,
-                                 title: title,
+                                 title: title
                                });
                                return memo;
                              }, [], this);
@@ -203,7 +203,7 @@
         icon.prop('class', 'icon-plus');
       } else {
         container.show();
-        icon.prop('class', 'icon-minus')
+        icon.prop('class', 'icon-minus');
       }
     }
   };
