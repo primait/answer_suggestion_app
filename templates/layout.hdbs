@@ -1,8 +1,7 @@
 <header>
   <span class="logo"/>
   <h3>
-    <a class="toggle-app"><i class="icon-minus"></i></a>
-    {{setting "name"}}
+    <a class="toggle-app"><i class="icon-minus"></i> {{setting "name"}}</a>
   </h3>
 </header>
 
