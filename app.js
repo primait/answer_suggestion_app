@@ -195,15 +195,15 @@
     },
 
     toggleAppContainer: function(){
-      var container = this.$('.app-container');
-      var icon = this.$('.toggle-app i');
+      var $container = this.$('.app-container'),
+          $icon = this.$('.toggle-app i');
 
-      if (container.is(':visible')){
-        container.hide();
-        icon.prop('class', 'icon-plus');
+      if ($container.is(':visible')){
+        $container.hide();
+        $icon.prop('class', 'icon-plus');
       } else {
-        container.show();
-        icon.prop('class', 'icon-minus');
+        $container.show();
+        $icon.prop('class', 'icon-minus');
       }
     }
   };
