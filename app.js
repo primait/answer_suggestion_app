@@ -1,34 +1,29 @@
 (function() {
-
   return {
-    doneLoading: false,
     defaultState: 'spinner',
     defaultNumberOfEntriesToDisplay: 10,
-
     events: {
       // APP EVENTS
-      'app.activated'                           : 'initializeIfReady',
-      'ticket.status.changed'                   : 'initializeIfReady',
-      'ticket.subject.changed'                  : _.debounce(function(){
-        this.initialize();
-      }, 500),
+      'app.activated': 'activated',
+      'ticket.subject.changed': _.debounce(function(){ this.initialize(); }, 500),
+
       // AJAX EVENTS
-      'search.done'                             : 'searchDone',
-      'fetchTopicsWithForums.done'              : function(data){
-        this.renderList(this.formatEntries(data));
-      },
+      'search.done': 'searchDone',
+
       // DOM EVENTS
-      'click,dragend ul.entries a.copy_link'    : 'copyLink',
-      'keyup .custom-search input'              : function(event){
+      'dragend,click a.copy_link': 'copyLink',
+      'click .toggle-app': 'toggleAppContainer',
+      'keyup .custom-search input': function(event){
         if(event.keyCode === 13)
           return this.processSearchFromInput();
       },
-      'click .custom-search button'             : 'processSearchFromInput'
+      'click .custom-search button': 'processSearchFromInput'
     },
 
     requests: {
       search: function(query){
         this.switchTo('spinner');
+
         return {
           url: this.apiEndpoint() + 'search.json?query=type:topic ' + query,
           type: 'GET'
@@ -51,16 +46,9 @@
       return this.searchUrlPrefix() + '/api/v2/';
     }),
 
-    initializeIfReady: function(){
-      if (this.canInitialize()){
-        this.initialize();
-        this.doneLoading = true;
-      }
-    },
-
-    canInitialize: function(){
-      return (!this.doneLoading &&
-              this.ticket());
+    activated: function(app){
+      if (app.firstLoad)
+        return this.initialize();
     },
 
     initialize: function(){
@@ -76,7 +64,12 @@
       if (this.setting('search_hc')){
         this.renderList(this.formatHcEntries(data.results));
       } else {
-        this.ajax('fetchTopicsWithForums', _.map(data.results, function(topic) { return topic.id; }));
+        var topics = data.results;
+
+        this.ajax('fetchTopicsWithForums', _.map(topics, function(topic) { return topic.id; }))
+          .done(function(data){
+            this.renderList(this.formatEntries(topics, data));
+          });
       }
     },
 
@@ -85,28 +78,20 @@
         return this.switchTo('no_entries');
 
       this.switchTo('list', data);
-
-      this.$('a').tooltip({
-        trigger: 'hover',
-        placement: 'left'
-      });
     },
 
-    formatEntries: function(result){
-      var entries = _.inject(result.topics, function(memo, entry){
-
-        var forum = _.find(result.forums, function(f){ return f.id == entry.forum_id; });
-        var formatted_entry = {
-          id: entry.id,
-          url: this.baseUrl() + 'entries/' + entry.id,
-          title: entry.title,
-          preview: this.truncate(entry.body, 100),
-          truncated_title: this.truncate(entry.title),
+    formatEntries: function(topics, result){
+      var entries = _.inject(topics, function(memo, topic){
+        var forum = _.find(result.forums, function(f){ return f.id == topic.forum_id; });
+        var entry = {
+          id: topic.id,
+          url: this.baseUrl() + 'entries/' + topic.id,
+          title: topic.title,
           agent_only: !!forum.access.match("agents only")
         };
 
-        if ( !(this.setting('exclude_agent_only') && formatted_entry.agent_only)){
-          memo.push(formatted_entry);
+        if ( !(this.setting('exclude_agent_only') && entry.agent_only)){
+          memo.push(entry);
         }
 
         return memo;
@@ -123,8 +108,7 @@
                                memo.push({
                                  id: entry.id,
                                  url: entry.html_url,
-                                 title: title,
-                                 truncated_title: this.truncate(title)
+                                 title: title
                                });
                                return memo;
                              }, [], this);
@@ -133,7 +117,9 @@
     },
 
     processSearchFromInput: function(){
-      this.ajax('search', this.$('.custom-search input').val());
+      var query = this.removePunctuation(this.$('.custom-search input').val());
+
+      this.ajax('search', query);
     },
 
     baseUrl: function(){
@@ -142,19 +128,13 @@
       return "https://" + this.currentAccount().subdomain() + ".zendesk.com/";
     },
 
-    truncate: function(str, custom_limit){
-      var limit = custom_limit|45;
-
-      if (str.length < limit)
-        return str;
-      return str.slice(0,limit) + '...';
-    },
-
     copyLink: function(event){
       event.preventDefault();
       var content = "";
 
-      if (this.setting('include_title')) { content = event.currentTarget.title + ' - '; }
+      if (this.setting('include_title')) {
+        content = event.target.title + ' - ';
+      }
 
       content += event.currentTarget.href;
 
@@ -174,8 +154,9 @@
       return this.setting('nb_entries') || this.defaultNumberOfEntriesToDisplay;
     },
 
-    // extracted from http://geeklad.com/remove-stop-words-in-javascript
     removeStopWords: function(str, stop_words){
+      // Remove punctuation and trim
+      str = this.removePunctuation(str);
       var words = str.match(/[^\s]+|\s+[^\s+]$/g);
       var x,y = 0;
 
@@ -202,13 +183,30 @@
           }
         }
       }
-      // Remove punctuation and trim
-      return str.replace(/[\!\?\,\.\;]/g,"")
-        .replace(/^\s+|\s+$/g, "");
+
+      return str;
+    },
+
+    removePunctuation: function(str){
+      return str.replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g," ")
+        .replace(/\s{2,}/g," ");
     },
 
     subjectSearchQuery: function(s){
       return this.removeStopWords(this.ticket().subject(), this.stop_words());
+    },
+
+    toggleAppContainer: function(){
+      var $container = this.$('.app-container'),
+          $icon = this.$('.toggle-app i');
+
+      if ($container.is(':visible')){
+        $container.hide();
+        $icon.prop('class', 'icon-plus');
+      } else {
+        $container.show();
+        $icon.prop('class', 'icon-minus');
+      }
     }
   };
 }());

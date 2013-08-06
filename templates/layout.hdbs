@@ -1,11 +1,16 @@
 <header>
   <span class="logo"/>
-  <h3>{{setting "name"}}</h3>
+  <h3>
+    <a class="toggle-app"><i class="icon-minus"></i></a>
+    {{setting "name"}}
+  </h3>
 </header>
 
-<div class="input-append custom-search">
-  <input type="text" placeholder="Results not helpful? Enter keywords here.">
-  <button class="btn" type="button">Search</button>
-</div>
+<div class="app-container">
+  <div class="input-append custom-search">
+    <input type="text" placeholder="{{t "layout.placeholder_text"}}">
+    <button class="btn" type="button">{{t "layout.search_button"}}</button>
+  </div>
 
-<section data-main/>
+  <section data-main/>
+</div>
