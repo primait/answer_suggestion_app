@@ -26,14 +26,16 @@
 
         return {
           url: this.apiEndpoint() + 'search.json?query=type:topic ' + query,
-          type: 'GET'
+          type: 'GET',
+          proxy_v2: true
         };
       },
 
       fetchTopicsWithForums: function(ids){
         return {
           url: '/api/v2/topics/show_many.json?ids=' + ids.join(',') + '&include=forums',
-          type: 'POST'
+          type: 'POST',
+          proxy_v2: true
         };
       }
     },
