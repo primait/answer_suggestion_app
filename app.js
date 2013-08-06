@@ -117,7 +117,9 @@
     },
 
     processSearchFromInput: function(){
-      this.ajax('search', this.removePunctuation(this.$('.custom-search input').val()));
+      var query = this.removePunctuation(this.$('.custom-search input').val());
+
+      this.ajax('search', query);
     },
 
     baseUrl: function(){
