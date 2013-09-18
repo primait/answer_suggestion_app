@@ -25,7 +25,7 @@
         this.switchTo('spinner');
 
         return {
-          url: this.apiEndpoint() + 'search.json?query=type:topic ' + query,
+          url: helpers.fmt('%@search.json?query=type:topic %@', this.apiEndpoint(), query),
           type: 'GET',
           proxy_v2: true
         };
@@ -33,7 +33,7 @@
 
       fetchTopicsWithForums: function(ids){
         return {
-          url: '/api/v2/topics/show_many.json?ids=' + ids.join(',') + '&include=forums',
+          url: helpers.fmt("/api/v2/topics/show_many.json?ids=%@&include=forums", ids.join(',')),
           type: 'POST',
           proxy_v2: true
         };
@@ -45,7 +45,7 @@
     }),
 
     apiEndpoint: _.memoize(function(){
-      return this.searchUrlPrefix() + '/api/v2/';
+      return helpers.fmt("%@/api/v2/", this.searchUrlPrefix());
     }),
 
     activated: function(app){
@@ -87,7 +87,7 @@
         var forum = _.find(result.forums, function(f){ return f.id == topic.forum_id; });
         var entry = {
           id: topic.id,
-          url: this.baseUrl() + 'entries/' + topic.id,
+          url: helpers.fmt("%@entries/%@", this.baseUrl(), topic.id),
           title: topic.title,
           agent_only: !!forum.access.match("agents only")
         };
@@ -127,7 +127,7 @@
     baseUrl: function(){
       if (this.setting('custom_host'))
         return this.setting('custom_host');
-      return "https://" + this.currentAccount().subdomain() + ".zendesk.com/";
+      return helpers.fmt("https://%@.zendesk.com/", this.currentAccount().subdomain());
     },
 
     copyLink: function(event){
@@ -200,7 +200,7 @@
 
     toggleAppContainer: function(){
       var $container = this.$('.app-container'),
-          $icon = this.$('.toggle-app i');
+      $icon = this.$('.toggle-app i');
 
       if ($container.is(':visible')){
         $container.hide();
