@@ -45,3 +45,7 @@ p.spinner_text {
   white-space:nowrap;
   padding-left:none;
 }
+
+section div.well.well-small {
+  margin-bottom: 0px;
+}
