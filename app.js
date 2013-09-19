@@ -9,6 +9,7 @@
 
       // AJAX EVENTS
       'search.done': 'searchDone',
+      'getTopicContent.done': 'topicContentDone',
 
       // DOM EVENTS
       'dragend,click a.copy_link': 'copyLink',
@@ -21,6 +22,14 @@
     },
 
     requests: {
+      getTopicContent: function(id) {
+        return {
+          url: helpers.fmt('/api/v2/topics/%@.json', id),
+          type: 'GET',
+          proxy_v2: true
+        };
+      },
+
       search: function(query){
         this.switchTo('spinner');
 
@@ -57,6 +66,10 @@
       if (_.isEmpty(this.ticket().subject()))
         return this.switchTo('no_subject');
       return this.ajax('search', this.subjectSearchQuery());
+    },
+
+    topicContentDone: function(data) {
+      this.$('#detailsModal .modal-body').html(data.topic.body);
     },
 
     searchDone: function(data){
@@ -132,15 +145,21 @@
 
     copyLink: function(event){
       event.preventDefault();
-      var content = "";
+      var modal = this.$("#detailsModal");
+      modal.find("h3").text(event.target.title);
+      modal.find("p").html('<div class="spinner dotted"></div>');
+      modal.modal({backdrop: false});
+      this.getContentFor(this.$(event.target).attr('data-id'));
+      return false;
+    },
 
-      if (this.setting('include_title')) {
-        content = event.target.title + ' - ';
+    getContentFor: function(id) {
+      if (this.setting('search_hc')) {
+        // TODO
       }
-
-      content += event.currentTarget.href;
-
-      return this.appendToComment(content);
+      else {
+        this.ajax('getTopicContent', id);
+      }
     },
 
     appendToComment: function(text){
