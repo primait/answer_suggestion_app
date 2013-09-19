@@ -37,5 +37,8 @@
   "no_subject": "Waiting for a subject to be defined...",
   "help_text": "Click the link to add it to the comment:",
   "spinner": "loading",
-  "agents_only": "Private"
+  "agents_only": "Private",
+  "modal": {
+    "close": "Close"
+  }
 }

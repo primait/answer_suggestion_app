@@ -9,6 +9,8 @@
 
       // AJAX EVENTS
       'search.done': 'searchDone',
+      'getTopicContent.done': 'topicContentDone',
+      'getHCArticleContent.done': 'hcArticleContentDone',
 
       // DOM EVENTS
       'dragend,click a.copy_link': 'copyLink',
@@ -21,11 +23,29 @@
     },
 
     requests: {
+      getTopicContent: function(id) {
+        return {
+          url: helpers.fmt('/api/v2/topics/%@.json', id),
+          type: 'GET',
+          proxy_v2: true
+        };
+      },
+
+      getHCArticleContent: function(url) {
+        return {
+          url: url,
+          type: 'GET',
+          dataType: 'html',
+          proxy_v2: true
+        };
+      },
+
       search: function(query){
         this.switchTo('spinner');
 
+        var topic = this.setting('search_hc') ? '' : 'type:topic ';
         return {
-          url: this.apiEndpoint() + 'search.json?query=type:topic ' + query,
+          url: helpers.fmt('%@search.json?query=%@%@', this.apiEndpoint(), query, topic),
           type: 'GET',
           proxy_v2: true
         };
@@ -33,7 +53,7 @@
 
       fetchTopicsWithForums: function(ids){
         return {
-          url: '/api/v2/topics/show_many.json?ids=' + ids.join(',') + '&include=forums',
+          url: helpers.fmt("/api/v2/topics/show_many.json?ids=%@&include=forums", ids.join(',')),
           type: 'POST',
           proxy_v2: true
         };
@@ -45,7 +65,7 @@
     }),
 
     apiEndpoint: _.memoize(function(){
-      return this.searchUrlPrefix() + '/api/v2/';
+      return helpers.fmt("%@/api/v2/", this.searchUrlPrefix());
     }),
 
     activated: function(app){
@@ -57,6 +77,15 @@
       if (_.isEmpty(this.ticket().subject()))
         return this.switchTo('no_subject');
       return this.ajax('search', this.subjectSearchQuery());
+    },
+
+    topicContentDone: function(data) {
+      this.$('#detailsModal .modal-body').html(data.topic.body);
+    },
+
+    hcArticleContentDone: function(data) {
+      var html = this.$(data).find('.article-body').html();
+      this.$('#detailsModal .modal-body').html(html);
     },
 
     searchDone: function(data){
@@ -87,7 +116,7 @@
         var forum = _.find(result.forums, function(f){ return f.id == topic.forum_id; });
         var entry = {
           id: topic.id,
-          url: this.baseUrl() + 'entries/' + topic.id,
+          url: helpers.fmt("%@entries/%@", this.baseUrl(), topic.id),
           title: topic.title,
           agent_only: !!forum.access.match("agents only")
         };
@@ -108,7 +137,7 @@
                                var title = entry.name;
 
                                memo.push({
-                                 id: entry.id,
+                                 id: entry.html_url,
                                  url: entry.html_url,
                                  title: title
                                });
@@ -127,20 +156,21 @@
     baseUrl: function(){
       if (this.setting('custom_host'))
         return this.setting('custom_host');
-      return "https://" + this.currentAccount().subdomain() + ".zendesk.com/";
+      return helpers.fmt("https://%@.zendesk.com/", this.currentAccount().subdomain());
     },
 
     copyLink: function(event){
       event.preventDefault();
-      var content = "";
+      var modal = this.$("#detailsModal");
+      modal.find("h3").text(event.target.title);
+      modal.find("p").html('<div class="spinner dotted"></div>');
+      modal.modal({backdrop: false});
+      this.getContentFor(this.$(event.target).attr('data-id'));
+      return false;
+    },
 
-      if (this.setting('include_title')) {
-        content = event.target.title + ' - ';
-      }
-
-      content += event.currentTarget.href;
-
-      return this.appendToComment(content);
+    getContentFor: function(id) {
+      this.ajax(this.setting('search_hc') ? 'getHCArticleContent' : 'getTopicContent', id);
     },
 
     appendToComment: function(text){
@@ -200,7 +230,7 @@
 
     toggleAppContainer: function(){
       var $container = this.$('.app-container'),
-          $icon = this.$('.toggle-app i');
+      $icon = this.$('.toggle-app i');
 
       if ($container.is(':visible')){
         $container.hide();
