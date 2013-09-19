@@ -10,6 +10,7 @@
       // AJAX EVENTS
       'search.done': 'searchDone',
       'getTopicContent.done': 'topicContentDone',
+      'getHCArticleContent.done': 'hcArticleContentDone',
 
       // DOM EVENTS
       'dragend,click a.copy_link': 'copyLink',
@@ -30,11 +31,21 @@
         };
       },
 
+      getHCArticleContent: function(url) {
+        return {
+          url: url,
+          type: 'GET',
+          dataType: 'html',
+          proxy_v2: true
+        };
+      },
+
       search: function(query){
         this.switchTo('spinner');
 
+        var topic = this.setting('search_hc') ? '' : 'type:topic ';
         return {
-          url: helpers.fmt('%@search.json?query=type:topic %@', this.apiEndpoint(), query),
+          url: helpers.fmt('%@search.json?query=%@%@', this.apiEndpoint(), query, topic),
           type: 'GET',
           proxy_v2: true
         };
@@ -70,6 +81,11 @@
 
     topicContentDone: function(data) {
       this.$('#detailsModal .modal-body').html(data.topic.body);
+    },
+
+    hcArticleContentDone: function(data) {
+      var html = this.$(data).find('.article-body').html();
+      this.$('#detailsModal .modal-body').html(html);
     },
 
     searchDone: function(data){
@@ -121,7 +137,7 @@
                                var title = entry.name;
 
                                memo.push({
-                                 id: entry.id,
+                                 id: entry.html_url,
                                  url: entry.html_url,
                                  title: title
                                });
@@ -154,12 +170,7 @@
     },
 
     getContentFor: function(id) {
-      if (this.setting('search_hc')) {
-        // TODO
-      }
-      else {
-        this.ajax('getTopicContent', id);
-      }
+      this.ajax(this.setting('search_hc') ? 'getHCArticleContent' : 'getTopicContent', id);
     },
 
     appendToComment: function(text){
