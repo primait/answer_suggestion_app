@@ -43,7 +43,7 @@
       search: function(query){
         this.switchTo('spinner');
 
-        var topic = this.setting('search_hc') ? '' : ' type:topic ';
+        var topi = this.setting('search_hc') ? '' : ' type:topic';
         return {
           url: helpers.fmt('%@search.json?query=%@%@', this.apiEndpoint(), query, topic),
           type: 'GET',
