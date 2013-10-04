@@ -17,7 +17,7 @@
         </ul>
       </div>
       <div class="entry-text">
-        <a href="#" data-id="{{id}}" title="{{title}}" class="copy_link">{{title}}</a>
+        <a href="#" data-id="{{id}}" title="{{title}}" class="preview_link">{{title}}</a>
       </div>
     </div>
     {{#if agent_only}}
