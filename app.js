@@ -11,8 +11,10 @@
       'search.done': 'searchDone',
       'getTopicContent.done': 'topicContentDone',
       'getHCArticleContent.done': 'hcArticleContentDone',
+      'settings.done': 'settingsDone',
 
       // DOM EVENTS
+      'click a.preview_link': 'previewLink',
       'dragend,click a.copy_link': 'copyLink',
       'click .toggle-app': 'toggleAppContainer',
       'keyup .custom-search input': function(event){
@@ -23,6 +25,11 @@
     },
 
     requests: {
+      settings: {
+        url: '/api/v2/account/settings.json',
+        type: 'GET'
+      },
+
       getTopicContent: function(id) {
         return {
           url: helpers.fmt('/api/v2/topics/%@.json', id),
@@ -76,7 +83,13 @@
     initialize: function(){
       if (_.isEmpty(this.ticket().subject()))
         return this.switchTo('no_subject');
-      return this.ajax('search', this.subjectSearchQuery());
+      this.ajax('settings').then(function() {
+        this.ajax('search', this.subjectSearchQuery());
+      }.bind(this));
+    },
+
+    settingsDone: function(data) {
+      this.useMarkdown = data.settings.tickets.markdown_ticket_comments;
     },
 
     topicContentDone: function(data) {
@@ -159,7 +172,7 @@
       return helpers.fmt("https://%@.zendesk.com/", this.currentAccount().subdomain());
     },
 
-    copyLink: function(event){
+    previewLink: function(event){
       event.preventDefault();
       var modal = this.$("#detailsModal");
       modal.find("h3").text(event.target.title);
@@ -167,6 +180,27 @@
       modal.modal({backdrop: false});
       this.getContentFor(this.$(event.target).attr('data-id'));
       return false;
+    },
+
+    copyLink: function(event) {
+      event.preventDefault();
+      var content = "";
+
+      if (this.useMarkdown) {
+        var title = event.target.href;
+        var link = event.target.href;
+        if (this.setting('include_title')) {
+          title = event.target.title;
+        }
+        content = helpers.fmt("[%@](%@)", title, link);
+      }
+      else {
+        if (this.setting('include_title')) {
+          content = event.target.title + ' - ';
+        }
+        content += event.currentTarget.href;
+      }
+      return this.appendToComment(content);
     },
 
     getContentFor: function(id) {
