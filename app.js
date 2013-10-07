@@ -177,7 +177,6 @@
       var $modal = this.$("#detailsModal");
       $modal.find("h3").text(event.target.title);
       $modal.find("p").html('<div class="spinner dotted"></div>');
-      $modal.modal({backdrop: false});
       $modal.modal();
       this.getContentFor(this.$(event.target).attr('data-id'));
       return false;
