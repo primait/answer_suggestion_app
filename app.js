@@ -16,6 +16,7 @@
       // DOM EVENTS
       'click a.preview_link': 'previewLink',
       'dragend,click a.copy_link': 'copyLink',
+      'dragend a.main': 'copyLink',
       'click .toggle-app': 'toggleAppContainer',
       'keyup .custom-search input': function(event){
         if(event.keyCode === 13)
