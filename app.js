@@ -187,11 +187,8 @@
       var content = "";
 
       if (this.useMarkdown) {
-        var title = event.target.href;
+        var title = event.target.title;
         var link = event.target.href;
-        if (this.setting('include_title')) {
-          title = event.target.title;
-        }
         content = helpers.fmt("[%@](%@)", title, link);
       }
       else {
