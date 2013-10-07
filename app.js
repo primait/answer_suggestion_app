@@ -175,13 +175,15 @@
 
     previewLink: function(event){
       event.preventDefault();
+      var $link = this.$(event.target).closest('a');
+      $link.parent().parent().parent().removeClass('open');
       var $modal = this.$("#detailsModal");
       $modal.html(this.renderTemplate('modal', {
-        title: event.target.title,
-        link: event.target.href
+        title: $link.attr('title'),
+        link: $link.attr('href')
       }));
       $modal.modal();
-      this.getContentFor(this.$(event.target).attr('data-id'));
+      this.getContentFor($link.attr('data-id'));
       return false;
     },
 
