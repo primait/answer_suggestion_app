@@ -175,8 +175,10 @@
     previewLink: function(event){
       event.preventDefault();
       var $modal = this.$("#detailsModal");
-      $modal.find("h3").text(event.target.title);
-      $modal.find("p").html('<div class="spinner dotted"></div>');
+      $modal.html(this.renderTemplate('modal', {
+        title: event.target.title,
+        link: event.target.href
+      }));
       $modal.modal();
       this.getContentFor(this.$(event.target).attr('data-id'));
       return false;

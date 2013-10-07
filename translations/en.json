@@ -40,6 +40,7 @@
   "spinner": "loading",
   "agents_only": "Private",
   "modal": {
-    "close": "Close"
+    "close": "Close",
+    "copy": "Add to comment"
   }
 }
