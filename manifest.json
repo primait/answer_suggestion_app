@@ -15,7 +15,8 @@
     },
     {
       "name": "include_title",
-      "type": "checkbox"
+      "type": "checkbox",
+      "default": "1"
     },
     {
       "name": "search_hc",
