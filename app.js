@@ -146,17 +146,18 @@
     },
 
     formatHcEntries: function(result){
-      var entries = _.inject(result.slice(0,this.numberOfDisplayableEntries()),
-                             function(memo, entry){
-                               var title = entry.name;
+      var slicedResult = result.slice(0, this.numberOfDisplayableEntries());
+      var entries = _.inject(slicedResult, function(memo, entry){
+        var title = entry.name;
+        var url = entry.html_url.replace(/^https:\/\/.*.zendesk.com\//, this.baseUrl());
 
-                               memo.push({
-                                 id: entry.html_url,
-                                 url: entry.html_url,
-                                 title: title
-                               });
-                               return memo;
-                             }, [], this);
+        memo.push({
+          id: url,
+          url: url,
+          title: title
+        });
+        return memo;
+      }, [], this);
 
       return { entries: entries };
     },
@@ -168,8 +169,11 @@
     },
 
     baseUrl: function(){
-      if (this.setting('custom_host'))
-        return this.setting('custom_host');
+      if (this.setting('custom_host')) {
+        var host = this.setting('custom_host');
+        if (host[host.length - 1] !== '/') { host += '/'; }
+        return host;
+      }
       return helpers.fmt("https://%@.zendesk.com/", this.currentAccount().subdomain());
     },
 
