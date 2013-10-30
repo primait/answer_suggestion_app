@@ -1,7 +1,7 @@
 {
   "app": {
     "description":  "Answer Suggestions from your knowledge base.",
-    "name":         "Answer Suggestions",
+    "name":         "Answer Suggestion",
     "parameters": {
       "nb_entries": {
         "label": "Number of results.",
@@ -12,8 +12,8 @@
         "helpText": "ie: https://support.mybusiness.com/"
       },
       "include_title": {
-        "label": "Copy entry title?",
-        "helpText": "Copy the entry title as well as the entry link."
+        "label": "Copy article title?",
+        "helpText": "Copy the article title as well as the entry link."
       },
       "search_hc": {
         "label": "Are you using Help Center?",

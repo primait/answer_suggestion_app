@@ -7,98 +7,98 @@ packages:
 parts:
   - translation:
       key: "txt.apps.answer_suggestion_app.app.description"
-      title: ""
+      title: "App description"
       value: "Answer Suggestions from your knowledge base."
   - translation:
       key: "txt.apps.answer_suggestion_app.app.name"
-      title: ""
-      value: "Answer Suggestions"
+      title: "Name of the App"
+      value: "Answer Suggestion"
   - translation:
       key: "txt.apps.answer_suggestion_app.app.parameters.nb_entries.label"
-      title: ""
+      title: "Number of results"
       value: "Number of results."
   - translation:
       key: "txt.apps.answer_suggestion_app.app.parameters.nb_entries.helpText"
-      title: ""
+      title: "Help text for the number of result field"
       value: "Number of results to display (default: 10, max: 100)."
   - translation:
       key: "txt.apps.answer_suggestion_app.app.parameters.custom_host.label"
-      title: ""
+      title: "If the customer wants to specify a custom domain different than company.zendesk.com they can input their own domain here"
       value: "Custom Domain"
   - translation:
       key: "txt.apps.answer_suggestion_app.app.parameters.custom_host.helpText"
-      title: ""
+      title: "example for the custom domain"
       value: "ie: https://support.mybusiness.com/"
   - translation:
       key: "txt.apps.answer_suggestion_app.app.parameters.include_title.label"
-      title: ""
-      value: "Copy entry title?"
+      title: "Checkbox title to copy the article title"
+      value: "Copy article title?"
   - translation:
       key: "txt.apps.answer_suggestion_app.app.parameters.include_title.helpText"
-      title: ""
-      value: "Copy the entry title as well as the entry link."
+      title: "Help text for the article title copy feature"
+      value: "Copy the article title as well as the article link."
   - translation:
       key: "txt.apps.answer_suggestion_app.app.parameters.search_hc.label"
-      title: ""
+      title: "Check box for customers who are using help center as opposed to web portal"
       value: "Are you using Help Center?"
   - translation:
       key: "txt.apps.answer_suggestion_app.app.parameters.search_hc.helpText"
-      title: ""
+      title: "Help text for the check box for help center usage"
       value: "Check this to search the Help Center articles."
   - translation:
       key: "txt.apps.answer_suggestion_app.app.parameters.exclude_agent_only.label"
-      title: ""
+      title: "Check box to exclude topics only visible to agents"
       value: "Exclude 'Agents Only' topics."
   - translation:
       key: "txt.apps.answer_suggestion_app.layout.placeholder_text"
-      title: ""
+      title: "Placeholder text in the search bar"
       value: "Results not helpful? Enter keywords here."
   - translation:
       key: "txt.apps.answer_suggestion_app.layout.search_button"
-      title: ""
+      title: "Search button when clicked triggers a search"
       value: "Search"
   - translation:
       key: "txt.apps.answer_suggestion_app.list.newtab_link"
-      title: ""
+      title: "option on the article results to open it in a new browser tab"
       value: "Open in a new tab"
   - translation:
       key: "txt.apps.answer_suggestion_app.list.copylink_link"
-      title: ""
+      title: "option on the article results to link it into a comment"
       value: "Copy Link in comment"
   - translation:
       key: "txt.apps.answer_suggestion_app.list.preview_link"
-      title: ""
+      title: "option on the article result to preview article in a preview box"
       value: "Preview article"
   - translation:
       key: "txt.apps.answer_suggestion_app.stop_words"
-      title: ""
+      title: "DO NOT TRANSLATE"
       value: "a, about, above, across, after, again, against, all, almost, alone, along, already, also, although, always, am, among, an, and, another, any, anybody, anyone, anything, anywhere, are, area, areas, aren't, around, as, ask, asked, asking, asks, at, away, b, back, backed, backing, backs, be, became, because, become, becomes, been, before, began, behind, being, beings, below, best, better, between, big, both, but, by, c, came, can, cannot, can't, case, cases, certain, certainly, clear, clearly, come, could, couldn't, d, did, didn't, differ, different, differently, do, does, doesn't, doing, done, don't, down, downed, downing, downs, during, e, each, early, either, end, ended, ending, ends, enough, even, evenly, ever, every, everybody, everyone, everything, everywhere, f, face, faces, fact, facts, far, felt, few, find, finds, first, for, four, from, full, fully, further, furthered, furthering, furthers, g, gave, general, generally, get, gets, give, given, gives, go, going, good, goods, got, great, greater, greatest, group, grouped, grouping, groups, h, had, hadn't, has, hasn't, have, haven't, having, he, he'd, he'll, her, here, here's, hers, herself, he's, high, higher, highest, him, himself, his, how, however, how's, i, i'd, if, i'll, i'm, important, in, interest, interested, interesting, interests, into, is, isn't, it, its, it's, itself, i've, j, just, k, keep, keeps, kind, knew, know, known, knows, l, large, largely, last, later, latest, least, less, let, lets, let's, like, likely, long, longer, longest, m, made, make, making, man, many, may, me, member, members, men, might, more, most, mostly, mr, mrs, much, must, mustn't, my, myself, n, necessary, need, needed, needing, needs, never, new, newer, newest, next, no, nobody, non, noone, nor, not, nothing, now, nowhere, number, numbers, o, of, off, often, old, older, oldest, on, once, one, only, open, opened, opening, opens, or, order, ordered, ordering, orders, other, others, ought, our, ours, ourselves, out, over, own, p, part, parted, parting, parts, per, perhaps, place, places, point, pointed, pointing, points, possible, present, presented, presenting, presents, problem, problems, put, puts, q, quite, r, rather, really, right, room, rooms, s, said, same, saw, say, says, second, seconds, see, seem, seemed, seeming, seems, sees, several, shall, shan't, she, she'd, she'll, she's, should, shouldn't, show, showed, showing, shows, side, sides, since, small, smaller, smallest, so, some, somebody, someone, something, somewhere, state, states, still, such, sure, t, take, taken, than, that, that's, the, their, theirs, them, themselves, then, there, therefore, there's, these, they, they'd, they'll, they're, they've, thing, things, think, thinks, this, those, though, thought, thoughts, three, through, thus, to, today, together, too, took, toward, turn, turned, turning, turns, two, u, under, until, up, upon, us, use, used, uses, v, very, w, want, wanted, wanting, wants, was, wasn't, way, ways, we, we'd, well, we'll, wells, went, were, we're, weren't, we've, what, what's, when, when's, where, where's, whether, which, while, who, whole, whom, who's, whose, why, why's, will, with, within, without, won't, work, worked, working, works, would, wouldn't, x, y, year, years, yes, yet, you, you'd, you'll, young, younger, youngest, your, you're, yours, yourself, yourselves, you've, z"
   - translation:
       key: "txt.apps.answer_suggestion_app.no_entries"
-      title: ""
+      title: "Placeholder when there are no suggestions for the ticket"
       value: "No suggestions for this ticket."
   - translation:
       key: "txt.apps.answer_suggestion_app.no_subject"
-      title: ""
+      title: "placeholder for when there is no subject yet on the ticket"
       value: "Waiting for a subject to be defined..."
   - translation:
       key: "txt.apps.answer_suggestion_app.help_text"
-      title: ""
+      title: "instructions for the add to comment button"
       value: "Click the link to add it to the comment:"
   - translation:
       key: "txt.apps.answer_suggestion_app.spinner"
-      title: ""
+      title: "Loading text"
       value: "loading"
   - translation:
       key: "txt.apps.answer_suggestion_app.agents_only"
-      title: ""
+      title: "label appearing on private articles, this is a tag to show that this article is private"
       value: "Private"
   - translation:
       key: "txt.apps.answer_suggestion_app.modal.close"
-      title: ""
+      title: "Close button on the modal"
       value: "Close"
   - translation:
       key: "txt.apps.answer_suggestion_app.modal.copy"
-      title: ""
+      title: "Adding article to the comment, this is a button"
       value: "Add to comment"
 
