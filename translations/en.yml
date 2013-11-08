@@ -52,7 +52,7 @@ parts:
   - translation:
       key: "txt.apps.answer_suggestion_app.layout.placeholder_text"
       title: "Placeholder text in the search bar"
-      value: "Results not helpful? Enter keywords here."
+      value: "Type your search here"
   - translation:
       key: "txt.apps.answer_suggestion_app.layout.search_button"
       title: "Search button when clicked triggers a search"

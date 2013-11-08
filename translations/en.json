@@ -25,7 +25,7 @@
     }
   },
   "layout": {
-    "placeholder_text": "Results not helpful? Enter keywords here.",
+    "placeholder_text": "Type your search here",
     "search_button": "Search"
   },
   "list": {
