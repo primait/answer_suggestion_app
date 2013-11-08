@@ -165,6 +165,10 @@
     processSearchFromInput: function(){
       var query = this.removePunctuation(this.$('.custom-search input').val());
 
+      if (!query || !query.length) {
+        return;
+      }
+
       this.ajax('search', query);
     },
 
