@@ -44,7 +44,7 @@ parts:
   - translation:
       key: "txt.apps.answer_suggestion_app.app.parameters.search_hc.helpText"
       title: "Help text for the check box for help center usage"
-      value: "Check this to search the Help Center articles."
+      value: "Select this option to search Help Center articles."
   - translation:
       key: "txt.apps.answer_suggestion_app.app.parameters.exclude_agent_only.label"
       title: "Check box to exclude topics only visible to agents"
