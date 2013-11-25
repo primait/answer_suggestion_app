@@ -17,7 +17,7 @@
       },
       "search_hc": {
         "label": "您在使用帮助中心吗？",
-        "helpText": "勾选这项搜索帮助中心文章。"
+        "helpText": "选择此选项搜索帮助中心文章。"
       },
       "exclude_agent_only": {
         "label": "“仅限代理”主题除外。"
@@ -25,7 +25,7 @@
     }
   },
   "layout": {
-    "placeholder_text": "结果没什么用？在这里输入关键字。",
+    "placeholder_text": "在这里输入您的搜索",
     "search_button": "搜索"
   },
   "list": {

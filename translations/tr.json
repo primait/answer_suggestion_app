@@ -17,7 +17,7 @@
       },
       "search_hc": {
         "label": "Are you using Help Center?",
-        "helpText": "Check this to search Help Center articles."
+        "helpText": "Select this option to search Help Center articles."
       },
       "exclude_agent_only": {
         "label": "Exclude 'Agents Only' topics."
@@ -25,7 +25,7 @@
     }
   },
   "layout": {
-    "placeholder_text": "Results not helpful? Enter keywords here.",
+    "placeholder_text": "Type your search here",
     "search_button": "Search"
   },
   "list": {

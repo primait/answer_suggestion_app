@@ -1,0 +1,461 @@
+Script started on Sun Nov 24 19:54:46 2013
+bash: get_time: command not found
+bash: parse_git_branch: command not found
+[01;31mMaxime[01;36m[][01;32m~/Dropbox/APPS/answer_suggestions_app/translations[01;35m$ [00m
+bash: get_time: command not found
+bash: parse_git_branch: command not found
+[01;31mMaxime[01;36m[][01;32m~/Dropbox/APPS/answer_suggestions_app/translations[01;35m$ [00m
+bash: get_time: command not found
+bash: parse_git_branch: command not found
+[01;31mMaxime[01;36m[][01;32m~/Dropbox/APPS/answer_suggestions_app/translations[01;35m$ [00m
+bash: get_time: command not found
+bash: parse_git_branch: command not found
+[01;31mMaxime[01;36m[][01;32m~/Dropbox/APPS/answer_suggestions_app/translations[01;35m$ [00mcd ..
+bash: get_time: command not found
+bash: parse_git_branch: command not found
+[01;31mMaxime[01;36m[][01;32m~/Dropbox/APPS/answer_suggestions_app[01;35m$ [00mzat translate update
+What is the package name for this app? (without app_) asn  nswer_suggestion_app
+What is your support.zendesk.com username? 
+[31mInvalid email, try again:[0m
+What is your support.zendesk.com username? mprades@zendesk.com
+What is your support.zendesk.com API token? 
+Fetching translations...
+[1m[31m    conflict[0m  translations/da.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/da.json? (enter "h" for help) [Ynaqdh] 
+[1m[33m       force[0m  translations/da.json
+[1m[31m    conflict[0m  translations/de.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/de.json? (enter "h" for help) [Ynaqdh] 
+[1m[33m       force[0m  translations/de.json
+[1m[31m    conflict[0m  translations/en.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/en.json? (enter "h" for help) [Ynaqdh] 
+[1m[33m       force[0m  translations/en.json
+[1m[31m    conflict[0m  translations/es.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/es.json? (enter "h" for help) [Ynaqdh] 
+[1m[33m       force[0m  translations/es.json
+[1m[31m    conflict[0m  translations/fr.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/fr.json? (enter "h" for help) [Ynaqdh] 
+[1m[33m       force[0m  translations/fr.json
+[1m[31m    conflict[0m  translations/it.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/it.json? (enter "h" for help) [Ynaqdh] 
+[1m[33m       force[0m  translations/it.json
+[1m[31m    conflict[0m  translations/pt.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/pt.json? (enter "h" for help) [Ynaqdh] 
+[1m[33m       force[0m  translations/pt.json
+[1m[31m    conflict[0m  translations/ja.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/ja.json? (enter "h" for help) [Ynaqdh] 
+[1m[33m       force[0m  translations/ja.json
+[32mTranslations updated[0m
+bash: get_time: command not found
+bash: parse_git_branch: command not found
+[01;31mMaxime[01;36m[][01;32m~/Dropbox/APPS/answer_suggestions_app[01;35m$ [00m
+bash: get_time: command not found
+bash: parse_git_branch: command not found
+[01;31mMaxime[01;36m[][01;32m~/Dropbox/APPS/answer_suggestions_app[01;35m$ [00m
+bash: get_time: command not found
+bash: parse_git_branch: command not found
+[01;31mMaxime[01;36m[][01;32m~/Dropbox/APPS/answer_suggestions_app[01;35m$ [00mzat translate update
+What is the package name for this app? (without app_) ^[[A^[[A^[[A^[[B                answer_suggestion_app
+What is your support.zendesk.com username? l mprades@zendesk.com
+What is your support.zendesk.com API token? 
+Fetching translations...
+[1m[31m    conflict[0m  translations/da.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/da.json? (enter "h" for help) [Ynaqdh] 
+[1m[33m       force[0m  translations/da.json
+[1m[31m    conflict[0m  translations/de.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/de.json? (enter "h" for help) [Ynaqdh] 
+[1m[33m       force[0m  translations/de.json
+[1m[34m   identical[0m  translations/en.json
+[1m[31m    conflict[0m  translations/es.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/es.json? (enter "h" for help) [Ynaqdh] 
+[1m[33m       force[0m  translations/es.json
+[1m[31m    conflict[0m  translations/fr.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/fr.json? (enter "h" for help) [Ynaqdh] 
+[1m[33m       force[0m  translations/fr.json
+[1m[31m    conflict[0m  translations/it.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/it.json? (enter "h" for help) [Ynaqdh] 
+[1m[33m       force[0m  translations/it.json
+[1m[31m    conflict[0m  translations/pt.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/pt.json? (enter "h" for help) [Ynaqdh] 
+[1m[33m       force[0m  translations/pt.json
+[1m[31m    conflict[0m  translations/ja.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/ja.json? (enter "h" for help) [Ynaqdh] 
+[1m[33m       force[0m  translations/ja.json
+[32mTranslations updated[0m
+bash: get_time: command not found
+bash: parse_git_branch: command not found
+[01;31mMaxime[01;36m[][01;32m~/Dropbox/APPS/answer_suggestions_app[01;35m$ [00mzat translate update
+What is the package name for this app? (without app_) answer_suggestion_app
+Fetching translations...
+[1m[31m    conflict[0m  translations/da.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/da.json? (enter "h" for help) [Ynaqdh] 
+[1m[33m       force[0m  translations/da.json
+[1m[31m    conflict[0m  translations/de.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/de.json? (enter "h" for help) [Ynaqdh] 
+[1m[33m       force[0m  translations/de.json
+[1m[31m    conflict[0m  translations/en-US.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/en-US.json? (enter "h" for help) [Ynaqdh] 
+[1m[33m       force[0m  translations/en-US.json
+[1m[31m    conflict[0m  translations/en-ca.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/en-ca.json? (enter "h" for help) [Ynaqdh] $ 
+[1m[33m       force[0m  translations/en-ca.json
+[1m[31m    conflict[0m  translations/en-gb.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/en-gb.json? (enter "h" for help) [Ynaqdh] 
+[1m[33m       force[0m  translations/en-gb.json
+[1m[31m    conflict[0m  translations/es.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/es.json? (enter "h" for help) [Ynaqdh] 
+[1m[33m       force[0m  translations/es.json
+[1m[31m    conflict[0m  translations/es-419.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/es-419.json? (enter "h" for help) [Ynaqdh] 
+[1m[33m       force[0m  translations/es-419.json
+[1m[31m    conflict[0m  translations/fr.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/fr.json? (enter "h" for help) [Ynaqdh] 
+[1m[33m       force[0m  translations/fr.json
+[1m[31m    conflict[0m  translations/fr-ca.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/fr-ca.json? (enter "h" for help) [Ynaqdh] 
+[1m[33m       force[0m  translations/fr-ca.json
+[1m[31m    conflict[0m  translations/it.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/it.json? (enter "h" for help) [Ynaqdh] 
+[1m[33m       force[0m  translations/it.json
+[1m[31m    conflict[0m  translations/nl.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/nl.json? (enter "h" for help) [Ynaqdh] 
+[1m[33m       force[0m  translations/nl.json
+[1m[31m    conflict[0m  translations/no.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/no.json? (enter "h" for help) [Ynaqdh] 
+[1m[33m       force[0m  translations/no.json
+[1m[31m    conflict[0m  translations/pt-br.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/pt-br.json? (enter "h" for help) [Ynaqdh] 
+[1m[33m       force[0m  translations/pt-br.json
+[1m[31m    conflict[0m  translations/pt.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/pt.json? (enter "h" for help) [Ynaqdh] 
+[1m[33m       force[0m  translations/pt.json
+[1m[31m    conflict[0m  translations/sv.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/sv.json? (enter "h" for help) [Ynaqdh] 
+[1m[33m       force[0m  translations/sv.json
+[1m[31m    conflict[0m  translations/tr.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/tr.json? (enter "h" for help) [Ynaqdh] 
+[1m[33m       force[0m  translations/tr.json
+[1m[31m    conflict[0m  translations/ru.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/ru.json? (enter "h" for help) [Ynaqdh] 
+[1m[33m       force[0m  translations/ru.json
+[1m[31m    conflict[0m  translations/uk.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/uk.json? (enter "h" for help) [Ynaqdh] 
+[1m[33m       force[0m  translations/uk.json
+[1m[31m    conflict[0m  translations/ja.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/ja.json? (enter "h" for help) [Ynaqdh] 
+[1m[33m       force[0m  translations/ja.json
+[1m[31m    conflict[0m  translations/zh-cn.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/zh-cn.json? (enter "h" for help) [Ynaqdh] 
+[1m[33m       force[0m  translations/zh-cn.json
+
+[1m[31m    conflict[0m  translations/zh-tw.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/zh-tw.json? (enter "h" for help) [Ynaqdh] [1m[33m       force[0m  translations/zh-tw.json
+
+[1m[31m    conflict[0m  translations/ko.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/ko.json? (enter "h" for help) [Ynaqdh] [1m[33m       force[0m  translations/ko.json
+[32mTranslations updated[0m
+bash: get_time: command not found
+bash: parse_git_branch: command not found
+[01;31mMaxime[01;36m[][01;32m~/Dropbox/APPS/answer_suggestions_app[01;35m$ [00mzat translate update
+What is the package name for this app? (without app_) answer_suggestion_app
+Fetching translations...
+[1m[31m    conflict[0m  translations/da.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/da.json? (enter "h" for help) [Ynaqdh] 
+[1m[33m       force[0m  translations/da.json
+[1m[31m    conflict[0m  translations/de.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/de.json? (enter "h" for help) [Ynaqdh] 
+[1m[33m       force[0m  translations/de.json
+[1m[34m   identical[0m  translations/en-US.json
+
+[1m[34m   identical[0m  translations/en-ca.json
+[1m[34m   identical[0m  translations/en-gb.json
+[1m[31m    conflict[0m  translations/es.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/es.json? (enter "h" for help) [Ynaqdh] [1m[33m       force[0m  translations/es.json
+[1m[31m    conflict[0m  translations/es-419.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/es-419.json? (enter "h" for help) [Ynaqdh] 
+[1m[33m       force[0m  translations/es-419.json
+[1m[31m    conflict[0m  translations/fr.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/fr.json? (enter "h" for help) [Ynaqdh] 
+[1m[33m       force[0m  translations/fr.json
+[1m[31m    conflict[0m  translations/fr-ca.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/fr-ca.json? (enter "h" for help) [Ynaqdh] 
+[1m[33m       force[0m  translations/fr-ca.json
+[1m[31m    conflict[0m  translations/it.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/it.json? (enter "h" for help) [Ynaqdh] 
+[1m[33m       force[0m  translations/it.json
+[1m[31m    conflict[0m  translations/nl.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/nl.json? (enter "h" for help) [Ynaqdh] 
+[1m[33m       force[0m  translations/nl.json
+[1m[31m    conflict[0m  translations/no.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/no.json? (enter "h" for help) [Ynaqdh] 
+[1m[33m       force[0m  translations/no.json
+[1m[31m    conflict[0m  translations/pt-br.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/pt-br.json? (enter "h" for help) [Ynaqdh] 
+[1m[33m       force[0m  translations/pt-br.json
+[1m[31m    conflict[0m  translations/pt.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/pt.json? (enter "h" for help) [Ynaqdh] 
+[1m[33m       force[0m  translations/pt.json
+[1m[34m   identical[0m  translations/sv.json
+
+[1m[34m   identical[0m  translations/tr.json
+[1m[31m    conflict[0m  translations/ru.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/ru.json? (enter "h" for help) [Ynaqdh] [1m[33m       force[0m  translations/ru.json
+[1m[34m   identical[0m  translations/uk.json
+[1m[31m    conflict[0m  translations/ja.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/ja.json? (enter "h" for help) [Ynaqdh] 
+[1m[33m       force[0m  translations/ja.json
+[1m[31m    conflict[0m  translations/zh-cn.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/zh-cn.json? (enter "h" for help) [Ynaqdh] 
+[1m[33m       force[0m  translations/zh-cn.json
+[1m[31m    conflict[0m  translations/zh-tw.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/zh-tw.json? (enter "h" for help) [Ynaqdh] 
+[1m[33m       force[0m  translations/zh-tw.json
+[1m[31m    conflict[0m  translations/ko.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/ko.json? (enter "h" for help) [Ynaqdh] 
+[1m[33m       force[0m  translations/ko.json
+[32mTranslations updated[0m
+bash: get_time: command not found
+bash: parse_git_branch: command not found
+[01;31mMaxime[01;36m[][01;32m~/Dropbox/APPS/answer_suggestions_app[01;35m$ [00m
+bash: get_time: command not found
+bash: parse_git_branch: command not found
+[01;31mMaxime[01;36m[][01;32m~/Dropbox/APPS/answer_suggestions_app[01;35m$ [00m
+bash: get_time: command not found
+bash: parse_git_branch: command not found
+[01;31mMaxime[01;36m[][01;32m~/Dropbox/APPS/answer_suggestions_app[01;35m$ [00m
+bash: get_time: command not found
+bash: parse_git_branch: command not found
+[01;31mMaxime[01;36m[][01;32m~/Dropbox/APPS/answer_suggestions_app[01;35m$ [00mgit st
+git: 'st' is not a git command. See 'git --help'.
+
+Did you mean one of these?
+	status
+	reset
+	stage
+	stash
+	svn
+bash: get_time: command not found
+bash: parse_git_branch: command not found
+[01;31mMaxime[01;36m[][01;32m~/Dropbox/APPS/answer_suggestions_app[01;35m$ [00mgit[K[K[Kgit status
+# On branch master
+# Changes not staged for commit:
+#   (use "git add <file>..." to update what will be committed)
+#   (use "git checkout -- <file>..." to discard changes in working directory)
+#
+#	modified:   translations/da.json
+#	modified:   translations/de.json
+#	modified:   translations/en-US.json
+#	modified:   translations/en-ca.json
+#	modified:   translations/en-gb.json
+#	modified:   translations/en.json
+#	modified:   translations/es-419.json
+#	modified:   translations/es.json
+#	modified:   translations/fr-ca.json
+#	modified:   translations/fr.json
+#	modified:   translations/it.json
+#	modified:   translations/ja.json
+#	modified:   translations/ko.json
+#	modified:   translations/nl.json
+#	modified:   translations/no.json
+#	modified:   translations/pt-br.json
+#	modified:   translations/pt.json
+#	modified:   translations/ru.json
+#	modified:   translations/sv.json
+#	modified:   translations/tr.json
+#	modified:   translations/uk.json
+#	modified:   translations/zh-cn.json
+#	modified:   translations/zh-tw.json
+#
+# Untracked files:
+#   (use "git add <file>..." to include in what will be committed)
+#
+#	translations/typescript
+no changes added to commit (use "git add" and/or "git commit -a")
+bash: get_time: command not found
+bash: parse_git_branch: command not found
+[01;31mMaxime[01;36m[][01;32m~/Dropbox/APPS/answer_suggestions_app[01;35m$ [00mgit add -A
+bash: get_time: command not found
+bash: parse_git_branch: command not found
+[01;31mMaxime[01;36m[][01;32m~/Dropbox/APPS/answer_suggestions_app[01;35m$ [00mgit[K[K[Kgit status
+# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#
+#	modified:   translations/da.json
+#	modified:   translations/de.json
+#	modified:   translations/en-US.json
+#	modified:   translations/en-ca.json
+#	modified:   translations/en-gb.json
+#	modified:   translations/en.json
+#	modified:   translations/es-419.json
+#	modified:   translations/es.json
+#	modified:   translations/fr-ca.json
+#	modified:   translations/fr.json
+#	modified:   translations/it.json
+#	modified:   translations/ja.json
+#	modified:   translations/ko.json
+#	modified:   translations/nl.json
+#	modified:   translations/no.json
+#	modified:   translations/pt-br.json
+#	modified:   translations/pt.json
+#	modified:   translations/ru.json
+#	modified:   translations/sv.json
+#	modified:   translations/tr.json
+#	new file:   translations/typescript
+#	modified:   translations/uk.json
+#	modified:   translations/zh-cn.json
+#	modified:   translations/zh-tw.json
+#
+# Changes not staged for commit:
+#   (use "git add <file>..." to update what will be committed)
+#   (use "git checkout -- <file>..." to discard changes in working directory)
+#
+#	modified:   translations/typescript
+#
+bash: get_time: command not found
+bash: parse_git_branch: command not found
+[01;31mMaxime[01;36m[][01;32m~/Dropbox/APPS/answer_suggestions_app[01;35m$ [00mgit add -A
+bash: get_time: command not found
+bash: parse_git_branch: command not found
+[01;31mMaxime[01;36m[][01;32m~/Dropbox/APPS/answer_suggestions_app[01;35m$ [00mgit status
+# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#
+#	modified:   translations/da.json
+#	modified:   translations/de.json
+#	modified:   translations/en-US.json
+#	modified:   translations/en-ca.json
+#	modified:   translations/en-gb.json
+#	modified:   translations/en.json
+#	modified:   translations/es-419.json
+#	modified:   translations/es.json
+#	modified:   translations/fr-ca.json
+#	modified:   translations/fr.json
+#	modified:   translations/it.json
+#	modified:   translations/ja.json
+#	modified:   translations/ko.json
+#	modified:   translations/nl.json
+#	modified:   translations/no.json
+#	modified:   translations/pt-br.json
+#	modified:   translations/pt.json
+#	modified:   translations/ru.json
+#	modified:   translations/sv.json
+#	modified:   translations/tr.json
+#	new file:   translations/typescript
+#	modified:   translations/uk.json
+#	modified:   translations/zh-cn.json
+#	modified:   translations/zh-tw.json
+#
+# Changes not staged for commit:
+#   (use "git add <file>..." to update what will be committed)
+#   (use "git checkout -- <file>..." to discard changes in working directory)
+#
+#	modified:   translations/typescript
+#
+bash: get_time: command not found
+bash: parse_git_branch: command not found
+[01;31mMaxime[01;36m[][01;32m~/Dropbox/APPS/answer_suggestions_app[01;35m$ [00mgi[K[Kgit c 'translation updates'
+git: 'c' is not a git command. See 'git --help'.
+
+Did you mean one of these?
+	checkout
+	clone
+	commit
+	gc
+bash: get_time: command not found
+bash: parse_git_branch: command not found
+[01;31mMaxime[01;36m[][01;32m~/Dropbox/APPS/answer_suggestions_app[01;35m$ [00mgit pu[K[K[Kc[K commit -[K'translation updates([K'
+error: pathspec 'translation updates' did not match any file(s) known to git.
+bash: get_time: command not found
+bash: parse_git_branch: command not found
+[01;31mMaxime[01;36m[][01;32m~/Dropbox/APPS/answer_suggestions_app[01;35m$ [00mgit push
+To git@github.com:zendesk/answer_suggestions_app.git
+ ! [rejected]        newpromotionasset -> newpromotionasset (non-fast-forward)
+ ! [rejected]        pierre -> pierre (non-fast-forward)
+error: failed to push some refs to 'git@github.com:zendesk/answer_suggestions_app.git'
+hint: Updates were rejected because a pushed branch tip is behind its remote
+hint: counterpart. If you did not intend to push that branch, you may want to
+hint: specify branches to push or set the 'push.default' configuration
+hint: variable to 'current' or 'upstream' to push only the current branch.
+bash: get_time: command not found
+bash: parse_git_branch: command not found
+[01;31mMaxime[01;36m[][01;32m~/Dropbox/APPS/answer_suggestions_app[01;35m$ [00mgit pull
+Cannot pull with rebase: You have unstaged changes.
+Additionally, your index contains uncommitted changes.
+Please commit or stash them.
+bash: get_time: command not found
+bash: parse_git_branch: command not found
+[01;31mMaxime[01;36m[][01;32m~/Dropbox/APPS/answer_suggestions_app[01;35m$ [00mwhich git
+/usr/bin/git
+bash: get_time: command not found
+bash: parse_git_branch: command not found
+[01;31mMaxime[01;36m[][01;32m~/Dropbox/APPS/answer_suggestions_app[01;35m$ [00msource ~/.bash_profile
+[01;31mMaxime[01;36m[20:10:24][01;32m~/Dropbox/APPS/answer_suggestions_app[01;35m[master]$ [00m
+[01;31mMaxime[01;36m[20:10:26][01;32m~/Dropbox/APPS/answer_suggestions_app[01;35m[master]$ [00m
+[01;31mMaxime[01;36m[20:10:26][01;32m~/Dropbox/APPS/answer_suggestions_app[01;35m[master]$ [00msource ~/.bash_profile[13Pwhich git[1Pgit pullshll
+Cannot pull with rebase: You have unstaged changes.
+Additionally, your index contains uncommitted changes.
+Please commit or stash them.
+[01;31mMaxime[01;36m[20:10:30][01;32m~/Dropbox/APPS/answer_suggestions_app[01;35m[master]$ [00mgit pullsource ~/.bash_profile[13Pwhich git[1Pgit pullshcommit 'translation updates'[5P[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cstatus[Kadd -Astatusadd -Astatus[Kzat translate update
+What is the package name for this app? (without app_) answer_suggestion_app
+Fetching translations...
+[1m[31m    conflict[0m  translations/da.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/da.json? (enter "h" for help) [Ynaqdh] 
+[1m[33m       force[0m  translations/da.json
+[1m[31m    conflict[0m  translations/de.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/de.json? (enter "h" for help) [Ynaqdh] 
+[1m[33m       force[0m  translations/de.json
+[1m[34m   identical[0m  translations/en-US.json
+
+[1m[34m   identical[0m  translations/en-ca.json
+[1m[34m   identical[0m  translations/en-gb.json
+[1m[31m    conflict[0m  translations/es.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/es.json? (enter "h" for help) [Ynaqdh] [1m[33m       force[0m  translations/es.json
+
+[1m[31m    conflict[0m  translations/es-419.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/es-419.json? (enter "h" for help) [Ynaqdh] [1m[33m       force[0m  translations/es-419.json
+[1m[31m    conflict[0m  translations/fr.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/fr.json? (enter "h" for help) [Ynaqdh] 
+[1m[33m       force[0m  translations/fr.json
+[1m[31m    conflict[0m  translations/fr-ca.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/fr-ca.json? (enter "h" for help) [Ynaqdh] 
+[1m[33m       force[0m  translations/fr-ca.json
+[1m[31m    conflict[0m  translations/it.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/it.json? (enter "h" for help) [Ynaqdh] 
+[1m[33m       force[0m  translations/it.json
+[1m[31m    conflict[0m  translations/nl.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/nl.json? (enter "h" for help) [Ynaqdh] 
+[1m[33m       force[0m  translations/nl.json
+[1m[31m    conflict[0m  translations/no.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/no.json? (enter "h" for help) [Ynaqdh] 
+[1m[33m       force[0m  translations/no.json
+[1m[31m    conflict[0m  translations/pt-br.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/pt-br.json? (enter "h" for help) [Ynaqdh] 
+[1m[33m       force[0m  translations/pt-br.json
+[1m[31m    conflict[0m  translations/pt.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/pt.json? (enter "h" for help) [Ynaqdh] 
+[1m[33m       force[0m  translations/pt.json
+[1m[34m   identical[0m  translations/sv.json
+
+[1m[34m   identical[0m  translations/tr.json
+[1m[31m    conflict[0m  translations/ru.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/ru.json? (enter "h" for help) [Ynaqdh] [1m[33m       force[0m  translations/ru.json
+
+[1m[34m   identical[0m  translations/uk.json
+[1m[31m    conflict[0m  translations/ja.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/ja.json? (enter "h" for help) [Ynaqdh] [1m[33m       force[0m  translations/ja.json
+[1m[31m    conflict[0m  translations/zh-cn.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/zh-cn.json? (enter "h" for help) [Ynaqdh] 
+[1m[33m       force[0m  translations/zh-cn.json
+[1m[31m    conflict[0m  translations/zh-tw.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/zh-tw.json? (enter "h" for help) [Ynaqdh] 
+[1m[33m       force[0m  translations/zh-tw.json
+[1m[31m    conflict[0m  translations/ko.json
+Overwrite /Users/Maxime/Dropbox/APPS/answer_suggestions_app/translations/ko.json? (enter "h" for help) [Ynaqdh] 
+[1m[33m       force[0m  translations/ko.json
+[32mTranslations updated[0m
+[01;31mMaxime[01;36m[20:11:17][01;32m~/Dropbox/APPS/answer_suggestions_app[01;35m[master]$ [00m
+[01;31mMaxime[01;36m[20:11:20][01;32m~/Dropbox/APPS/answer_suggestions_app[01;35m[master]$ [00m
+[01;31mMaxime[01;36m[20:11:21][01;32m~/Dropbox/APPS/answer_suggestions_app[01;35m[master]$ [00m
+[01;31mMaxime[01;36m[20:11:21][01;32m~/Dropbox/APPS/answer_suggestions_app[01;35m[master]$ [00m
+[01;31mMaxime[01;36m[20:11:21][01;32m~/Dropbox/APPS/answer_suggestions_app[01;35m[master]$ [00m

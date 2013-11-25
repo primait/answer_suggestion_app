@@ -17,7 +17,7 @@
       },
       "search_hc": {
         "label": "Maakt u gebruik van Helpcenter?",
-        "helpText": "Schakel dit selectievakje in als u naar Helpcenter-artikelen wilt zoeken."
+        "helpText": "Selecteer deze optie als u naar Helpcenter-artikelen wilt zoeken."
       },
       "exclude_agent_only": {
         "label": "Zonder onderwerpen die zijn aangeduid met 'Alleen agenten'."
@@ -25,7 +25,7 @@
     }
   },
   "layout": {
-    "placeholder_text": "Resultaten niet nuttig? Geef hier trefwoorden op.",
+    "placeholder_text": "Geef hier uw zoekopdracht op",
     "search_button": "Zoeken"
   },
   "list": {

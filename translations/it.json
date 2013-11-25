@@ -17,7 +17,7 @@
       },
       "search_hc": {
         "label": "Utilizzate il centro assistenza?",
-        "helpText": "Selezionare questa opzione per cercare nel centro assistenza."
+        "helpText": "Selezionare questa opzione per cercare negli articoli del Centro assistenza."
       },
       "exclude_agent_only": {
         "label": "Esclusi argomenti 'solo per agenti'."
@@ -25,7 +25,7 @@
     }
   },
   "layout": {
-    "placeholder_text": "I risultati non sono utili? Inserite qui delle parole chiave.",
+    "placeholder_text": "Digitate qui cosa cercare",
     "search_button": "Cerca"
   },
   "list": {

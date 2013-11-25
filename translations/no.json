@@ -17,7 +17,7 @@
       },
       "search_hc": {
         "label": "Bruger du Hjælp-center?",
-        "helpText": "Vælg dette for at søge i artikler i Hjælp-centeret."
+        "helpText": "Vælg denne indstilling for at søge i artikler i Hjælp-centeret."
       },
       "exclude_agent_only": {
         "label": "Udeluk 'Kun agenter'-emner."
@@ -25,7 +25,7 @@
     }
   },
   "layout": {
-    "placeholder_text": "Er resultaterne ikke nyttige? Indtast nøgleord her.",
+    "placeholder_text": "Indtast din søgning her",
     "search_button": "Søg"
   },
   "list": {

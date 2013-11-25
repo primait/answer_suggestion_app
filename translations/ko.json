@@ -17,7 +17,7 @@
       },
       "search_hc": {
         "label": "헬프 센터를 사용하고 계십니까?",
-        "helpText": "헬프 센터 문서를 검색하려면 이 옵션을 선택합니다."
+        "helpText": "헬프 센터 문서를 검색하려면 이 옵션을 선택하십시오."
       },
       "exclude_agent_only": {
         "label": "'상담원 전용' 주제를 제외합니다."
@@ -25,7 +25,7 @@
     }
   },
   "layout": {
-    "placeholder_text": "결과가 도움이 되었습니까? 키워드를 여기에 입력하십시오.",
+    "placeholder_text": "검색어를 여기에 입력하십시오",
     "search_button": "검색"
   },
   "list": {

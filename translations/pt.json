@@ -17,7 +17,7 @@
       },
       "search_hc": {
         "label": "Você está usando a Central de Ajuda?",
-        "helpText": "Verifique isso para pesquisar os artigos da Central de Ajuda."
+        "helpText": "Selecione essa opção para pesquisar os artigos da Central de Ajuda."
       },
       "exclude_agent_only": {
         "label": "Exclua tópicos \"apenas para agentes\"."
@@ -25,7 +25,7 @@
     }
   },
   "layout": {
-    "placeholder_text": "Os resultados não foram úteis? Digite as palavras-chave aqui.",
+    "placeholder_text": "Digite sua pesquisa aqui",
     "search_button": "Pesquisar"
   },
   "list": {

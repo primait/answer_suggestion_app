@@ -1,7 +1,7 @@
 {
   "app": {
-    "description":  "Answer Suggestions from your knowledge base.",
-    "name":         "Answer Suggestion",
+    "description": "Answer Suggestions from your knowledge base.",
+    "name": "Answer Suggestion",
     "parameters": {
       "nb_entries": {
         "label": "Number of results.",
@@ -13,11 +13,11 @@
       },
       "include_title": {
         "label": "Copy article title?",
-        "helpText": "Copy the article title as well as the entry link."
+        "helpText": "Copy the article title as well as the article link."
       },
       "search_hc": {
         "label": "Are you using Help Center?",
-        "helpText": "Check this to search the Help Center articles."
+        "helpText": "Select this option to search Help Center articles."
       },
       "exclude_agent_only": {
         "label": "Exclude 'Agents Only' topics."

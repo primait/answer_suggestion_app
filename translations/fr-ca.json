@@ -17,7 +17,7 @@
       },
       "search_hc": {
         "label": "Utilisez-vous le centre d’aide ?",
-        "helpText": "Cochez cette case pour effectuer des recherches dans les articles du centre d’aide."
+        "helpText": "Sélectionnez cette option pour effectuer des recherches dans les articles du centre d’aide."
       },
       "exclude_agent_only": {
         "label": "Exclure les sujets réservés aux agents"
@@ -25,7 +25,7 @@
     }
   },
   "layout": {
-    "placeholder_text": "Les résultats ne vous ont pas aidé ? Saisissez des mots-clés ici.",
+    "placeholder_text": "Saisissez ce que vous voulez rechercher ici",
     "search_button": "Rechercher"
   },
   "list": {

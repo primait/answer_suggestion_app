@@ -17,7 +17,7 @@
       },
       "search_hc": {
         "label": "¿Está usando el Centro de ayuda?",
-        "helpText": "Marque esta casilla para buscar artículos del Centro de ayuda."
+        "helpText": "Seleccione esta opción para buscar artículos del Centro de ayuda."
       },
       "exclude_agent_only": {
         "label": "Excluir los temas que solo los agentes pueden ver."
@@ -25,7 +25,7 @@
     }
   },
   "layout": {
-    "placeholder_text": "¿No le parecieron útiles los resultados? Ingrese las palabras clave aquí.",
+    "placeholder_text": "Escriba su búsqueda aquí",
     "search_button": "Búsqueda"
   },
   "list": {

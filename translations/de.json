@@ -17,7 +17,7 @@
       },
       "search_hc": {
         "label": "Verwenden Sie das Help Center?",
-        "helpText": "Markieren Sie dieses Kästchen, um Help-Center-Beiträge zu durchsuchen."
+        "helpText": "Wählen Sie diese Option aus, um Help-Center-Beiträge zu durchsuchen."
       },
       "exclude_agent_only": {
         "label": "Themen ausschließen, die nur für Agenten bestimmt sind."
@@ -25,7 +25,7 @@
     }
   },
   "layout": {
-    "placeholder_text": "Ergebnisse nicht hilfreich? Geben Sie hier Schlüsselwörter ein.",
+    "placeholder_text": "Suchbegriff hier eingeben",
     "search_button": "Suchen"
   },
   "list": {
