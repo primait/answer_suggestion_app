@@ -4,7 +4,7 @@
     "name": "答案建議",
     "parameters": {
       "nb_entries": {
-        "label": "結果數目。",
+        "label": "結果數目",
         "helpText": "顯示結果數目（預設：10，最多：100）。"
       },
       "custom_host": {

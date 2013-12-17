@@ -4,7 +4,7 @@
     "name": "Suggestions de réponses",
     "parameters": {
       "nb_entries": {
-        "label": "Nombre de résultats.",
+        "label": "Nombre de résultats",
         "helpText": "Nombre de résultats à afficher (par défaut : 10, max. : 100)."
       },
       "custom_host": {
@@ -16,7 +16,7 @@
         "helpText": "Copiez le titre de l’article en plus du lien de l’article."
       },
       "search_hc": {
-        "label": "Utilisez-vous le centre d’aide ?",
+        "label": "Utiliser le centre d’aide ?",
         "helpText": "Sélectionnez cette option pour effectuer des recherches dans les articles du centre d’aide."
       },
       "exclude_agent_only": {
