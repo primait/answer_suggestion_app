@@ -9,18 +9,18 @@
       },
       "custom_host": {
         "label": "Domínio personalizado",
-        "helpText": "Isto é: support.mybusiness.com"
+        "helpText": "Por exemplo: suporte.minhaempresa.com"
       },
       "include_title": {
         "label": "Copiar o título do artigo?",
-        "helpText": "Copie o título e o link do artigo."
+        "helpText": "Copia o título e o link do artigo."
       },
       "search_hc": {
         "label": "Você está usando a Central de Ajuda?",
-        "helpText": "Selecione essa opção para pesquisar os artigos da Central de Ajuda."
+        "helpText": "Marque essa opção para pesquisar os artigos da Central de Ajuda."
       },
       "exclude_agent_only": {
-        "label": "Exclua tópicos \"apenas para agentes\"."
+        "label": "Excluir tópicos \"apenas para agentes\"."
       }
     }
   },

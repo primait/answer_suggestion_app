@@ -16,8 +16,8 @@
         "helpText": "Kopier artiklens titel samt linket til artiklen."
       },
       "search_hc": {
-        "label": "Bruger du Hjælp-center?",
-        "helpText": "Vælg denne indstilling for at søge i artikler i Hjælp-centeret."
+        "label": "Bruger du Help Center?",
+        "helpText": "Vælg denne indstilling for at søge i artikler i Help Center."
       },
       "exclude_agent_only": {
         "label": "Udeluk 'Kun agenter'-emner."

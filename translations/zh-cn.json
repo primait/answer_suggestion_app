@@ -4,7 +4,7 @@
     "name": "推荐答案",
     "parameters": {
       "nb_entries": {
-        "label": "结果数。",
+        "label": "结果数",
         "helpText": "显示结果数（默认：10，最多：100）。"
       },
       "custom_host": {
