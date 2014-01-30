@@ -1,7 +1,7 @@
 {
   "app": {
     "description": "Svar og forslag fra din vidensbase.",
-    "name": "Svar og forslag",
+    "name": "Forslag til svar",
     "parameters": {
       "nb_entries": {
         "label": "Antal resultater.",

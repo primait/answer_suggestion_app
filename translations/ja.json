@@ -1,7 +1,7 @@
 {
   "app": {
     "description": " サポート情報から推奨される回答を提示します。",
-    "name": "Answer Suggestion",
+    "name": "回答候補の表示",
     "parameters": {
       "nb_entries": {
         "label": "結果数。",
