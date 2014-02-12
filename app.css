@@ -49,3 +49,9 @@ p.spinner_text {
 section div.well.well-small {
   margin-bottom: 0px;
 }
+
+.toggles {
+  padding-left:3px;
+  padding-bottom:5px;
+  color:red;
+}

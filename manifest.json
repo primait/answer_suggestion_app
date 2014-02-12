@@ -23,6 +23,11 @@
       "type": "checkbox"
     },
     {
+      "name": "search_macros",
+      "type": "checkbox",
+      "default": "1"
+    },
+    {
       "name": "exclude_agent_only",
       "type": "checkbox"
     }

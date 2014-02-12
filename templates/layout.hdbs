@@ -6,6 +6,10 @@
 </header>
 
 <div class="app-container">
+  <div class="toggle-search">
+    <input type="checkbox" class="toggles" checked="checked"> Search Forums
+    <input type="checkbox" class="toggles"> Search Macros 
+  </div>
   <div class="input-append custom-search">
     <input type="text" placeholder="{{t "layout.placeholder_text"}}">
     <button class="btn" type="button">{{t "layout.search_button"}}</button>

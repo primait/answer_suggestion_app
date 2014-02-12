@@ -12,6 +12,7 @@
       'getTopicContent.done': 'topicContentDone',
       'getHCArticleContent.done': 'hcArticleContentDone',
       'settings.done': 'settingsDone',
+      'getMacroContent.done': 'macroContentDone',
 
       // DOM EVENTS
       'click a.preview_link': 'previewLink',
@@ -34,8 +35,7 @@
       getTopicContent: function(id) {
         return {
           url: helpers.fmt('/api/v2/topics/%@.json', id),
-          type: 'GET',
-          proxy_v2: true
+          type: 'GET'
         };
       },
 
@@ -43,14 +43,22 @@
         return {
           url: url,
           type: 'GET',
-          dataType: 'html',
-          proxy_v2: true
+          dataType: 'html'
+        };
+      },
+
+      getMacroContent: function() {
+        return {
+          url: '/api/v2/macros.json',
+          type: 'GET'
         };
       },
 
       search: function(query){
         this.switchTo('spinner');
-
+        console.log(query);
+        this.query = query;
+        this.results = { entries: [], macros: [] };
         var topic = this.setting('search_hc') ? '' : ' type:topic';
         return {
           url: helpers.fmt('%@search.json?query=%@%@', this.apiEndpoint(), query, topic),
@@ -86,6 +94,7 @@
         return this.switchTo('no_subject');
       this.ajax('settings').then(function() {
         this.ajax('search', this.subjectSearchQuery());
+        this.query = this.subjectSearchQuery()
       }.bind(this));
     },
 
@@ -102,24 +111,55 @@
       this.$('#detailsModal .modal-body').html(html);
     },
 
+    macroContentDone: function(data) {
+      if (data.count > 0) {
+        var queryWords = this.query.split(' ');
+        var macros = data.macros.filter(function(macro) {
+          macro.relevance = 0;
+          queryWords.reduce(function(memo, word) { 
+            if (macro.title.indexOf(word) !== -1) {
+              macro.relevance++;
+            }
+          }, macro.relevance);
+          return macro.relevance > 0;
+        });
+        if (macros.length) {
+          macros = _.sortBy(macros, 'relevance').reverse();
+          this.results.macros = macros;
+        }
+        this.renderList(this.results);
+      } 
+    },
+
     searchDone: function(data){
-      if (_.isEmpty(data.results))
-        return this.switchTo('no_entries');
+      if (_.isEmpty(data.results)){
+        this.searchForMacros();
+        return;
+      }
 
       if (this.setting('search_hc')){
-        this.renderList(this.formatHcEntries(data.results));
+        this.results.entries = this.formatHcEntries(data.results);
+        this.searchForMacros();
       } else {
         var topics = data.results;
 
         this.ajax('fetchTopicsWithForums', _.map(topics, function(topic) { return topic.id; }))
           .done(function(data){
-            this.renderList(this.formatEntries(topics, data));
+            this.results.entries = this.formatEntries(topics, data);
+            this.searchForMacros();
           });
       }
     },
 
+    searchForMacros: function() {
+      if (!this.setting('search_macros')) {
+        return this.renderList(this.entries);
+      }
+      this.ajax('getMacroContent');
+    },
+
     renderList: function(data){
-      if (_.isEmpty(data.entries))
+      if (_.isEmpty(data.entries) && _.isEmpty(data.macros))
         return this.switchTo('no_entries');
 
       this.switchTo('list', data);

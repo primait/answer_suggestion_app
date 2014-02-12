@@ -1,6 +1,7 @@
-{{#if entries}}
+
 <div class="well well-small">
   <p>{{t "help_text"}}</p>
+  {{#if entries}}
   <div class="entries">
   {{#each entries}}
   <div class="row-fluid entry">
@@ -31,5 +32,9 @@
   </div>
   {{/each}}
   </div>
+  {{/if}}
+  {{#each macros}}
+    {{title}}
+  {{/each}}
 </div>
-{{/if}}
+
