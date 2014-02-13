@@ -94,7 +94,6 @@
         return this.switchTo('no_subject');
       this.ajax('settings').then(function() {
         this.ajax('search', this.subjectSearchQuery());
-        this.query = this.subjectSearchQuery()
       }.bind(this));
     },
 
@@ -117,7 +116,7 @@
         var macros = data.macros.filter(function(macro) {
           macro.relevance = 0;
           queryWords.reduce(function(memo, word) { 
-            if (macro.title.indexOf(word) !== -1) {
+            if (macro.title.toLowerCase().indexOf(word.toLowerCase()) !== -1 && word !== "") {
               macro.relevance++;
             }
           }, macro.relevance);
