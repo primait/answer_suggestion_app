@@ -58,7 +58,7 @@
         this.switchTo('spinner');
         console.log(query);
         this.query = query;
-        this.results = { entries: [], macros: [] };
+        this.results = {};
         var topic = this.setting('search_hc') ? '' : ' type:topic';
         return {
           url: helpers.fmt('%@search.json?query=%@%@', this.apiEndpoint(), query, topic),
@@ -181,12 +181,12 @@
         return memo;
       }, [], this);
 
-      return { entries: entries.slice(0,this.numberOfDisplayableEntries()) };
+      return entries.slice(0,this.numberOfDisplayableEntries());
     },
 
     formatHcEntries: function(result){
       var slicedResult = result.slice(0, this.numberOfDisplayableEntries());
-      var entries = _.inject(slicedResult, function(memo, entry){
+      return _.inject(slicedResult, function(memo, entry){
         var title = entry.name;
         var url = entry.html_url.replace(/^https:\/\/.*.zendesk.com\//, this.baseUrl());
 

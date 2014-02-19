@@ -35,7 +35,8 @@ p.spinner_text {
   min-height: 20px;
 }
 
-.entries {
+.entries,
+.macros {
   padding-top: 10px;
 }
 .entry-text {

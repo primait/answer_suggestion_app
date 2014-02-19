@@ -1,40 +1,60 @@
 
 <div class="well well-small">
-  <p>{{t "help_text"}}</p>
   {{#if entries}}
+  <p>{{t "entries_help_text"}}</p>
   <div class="entries">
-  {{#each entries}}
-  <div class="row-fluid entry">
-    <div class="span10">
-      <div class="dropdown">
-        <a class="dropdown-toggle pull-left" data-toggle="dropdown"><i class="icon-cog"></i></a>
-        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-          <li>
-            <a href="{{url}}" class='preview_link' data-id="{{id}}" title="{{title}}"><i class="icon-eye-open"></i> {{t "list.preview_link"}}</a>
-          </li>
-          <li>
-            <a href="{{url}}" target="_blank"><i class="icon-share"></i> {{t "list.newtab_link"}}</a>
-          </li>
-          <li>
-            <a href="{{url}}" title="{{title}}" class="copy_link"><i class="icon-th-list"></i> {{t "list.copylink_link"}}</a>
-          </li>
-        </ul>
+    {{#each entries}}
+    <div class="row-fluid entry">
+      <div class="span10">
+        <div class="dropdown">
+          <a class="dropdown-toggle pull-left" data-toggle="dropdown"><i class="icon-cog"></i></a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+            <li>
+              <a href="{{url}}" class='preview_link' data-id="{{id}}" title="{{title}}"><i class="icon-eye-open"></i> {{t "list.preview_link"}}</a>
+            </li>
+            <li>
+              <a href="{{url}}" target="_blank"><i class="icon-share"></i> {{t "list.newtab_link"}}</a>
+            </li>
+            <li>
+              <a href="{{url}}" title="{{title}}" class="copy_link"><i class="icon-th-list"></i> {{t "list.copylink_link"}}</a>
+            </li>
+          </ul>
+        </div>
+        <div class="entry-text">
+          <a href="{{url}}" data-id="{{id}}" title="{{title}}" class="main preview_link">{{title}}</a>
+        </div>
       </div>
-      <div class="entry-text">
-        <a href="{{url}}" data-id="{{id}}" title="{{title}}" class="main preview_link">{{title}}</a>
+      {{#if agent_only}}
+      <div class="span2">
+        <span class="label label-warning">{{t "agents_only"}}</span>
       </div>
+      {{/if}}
     </div>
-    {{#if agent_only}}
-    <div class="span2">
-      <span class="label label-warning">{{t "agents_only"}}</span>
-    </div>
-    {{/if}}
-  </div>
-  {{/each}}
+    {{/each}}
   </div>
   {{/if}}
-  {{#each macros}}
-    {{title}}
-  {{/each}}
+
+  {{#if macros}}
+  <p>{{t "macros_help_text"}}</p>
+  <div class="macros">
+    {{#each macros}}
+    <div class="row-fluid entry">
+      <div class="span10">
+        <div class="dropdown">
+          <a class="dropdown-toggle pull-left" data-toggle="dropdown"><i class="icon-cog"></i></a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+            <li>
+              <a href="#" data-id="{{id}}" title="{{title}}" class="apply_macro_link"><i class="icon-th-list"></i> {{t "list.apply_macro_link"}}</a>
+            </li>
+          </ul>
+        </div>
+        <div class="entry-text">
+          <a href="{{url}}" data-id="{{id}}" title="{{title}}" class="main preview_link">{{title}}</a>
+        </div>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+  {{/if}}
 </div>
 

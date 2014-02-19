@@ -80,6 +80,10 @@
     "preview_link": {
       "title": "option on the article result to preview article in a preview box",
       "value": "Preview article"
+    },
+    "apply_macro_link": {
+      "title": "option to apply the current macro",
+      "value": "Apply Macro"
     }
   },
   "stop_words": {
@@ -94,9 +98,13 @@
     "title": "placeholder for when there is no subject yet on the ticket",
     "value": "Waiting for a subject to be defined..."
   },
-  "help_text": {
-    "title": "instructions for the add to comment button",
+  "entries_help_text": {
+    "title": "instructions for the add entries to comment button",
     "value": "Click the link to add it to the comment:"
+  },
+  "macros_help_text": {
+    "title": "instructions for the add macros to comment button",
+    "value": "Click the link to apply macro:"
   },
   "spinner": {
     "title": "Loading text",
