@@ -35,6 +35,9 @@
   {{/if}}
 
   {{#if macros}}
+  {{#if entries}}
+    <div class="break"/>
+  {{/if}}
   <p>{{t "macros_help_text"}}</p>
   <div class="macros">
     {{#each macros}}
