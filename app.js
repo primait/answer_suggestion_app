@@ -23,7 +23,8 @@
         if(event.keyCode === 13)
           return this.processSearchFromInput();
       },
-      'click .custom-search button': 'processSearchFromInput'
+      'click .custom-search button': 'processSearchFromInput',
+      'click .apply_macro_link': 'applyMacro'
     },
 
     requests: {
@@ -56,7 +57,6 @@
 
       search: function(query){
         this.switchTo('spinner');
-        console.log(query);
         this.query = query;
         this.results = {};
         var topic = this.setting('search_hc') ? '' : ' type:topic';
@@ -115,7 +115,7 @@
         var queryWords = this.query.split(' ');
         var macros = data.macros.filter(function(macro) {
           macro.relevance = 0;
-          queryWords.reduce(function(memo, word) { 
+          queryWords.reduce(function(memo, word) {
             if (macro.title.toLowerCase().indexOf(word.toLowerCase()) !== -1 && word !== "") {
               macro.relevance++;
             }
@@ -127,7 +127,7 @@
           this.results.macros = macros;
         }
         this.renderList(this.results);
-      } 
+      }
     },
 
     searchDone: function(data){
@@ -250,6 +250,10 @@
         content += event.currentTarget.href;
       }
       return this.appendToComment(content);
+    },
+
+    applyMacro: function(event) {
+      console.log(event);
     },
 
     getContentFor: function(id) {

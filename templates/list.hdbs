@@ -49,7 +49,7 @@
           </ul>
         </div>
         <div class="entry-text">
-          <a href="{{url}}" data-id="{{id}}" title="{{title}}" class="main preview_link">{{title}}</a>
+          <a href="#" data-id="{{id}}" title="{{title}}" class="apply_macro_link">{{title}}</a>
         </div>
       </div>
     </div>
