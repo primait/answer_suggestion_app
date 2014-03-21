@@ -34,17 +34,14 @@
       getTopicContent: function(id) {
         return {
           url: helpers.fmt('/api/v2/topics/%@.json', id),
-          type: 'GET',
-          proxy_v2: true
+          type: 'GET'
         };
       },
 
-      getHCArticleContent: function(url) {
+      getHCArticleContent: function(id) {
         return {
-          url: url,
-          type: 'GET',
-          dataType: 'html',
-          proxy_v2: true
+          url: helpers.fmt('/api/v2/help_center/articles/%@.json', id),
+          type: 'GET'
         };
       },
 
@@ -54,16 +51,14 @@
         var topic = this.setting('search_hc') ? '' : ' type:topic';
         return {
           url: helpers.fmt('%@search.json?query=%@%@', this.apiEndpoint(), query, topic),
-          type: 'GET',
-          proxy_v2: true
+          type: 'GET'
         };
       },
 
       fetchTopicsWithForums: function(ids){
         return {
           url: helpers.fmt("/api/v2/topics/show_many.json?ids=%@&include=forums", ids.join(',')),
-          type: 'POST',
-          proxy_v2: true
+          type: 'POST'
         };
       }
     },
@@ -97,8 +92,19 @@
       this.$('#detailsModal .modal-body').html(data.topic.body);
     },
 
+    hcArticleLocaleContent: function(data) {
+      var currentLocale = this.currentUser().locale();
+      var body = _.map(data.translations, function(translation) {
+        if(translation.locale.toLowerCase() === currentLocale.toLowerCase()) {
+            return translation.body;
+        }
+      }).filter(Boolean);
+
+      return body[0] || data.translations[0].body;
+    },
+
     hcArticleContentDone: function(data) {
-      var html = this.$(data).find('.article-body').html();
+      var html = this.hcArticleLocaleContent(data);
       this.$('#detailsModal .modal-body').html(html);
     },
 
@@ -152,7 +158,7 @@
         var url = entry.html_url.replace(/^https:\/\/.*.zendesk.com\//, this.baseUrl());
 
         memo.push({
-          id: url,
+          id: entry.id,
           url: url,
           title: title
         });
@@ -182,7 +188,6 @@
     },
 
     previewLink: function(event){
-      event.preventDefault();
       var $link = this.$(event.target).closest('a');
       $link.parent().parent().parent().removeClass('open');
       var $modal = this.$("#detailsModal");
@@ -192,7 +197,7 @@
       }));
       $modal.modal();
       this.getContentFor($link.attr('data-id'));
-      return false;
+      event.preventDefault();
     },
 
     copyLink: function(event) {
