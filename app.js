@@ -94,13 +94,11 @@
 
     hcArticleLocaleContent: function(data) {
       var currentLocale = this.currentUser().locale();
-      var body = _.map(data.translations, function(translation) {
-        if(translation.locale.toLowerCase() === currentLocale.toLowerCase()) {
-            return translation.body;
-        }
-      }).filter(Boolean);
+      var translation = _.filter(data.translations, function(article) {
+        return article.locale.toLowerCase() === currentLocale.toLowerCase()
+      });
 
-      return body[0] || data.translations[0].body;
+      return translation[0] && translation[0].body || data.translations[0].body;
     },
 
     hcArticleContentDone: function(data) {
