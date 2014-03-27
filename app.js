@@ -95,7 +95,7 @@
     hcArticleLocaleContent: function(data) {
       var currentLocale = this.currentUser().locale();
       var translation = _.filter(data.translations, function(article) {
-        return article.locale.toLowerCase() === currentLocale.toLowerCase()
+        return article.locale.toLowerCase() === currentLocale.toLowerCase();
       });
 
       return translation[0] && translation[0].body || data.translations[0].body;
