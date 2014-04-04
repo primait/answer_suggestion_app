@@ -3,7 +3,6 @@ title: "Answer Suggestion"
 packages:
   - default
   - app_answer_suggestion_app
-  - classic
 
 parts:
   - translation:
