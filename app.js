@@ -2,15 +2,16 @@
   return {
     defaultState: 'spinner',
     defaultNumberOfEntriesToDisplay: 10,
+
     events: {
       // APP EVENTS
       'app.activated': 'activated',
       'ticket.subject.changed': _.debounce(function(){ this.initialize(); }, 500),
 
       // AJAX EVENTS
-      'search.done': 'searchDone',
-      'getTopicContent.done': 'topicContentDone',
-      'getHCArticleContent.done': 'hcArticleContentDone',
+      'searchHelpCenter.done': 'searchHelpCenterDone',
+      'searchWebPortal.done': 'searchWebPortalDone',
+      'getHcArticle.done': 'getHcArticleDone',
       'settings.done': 'settingsDone',
 
       // DOM EVENTS
@@ -31,45 +32,44 @@
         type: 'GET'
       },
 
-      getTopicContent: function(id) {
+      getHcArticle: function(id) {
         return {
-          url: helpers.fmt('/api/v2/topics/%@.json', id),
+          url: helpers.fmt('/api/v2/help_center/articles/%@.json?include=translations,sections', id),
           type: 'GET'
         };
       },
 
-      getHCArticleContent: function(id) {
+      searchHelpCenter: function(query){
         return {
-          url: helpers.fmt('/api/v2/help_center/articles/%@.json?include=translations', id),
+          url: helpers.fmt('/api/v2/help_center/search.json?per_page=%@&query=%@', this.queryLimit(), query),
           type: 'GET'
         };
       },
 
-      search: function(query){
-        this.switchTo('spinner');
-
-        var topic = this.setting('search_hc') ? '' : ' type:topic';
+      searchWebPortal: function(query){
         return {
-          url: helpers.fmt('%@search.json?query=%@%@', this.apiEndpoint(), query, topic),
+          url: helpers.fmt('/api/v2/search.json?per_page=%@&query=%@ type:topic', this.queryLimit(), query),
           type: 'GET'
         };
       },
 
       fetchTopicsWithForums: function(ids){
         return {
-          url: helpers.fmt("/api/v2/topics/show_many.json?ids=%@&include=forums", ids.join(',')),
+          url: helpers.fmt('/api/v2/topics/show_many.json?ids=%@&include=forums', ids.join(',')),
           type: 'POST'
         };
       }
     },
 
-    searchUrlPrefix: _.memoize(function() {
-      return this.setting('search_hc') ? '/hc' : '';
-    }),
+    search: function(query) {
+      this.switchTo('spinner');
 
-    apiEndpoint: _.memoize(function(){
-      return helpers.fmt("%@/api/v2/", this.searchUrlPrefix());
-    }),
+      if (this.setting('search_hc')) {
+        this.ajax('searchHelpCenter', query);
+      } else {
+        this.ajax('searchWebPortal', query);
+      }
+    },
 
     activated: function(app){
       if (app.firstLoad)
@@ -80,16 +80,12 @@
       if (_.isEmpty(this.ticket().subject()))
         return this.switchTo('no_subject');
       this.ajax('settings').then(function() {
-        this.ajax('search', this.subjectSearchQuery());
+        this.search(this.subjectSearchQuery());
       }.bind(this));
     },
 
     settingsDone: function(data) {
       this.useMarkdown = data.settings.tickets.markdown_ticket_comments;
-    },
-
-    topicContentDone: function(data) {
-      this.$('#detailsModal .modal-body').html(data.topic.body);
     },
 
     hcArticleLocaleContent: function(data) {
@@ -100,32 +96,46 @@
       return translation[0] && translation[0].body || data.translations[0].body;
     },
 
-    hcArticleContentDone: function(data) {
-      var html = this.hcArticleLocaleContent(data);
-      this.$('#detailsModal .modal-body').html(html);
+    renderAgentOnlyAlert: function() {
+      var alert = this.renderTemplate('alert');
+      this.$('#detailsModal .modal-body').prepend(alert);
     },
 
-    searchDone: function(data){
+    isAgentOnlyContent: function(data) {
+       return data.sections && data.sections[0].visibility !== 'public' || data.agent_only;
+    },
+
+    getHcArticleDone: function(data) {
+      var html = this.hcArticleLocaleContent(data);
+      this.$('#detailsModal .modal-body .content-body').html(html);
+      if (this.isAgentOnlyContent(data)) { this.renderAgentOnlyAlert(); }
+    },
+
+    searchHelpCenterDone: function(data){
+      this.renderList(this.formatHcEntries(data.results));
+    },
+
+    searchWebPortalDone: function(data){
       if (_.isEmpty(data.results))
         return this.switchTo('no_entries');
 
-      if (this.setting('search_hc')){
-        this.renderList(this.formatHcEntries(data.results));
-      } else {
-        var topics = data.results;
+      var topics = data.results,
+          topicIds = _.map(topics, function(topic) { return topic.id; });
 
-        this.ajax('fetchTopicsWithForums', _.map(topics, function(topic) { return topic.id; }))
-          .done(function(data){
-            this.renderList(this.formatEntries(topics, data));
-          });
-      }
+      this.ajax('fetchTopicsWithForums', topicIds)
+        .done(function(data){
+          var entries = this.formatEntries(topics, data);
+          this.store('entries', entries);
+          this.renderList(entries);
+        });
     },
 
     renderList: function(data){
-      if (_.isEmpty(data.entries))
+      if (_.isEmpty(data.entries)) {
         return this.switchTo('no_entries');
-
-      this.switchTo('list', data);
+      } else {
+        this.switchTo('list', data);
+      }
     },
 
     formatEntries: function(topics, result){
@@ -135,6 +145,7 @@
           id: topic.id,
           url: helpers.fmt("%@entries/%@", this.baseUrl(), topic.id),
           title: topic.title,
+          body: topic.body,
           agent_only: !!forum.access.match("agents only")
         };
 
@@ -167,12 +178,7 @@
 
     processSearchFromInput: function(){
       var query = this.removePunctuation(this.$('.custom-search input').val());
-
-      if (!query || !query.length) {
-        return;
-      }
-
-      this.ajax('search', query);
+      if (query && query.length) { this.search(query); }
     },
 
     baseUrl: function(){
@@ -185,6 +191,7 @@
     },
 
     previewLink: function(event){
+      event.preventDefault();
       var $link = this.$(event.target).closest('a');
       $link.parent().parent().parent().removeClass('open');
       var $modal = this.$("#detailsModal");
@@ -194,7 +201,6 @@
       }));
       $modal.modal();
       this.getContentFor($link.attr('data-id'));
-      event.preventDefault();
     },
 
     copyLink: function(event) {
@@ -215,8 +221,20 @@
       return this.appendToComment(content);
     },
 
+    renderTopicContent: function(id) {
+      var topic = _.find(this.store('entries').entries, function(entry) {
+        return entry.id == id;
+      });
+      this.$('#detailsModal .modal-body .content-body').html(topic.body);
+      if (this.isAgentOnlyContent(topic)) { this.renderAgentOnlyAlert(); }
+    },
+
     getContentFor: function(id) {
-      this.ajax(this.setting('search_hc') ? 'getHCArticleContent' : 'getTopicContent', id);
+      if (this.setting('search_hc')) {
+        this.ajax('getHcArticle', id);
+      } else {
+        this.renderTopicContent(id);
+      }
     },
 
     appendToComment: function(text){
@@ -230,6 +248,15 @@
 
     numberOfDisplayableEntries: function(){
       return this.setting('nb_entries') || this.defaultNumberOfEntriesToDisplay;
+    },
+
+    queryLimit: function(){
+      // ugly hack to return more results than needed because we filter out agent only content
+      if (this.setting('exclude_agent_only') && !this.setting('search_hc')) {
+        return this.numberOfDisplayableEntries() * 2;
+      } else {
+        return this.numberOfDisplayableEntries();
+      }
     },
 
     removeStopWords: function(str, stop_words){
