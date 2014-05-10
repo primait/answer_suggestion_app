@@ -106,6 +106,10 @@
     "title": "label appearing on private articles, this is a tag to show that this article is private",
     "value": "Private"
   },
+  "private_content_notice": {
+    "title": "Notice message displayed in modal preview for private content",
+    "value": "End-users will not be able to access this content."
+  },
   "modal": {
     "close": {
       "title": "Close button on the modal",

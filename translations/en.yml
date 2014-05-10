@@ -94,6 +94,10 @@ parts:
       title: "label appearing on private articles, this is a tag to show that this article is private"
       value: "Private"
   - translation:
+      key: "txt.apps.answer_suggestion_app.private_content_notice"
+      title: "Notice message displayed in modal preview for private content"
+      value: "End-users will not be able to access this content."
+  - translation:
       key: "txt.apps.answer_suggestion_app.modal.close"
       title: "Close button on the modal"
       value: "Close"
