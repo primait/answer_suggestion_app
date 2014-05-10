@@ -40,7 +40,7 @@
 
       getHCArticleContent: function(id) {
         return {
-          url: helpers.fmt('/api/v2/help_center/articles/%@.json', id),
+          url: helpers.fmt('/api/v2/help_center/articles/%@.json?include=translations', id),
           type: 'GET'
         };
       },
@@ -97,7 +97,6 @@
       var translation = _.filter(data.translations, function(article) {
         return article.locale.toLowerCase() === currentLocale.toLowerCase();
       });
-
       return translation[0] && translation[0].body || data.translations[0].body;
     },
 
