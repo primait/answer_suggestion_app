@@ -92,11 +92,11 @@
       var currentLocale = this.currentUser().locale(),
           translations = data.article.translations;
 
-      var localizedTranslation = _.filter(translations, function(translation) {
+      var localizedTranslation = _.find(translations, function(translation) {
         return translation.locale.toLowerCase() === currentLocale.toLowerCase();
       });
 
-      return localizedTranslation[0] && localizedTranslation[0].body || translations[0].body;
+      return localizedTranslation && localizedTranslation.body || translations[0].body;
     },
 
     renderAgentOnlyAlert: function() {
