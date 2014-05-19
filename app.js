@@ -41,7 +41,7 @@
 
       searchHelpCenter: function(query){
         return {
-          url: helpers.fmt('/api/v2/help_center/search.json?per_page=%@&query=%@', this.queryLimit(), query),
+          url: helpers.fmt('/api/v2/help_center/articles/search.json?per_page=%@&query=%@', this.queryLimit(), query),
           type: 'GET'
         };
       },
@@ -89,11 +89,14 @@
     },
 
     hcArticleLocaleContent: function(data) {
-      var currentLocale = this.currentUser().locale();
-      var translation = _.filter(data.translations, function(article) {
-        return article.locale.toLowerCase() === currentLocale.toLowerCase();
+      var currentLocale = this.currentUser().locale(),
+          translations = data.article.translations;
+
+      var localizedTranslation = _.find(translations, function(translation) {
+        return translation.locale.toLowerCase() === currentLocale.toLowerCase();
       });
-      return translation[0] && translation[0].body || data.translations[0].body;
+
+      return localizedTranslation && localizedTranslation.body || translations[0].body;
     },
 
     renderAgentOnlyAlert: function() {
