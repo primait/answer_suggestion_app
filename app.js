@@ -105,7 +105,7 @@
     },
 
     isAgentOnlyContent: function(data) {
-       return data.sections && data.sections[0].visibility !== 'public' || data.agent_only;
+       return data.sections && data.sections[0].visibility == 'internal' || data.agent_only;
     },
 
     getHcArticleDone: function(data) {
