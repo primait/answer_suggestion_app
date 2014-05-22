@@ -166,7 +166,7 @@
       var slicedResult = result.slice(0, this.numberOfDisplayableEntries());
       var entries = _.inject(slicedResult, function(memo, entry){
         var title = entry.name;
-        var url = entry.html_url.replace(/^https:\/\/.*.zendesk.com\//, this.baseUrl());
+        var url = entry.html_url.replace(/^https:\/\/.*.zendesk(-staging|-gamma)?.com\//, this.baseUrl());
 
         memo.push({
           id: entry.id,
