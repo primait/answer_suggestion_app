@@ -12,6 +12,7 @@
       'searchHelpCenter.done': 'searchHelpCenterDone',
       'searchWebPortal.done': 'searchWebPortalDone',
       'getHcArticle.done': 'getHcArticleDone',
+      'getSectionAccessPolicy.done': 'getSectionAccessPolicyDone',
       'settings.done': 'settingsDone',
 
       // DOM EVENTS
@@ -34,7 +35,14 @@
 
       getHcArticle: function(id) {
         return {
-          url: helpers.fmt('/api/v2/help_center/articles/%@.json?include=translations,sections', id),
+          url: helpers.fmt('/api/v2/help_center/articles/%@.json?include=translations', id),
+          type: 'GET'
+        };
+      },
+
+      getSectionAccessPolicy: function(sectionId) {
+        return {
+          url: helpers.fmt('/api/v2/help_center/sections/%@/access_policy.json', sectionId),
           type: 'GET'
         };
       },
@@ -105,12 +113,17 @@
     },
 
     isAgentOnlyContent: function(data) {
-       return data.sections && data.sections[0].visibility == 'internal' || data.agent_only;
+      return data.agent_only || data.access_policy && data.access_policy.viewable_by !== 'everybody';
     },
 
     getHcArticleDone: function(data) {
+      this.ajax('getSectionAccessPolicy', data.article.section_id);
+
       var html = this.hcArticleLocaleContent(data);
       this.$('#detailsModal .modal-body .content-body').html(html);
+    },
+
+    getSectionAccessPolicyDone: function(data) {
       if (this.isAgentOnlyContent(data)) { this.renderAgentOnlyAlert(); }
     },
 
