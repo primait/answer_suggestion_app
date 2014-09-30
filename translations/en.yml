@@ -48,7 +48,7 @@ parts:
   - translation:
       key: "txt.apps.answer_suggestion_app.app.parameters.exclude_agent_only.label"
       title: "Check box to exclude topics only visible to agents"
-      value: "Exclude 'Agents Only' topics."
+      value: "Exclude 'Agents Only' topics. (Web Portal Only)"
   - translation:
       key: "txt.apps.answer_suggestion_app.layout.placeholder_text"
       title: "Placeholder text in the search bar"
