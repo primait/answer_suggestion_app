@@ -20,7 +20,8 @@
     },
     {
       "name": "search_hc",
-      "type": "checkbox"
+      "type": "checkbox",
+      "default": "1"
     },
     {
       "name": "exclude_agent_only",
