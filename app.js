@@ -49,7 +49,7 @@
 
       searchHelpCenter: function(query){
         return {
-          url: helpers.fmt('/api/v2/help_center/articles/search.json?per_page=%@&query=%@', this.queryLimit(), query),
+          url: helpers.fmt('/api/v2/help_center/articles/search.json?per_page=%@&query=%@&locale=%@', this.queryLimit(), query, this.currentUser().locale()),
           type: 'GET'
         };
       },
