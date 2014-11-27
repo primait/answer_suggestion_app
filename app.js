@@ -47,10 +47,17 @@
         };
       },
 
-      searchHelpCenter: function(query){
+      searchHelpCenter: function(query) {
+        var locale = this.currentUser().locale(),
+            limit =  this.queryLimit();
         return {
-          url: helpers.fmt('/api/v2/help_center/articles/search.json?per_page=%@&query=%@&locale=%@', this.queryLimit(), query, this.currentUser().locale()),
-          type: 'GET'
+          url: '/api/v2/help_center/articles/search.json',
+          type: 'GET',
+          data: {
+            per_page: limit,
+            locale:   locale,
+            query:    query
+          }
         };
       },
 
