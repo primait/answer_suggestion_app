@@ -109,13 +109,7 @@
       }
 
       this.brands = [];
-      this.ajax('getBrands').then(function() {
-        if (this.isMultibrand()) {
-          this.$('.custom-search').append(
-            this.renderTemplate('brand_filter', { options: this.brands })
-          );
-        }
-      }.bind(this));
+      this.ajax('getBrands');
 
       this.ajax('settings').then(function() {
         this.search(this.subjectSearchQuery());
@@ -150,6 +144,11 @@
       this.brands = _.map(data.brands, function(brand) {
         return { id: brand.id, name: brand.name };
       });
+      if (this.isMultibrand()) {
+        this.$('.custom-search').append(
+          this.renderTemplate('brand_filter', { options: this.brands })
+        );
+      }
     },
 
     getHcArticleDone: function(data) {
