@@ -99,10 +99,24 @@
         return this.initialize();
     },
 
+    isMultibrand: function() {
+      return this.brands.length > 1;
+    },
+
     initialize: function(){
-      if (_.isEmpty(this.ticket().subject()))
+      if (_.isEmpty(this.ticket().subject())) {
         return this.switchTo('no_subject');
-      this.ajax('getBrands');
+      }
+
+      this.brands = [];
+      this.ajax('getBrands').then(function() {
+        if (this.isMultibrand()) {
+          this.$('.custom-search').append(
+            this.renderTemplate('brand_filter', { options: this.brands })
+          );
+        }
+      }.bind(this));
+
       this.ajax('settings').then(function() {
         this.search(this.subjectSearchQuery());
       }.bind(this));
@@ -133,12 +147,9 @@
     },
 
     getBrandsDone: function(data) {
-      var options = _.map(data.brands, function(brand) {
+      this.brands = _.map(data.brands, function(brand) {
         return { id: brand.id, name: brand.name };
       });
-      this.$('.custom-search').append(
-        this.renderTemplate('brand_filter', { options: options })
-      );
     },
 
     getHcArticleDone: function(data) {
@@ -153,8 +164,8 @@
     },
 
     searchHelpCenterDone: function(data) {
-      var brand = this.$('.custom-search .brand-filter option:selected').val(); 
-      if (brand == 'any') {
+      var brand = this.$('.custom-search .brand-filter option:selected').val();
+      if (brand === undefined || brand === 'any') {
         this.renderList(this.formatHcEntries(data.results));
       } else {
         this.renderList(this.formatHcEntries(
@@ -212,7 +223,8 @@
     formatHcEntries: function(result){
       var slicedResult = result.slice(0, this.numberOfDisplayableEntries());
       var entries = _.inject(slicedResult, function(memo, entry) {
-        var title = entry.brand_name + ": " + entry.name;
+        var title = this.isMultibrand() ? entry.brand_name + ": " + entry.name
+                                        : entry.name;
         var url = entry.html_url.replace(/^https:\/\/.*.zendesk(-staging|-gamma|-acceptance)?.com\//, this.baseUrl());
 
         memo.push({
