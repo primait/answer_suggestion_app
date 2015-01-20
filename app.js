@@ -11,11 +11,13 @@
       // AJAX EVENTS
       'searchHelpCenter.done': 'searchHelpCenterDone',
       'searchWebPortal.done': 'searchWebPortalDone',
+      'getBrands.done': 'getBrandsDone',
       'getHcArticle.done': 'getHcArticleDone',
       'getSectionAccessPolicy.done': 'getSectionAccessPolicyDone',
       'settings.done': 'settingsDone',
 
       // DOM EVENTS
+      'change .custom-search .brand-filter': 'processSearchFromInput',
       'click a.preview_link': 'previewLink',
       'dragend,click a.copy_link': 'copyLink',
       'dragend a.main': 'copyLink',
@@ -30,6 +32,11 @@
     requests: {
       settings: {
         url: '/api/v2/account/settings.json',
+        type: 'GET'
+      },
+
+      getBrands: {
+        url: '/api/v2/brands.json',
         type: 'GET'
       },
 
@@ -51,7 +58,8 @@
         var locale = this.currentUser().locale(),
             limit =  this.queryLimit();
         return {
-          url: '/api/v2/help_center/articles/search.json',
+          // CAUTION: using an internal API - we need to do this for multibrand support to work
+          url: '/hc/api/internal/articles/search.json',
           type: 'GET',
           data: {
             per_page: limit,
@@ -94,6 +102,7 @@
     initialize: function(){
       if (_.isEmpty(this.ticket().subject()))
         return this.switchTo('no_subject');
+      this.ajax('getBrands');
       this.ajax('settings').then(function() {
         this.search(this.subjectSearchQuery());
       }.bind(this));
@@ -123,6 +132,15 @@
       return data.agent_only || data.access_policy && data.access_policy.viewable_by !== 'everybody';
     },
 
+    getBrandsDone: function(data) {
+      var options = _.map(data.brands, function(brand) {
+        return { id: brand.id, name: brand.name };
+      });
+      this.$('.custom-search').append(
+        this.renderTemplate('brand_filter', { options: options })
+      );
+    },
+
     getHcArticleDone: function(data) {
       this.ajax('getSectionAccessPolicy', data.article.section_id);
 
@@ -134,8 +152,17 @@
       if (this.isAgentOnlyContent(data)) { this.renderAgentOnlyAlert(); }
     },
 
-    searchHelpCenterDone: function(data){
-      this.renderList(this.formatHcEntries(data.results));
+    searchHelpCenterDone: function(data) {
+      var brand = this.$('.custom-search .brand-filter option:selected').val(); 
+      if (brand == 'any') {
+        this.renderList(this.formatHcEntries(data.results));
+      } else {
+        this.renderList(this.formatHcEntries(
+          _.filter(data.results, function (article) {
+            return article.brand_id == brand;
+          })
+        ));
+      }
     },
 
     searchWebPortalDone: function(data){
@@ -184,8 +211,8 @@
 
     formatHcEntries: function(result){
       var slicedResult = result.slice(0, this.numberOfDisplayableEntries());
-      var entries = _.inject(slicedResult, function(memo, entry){
-        var title = entry.name;
+      var entries = _.inject(slicedResult, function(memo, entry) {
+        var title = entry.brand_name + ": " + entry.name;
         var url = entry.html_url.replace(/^https:\/\/.*.zendesk(-staging|-gamma|-acceptance)?.com\//, this.baseUrl());
 
         memo.push({
