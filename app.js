@@ -164,15 +164,13 @@
 
     searchHelpCenterDone: function(data) {
       var brand = this.$('.custom-search .brand-filter option:selected').val();
-      if (brand === undefined || brand === 'any') {
-        this.renderList(this.formatHcEntries(data.results));
-      } else {
-        this.renderList(this.formatHcEntries(
-          _.filter(data.results, function (article) {
-            return article.brand_id == brand;
-          })
-        ));
+      var results = data.results;
+      if (brand && brand !== 'any') {
+        results = _.filter(data.results, function (article) {
+          return article.brand_id == brand;
+        });
       }
+      this.renderList(this.formatHcEntries(results));
     },
 
     searchWebPortalDone: function(data){
