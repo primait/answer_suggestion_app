@@ -17,7 +17,7 @@
       'settings.done': 'settingsDone',
 
       // DOM EVENTS
-      'change .custom-search .brand-filter': 'processSearchFromInput',
+      'zd_ui_change .brand-filter': 'processSearchFromInput',
       'click a.preview_link': 'previewLink',
       'dragend,click a.copy_link': 'copyLink',
       'dragend a.main': 'copyLink',
@@ -26,7 +26,7 @@
         if(event.keyCode === 13)
           return this.processSearchFromInput();
       },
-      'click .custom-search button': 'processSearchFromInput'
+      'click .custom-search .search-btn': 'processSearchFromInput'
     },
 
     requests: {
@@ -147,7 +147,7 @@
       if (this.isMultibrand()) {
         this.$('.custom-search').append(
           this.renderTemplate('brand_filter', { options: this.brands })
-        );
+        ).find('.brand-filter').zdSelectMenu();
       }
     },
 
@@ -163,7 +163,7 @@
     },
 
     searchHelpCenterDone: function(data) {
-      var brand = this.$('.custom-search .brand-filter option:selected').val();
+      var brand = this.$('.custom-search .brand-filter').zdSelectMenu('value');
       var results = data.results;
       if (brand && brand !== 'any') {
         results = _.filter(data.results, function (article) {
@@ -235,7 +235,7 @@
       return { entries: entries };
     },
 
-    processSearchFromInput: function(){
+    processSearchFromInput: function() {
       var query = this.removePunctuation(this.$('.custom-search input').val());
       if (query && query.length) { this.search(query); }
     },
