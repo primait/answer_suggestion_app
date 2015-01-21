@@ -1,0 +1,6 @@
+<select class="brand-filter" name="brand" data-zd-type="select_menu">
+  <option value="any">Any Brand</option>
+  {{#each options}}
+    <option value='{{value}}'>{{label}}</option>
+  {{/each}}
+</select>

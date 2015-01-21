@@ -11,11 +11,13 @@
       // AJAX EVENTS
       'searchHelpCenter.done': 'searchHelpCenterDone',
       'searchWebPortal.done': 'searchWebPortalDone',
+      'getBrands.done': 'getBrandsDone',
       'getHcArticle.done': 'getHcArticleDone',
       'getSectionAccessPolicy.done': 'getSectionAccessPolicyDone',
       'settings.done': 'settingsDone',
 
       // DOM EVENTS
+      'zd_ui_change .brand-filter': 'processSearchFromInput',
       'click a.preview_link': 'previewLink',
       'dragend,click a.copy_link': 'copyLink',
       'dragend a.main': 'copyLink',
@@ -24,12 +26,17 @@
         if(event.keyCode === 13)
           return this.processSearchFromInput();
       },
-      'click .custom-search button': 'processSearchFromInput'
+      'click .custom-search .search-btn': 'processSearchFromInput'
     },
 
     requests: {
       settings: {
         url: '/api/v2/account/settings.json',
+        type: 'GET'
+      },
+
+      getBrands: {
+        url: '/api/v2/brands.json',
         type: 'GET'
       },
 
@@ -51,7 +58,8 @@
         var locale = this.currentUser().locale(),
             limit =  this.queryLimit();
         return {
-          url: '/api/v2/help_center/articles/search.json',
+          // CAUTION: using an internal API - we need to do this for multibrand support to work
+          url: '/hc/api/internal/articles/search.json',
           type: 'GET',
           data: {
             per_page: limit,
@@ -92,8 +100,13 @@
     },
 
     initialize: function(){
-      if (_.isEmpty(this.ticket().subject()))
+      if (_.isEmpty(this.ticket().subject())) {
         return this.switchTo('no_subject');
+      }
+
+      this.isMultibrand = false;
+      this.ajax('getBrands');
+
       this.ajax('settings').then(function() {
         this.search(this.subjectSearchQuery());
       }.bind(this));
@@ -123,6 +136,19 @@
       return data.agent_only || data.access_policy && data.access_policy.viewable_by !== 'everybody';
     },
 
+    getBrandsDone: function(data) {
+      this.isMultibrand = data.brands.length > 1;
+      if (this.isMultibrand) {
+        var options = _.map(data.brands, function(brand) {
+          return { value: brand.id, label: brand.name };
+        });
+        this.$('.custom-search')
+          .append(this.renderTemplate('brand_filter', { options: options }))
+          .find('.brand-filter')
+          .zdSelectMenu();
+      }
+    },
+
     getHcArticleDone: function(data) {
       this.ajax('getSectionAccessPolicy', data.article.section_id);
 
@@ -134,8 +160,17 @@
       if (this.isAgentOnlyContent(data)) { this.renderAgentOnlyAlert(); }
     },
 
-    searchHelpCenterDone: function(data){
-      this.renderList(this.formatHcEntries(data.results));
+    searchHelpCenterDone: function(data) {
+      var results = data.results;
+      if (this.isMultibrand) {
+        var brand = this.$('.custom-search .brand-filter').zdSelectMenu('value');
+        if (brand !== 'any') {
+          results = _.filter(data.results, function (article) {
+            return article.brand_id == brand;
+          });
+        }
+      }
+      this.renderList(this.formatHcEntries(results));
     },
 
     searchWebPortalDone: function(data){
@@ -184,8 +219,10 @@
 
     formatHcEntries: function(result){
       var slicedResult = result.slice(0, this.numberOfDisplayableEntries());
-      var entries = _.inject(slicedResult, function(memo, entry){
+      var entries = _.inject(slicedResult, function(memo, entry) {
         var title = entry.name;
+        if (this.isMultibrand) { title = entry.brand_name + ": " + title; }
+
         var url = entry.html_url.replace(/^https:\/\/.*.zendesk(-staging|-gamma|-acceptance)?.com\//, this.baseUrl());
 
         memo.push({
@@ -199,7 +236,7 @@
       return { entries: entries };
     },
 
-    processSearchFromInput: function(){
+    processSearchFromInput: function() {
       var query = this.removePunctuation(this.$('.custom-search input').val());
       if (query && query.length) { this.search(query); }
     },
