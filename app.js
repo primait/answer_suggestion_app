@@ -220,8 +220,9 @@
     formatHcEntries: function(result){
       var slicedResult = result.slice(0, this.numberOfDisplayableEntries());
       var entries = _.inject(slicedResult, function(memo, entry) {
-        var title = this.isMultibrand ? entry.brand_name + ": " + entry.name
-                                      : entry.name;
+        var title = entry.name;
+        if (this.isMultibrand) { title = entry.brand_name + ": " + title; }
+
         var url = entry.html_url.replace(/^https:\/\/.*.zendesk(-staging|-gamma|-acceptance)?.com\//, this.baseUrl());
 
         memo.push({
