@@ -140,7 +140,7 @@
       this.isMultibrand = data.brands.length > 1;
       if (this.isMultibrand) {
         var options = _.map(data.brands, function(brand) {
-          return { id: brand.id, name: brand.name };
+          return { value: brand.id, label: brand.name };
         });
         this.$('.custom-search')
           .append(this.renderTemplate('brand_filter', { options: options }))
