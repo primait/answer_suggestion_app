@@ -99,16 +99,12 @@
         return this.initialize();
     },
 
-    isMultibrand: function() {
-      return this.brands.length > 1;
-    },
-
     initialize: function(){
       if (_.isEmpty(this.ticket().subject())) {
         return this.switchTo('no_subject');
       }
 
-      this.brands = [];
+      this.isMultibrand = false;
       this.ajax('getBrands');
 
       this.ajax('settings').then(function() {
@@ -141,13 +137,15 @@
     },
 
     getBrandsDone: function(data) {
-      this.brands = _.map(data.brands, function(brand) {
-        return { id: brand.id, name: brand.name };
-      });
-      if (this.isMultibrand()) {
-        this.$('.custom-search').append(
-          this.renderTemplate('brand_filter', { options: this.brands })
-        ).find('.brand-filter').zdSelectMenu();
+      this.isMultibrand = data.brands.length > 1;
+      if (this.isMultibrand) {
+        var options = _.map(data.brands, function(brand) {
+          return { id: brand.id, name: brand.name };
+        });
+        this.$('.custom-search')
+          .append(this.renderTemplate('brand_filter', { options: options }))
+          .find('.brand-filter')
+          .zdSelectMenu();
       }
     },
 
@@ -163,12 +161,14 @@
     },
 
     searchHelpCenterDone: function(data) {
-      var brand = this.$('.custom-search .brand-filter').zdSelectMenu('value');
       var results = data.results;
-      if (brand && brand !== 'any') {
-        results = _.filter(data.results, function (article) {
-          return article.brand_id == brand;
-        });
+      if (this.isMultibrand) {
+        var brand = this.$('.custom-search .brand-filter').zdSelectMenu('value');
+        if (brand !== 'any') {
+          results = _.filter(data.results, function (article) {
+            return article.brand_id == brand;
+          });
+        }
       }
       this.renderList(this.formatHcEntries(results));
     },
@@ -220,8 +220,8 @@
     formatHcEntries: function(result){
       var slicedResult = result.slice(0, this.numberOfDisplayableEntries());
       var entries = _.inject(slicedResult, function(memo, entry) {
-        var title = this.isMultibrand() ? entry.brand_name + ": " + entry.name
-                                        : entry.name;
+        var title = this.isMultibrand ? entry.brand_name + ": " + entry.name
+                                      : entry.name;
         var url = entry.html_url.replace(/^https:\/\/.*.zendesk(-staging|-gamma|-acceptance)?.com\//, this.baseUrl());
 
         memo.push({
