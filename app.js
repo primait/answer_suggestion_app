@@ -58,13 +58,12 @@
         var locale = this.currentUser().locale(),
             limit =  this.queryLimit();
         return {
-          // CAUTION: using an internal API - we need to do this for multibrand support to work
-          url: '/hc/api/internal/articles/search.json',
+          url: '/api/v2/search.json',
           type: 'GET',
           data: {
             per_page: limit,
             locale:   locale,
-            query:    query
+            query:    'type:article ' + query
           }
         };
       },
