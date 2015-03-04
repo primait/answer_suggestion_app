@@ -5,7 +5,7 @@
 
     events: {
       // APP EVENTS
-      'app.activated': 'activated',
+      'app.created': 'created',
       'ticket.subject.changed': _.debounce(function(){ this.initialize(); }, 500),
 
       // AJAX EVENTS
@@ -93,18 +93,16 @@
       }
     },
 
-    activated: function(app){
-      if (app.firstLoad)
-        return this.initialize();
+    created: function() {
+      this.isMultibrand = false;
+      this.ajax('getBrands');
+      this.initialize();
     },
 
     initialize: function(){
       if (_.isEmpty(this.ticket().subject())) {
         return this.switchTo('no_subject');
       }
-
-      this.isMultibrand = false;
-      this.ajax('getBrands');
 
       this.ajax('settings').then(function() {
         this.search(this.subjectSearchQuery());
