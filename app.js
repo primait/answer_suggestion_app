@@ -141,10 +141,10 @@
         var options = _.map(data.brands, function(brand) {
           return { value: brand.id, label: brand.name };
         });
-        this.$('.custom-search')
-          .append(this.renderTemplate('brand_filter', { options: options }))
-          .find('.brand-filter')
-          .zdSelectMenu();
+        this.$('.custom-search').before(
+          this.renderTemplate('brand_filter', { options: options })
+        );
+        this.$('.brand-filter').zdSelectMenu();
       }
     },
 
@@ -162,7 +162,7 @@
     searchHelpCenterDone: function(data) {
       var results = data.results;
       if (this.isMultibrand) {
-        var brand = this.$('.custom-search .brand-filter').zdSelectMenu('value');
+        var brand = this.$('.brand-filter').zdSelectMenu('value');
         if (brand !== 'any') {
           results = _.filter(data.results, function (article) {
             return article.brand_id == brand;
