@@ -20,7 +20,10 @@
         </ul>
       </div>
       <div class="entry-text">
-        <a href="{{url}}" data-id="{{id}}" title="{{title}}" class="main preview_link">{{title}}</a>
+        <a href="{{url}}" class="main preview_link" title="{{title}}"
+          data-id="{{id}}" data-subdomain="{{subdomain}}" data-article-body="{{body}}">
+          {{title}}
+        </a>
       </div>
     </div>
     {{#if agent_only}}
