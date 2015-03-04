@@ -2,6 +2,7 @@
   return {
     defaultState: 'spinner',
     defaultNumberOfEntriesToDisplay: 10,
+    urlRegex: /^https:\/\/(.*?)\.(?:zendesk|zd-(?:dev|master|staging))\.com\//,
 
     events: {
       // APP EVENTS
@@ -147,10 +148,19 @@
     },
 
     getHcArticleDone: function(data) {
-      this.ajax('getSectionAccessPolicy', data.article.section_id);
+      var modalContent;
 
-      var html = this.hcArticleLocaleContent(data);
-      this.$('#detailsModal .modal-body .content-body').html(html);
+      if (data.article && data.article.section_id) {
+        this.ajax('getSectionAccessPolicy', data.article.section_id);
+      }
+
+      if (data.diffDomain) {
+        modalContent = data.body;
+      } else {
+        modalContent = this.hcArticleLocaleContent(data);
+      }
+
+      this.$('#detailsModal .modal-body .content-body').html(modalContent);
     },
 
     getSectionAccessPolicyDone: function(data) {
@@ -187,7 +197,7 @@
 
     renderList: function(data){
       if (_.isEmpty(data.entries)) {
-        return this.switchTo('no_entries');
+        this.switchTo('no_entries');
       } else {
         this.switchTo('list', data);
       }
@@ -195,7 +205,7 @@
 
     formatEntries: function(topics, result){
       var entries = _.inject(topics, function(memo, topic){
-        var forum = _.find(result.forums, function(f){ return f.id == topic.forum_id; });
+        var forum = _.find(result.forums, function(f) { return f.id == topic.forum_id; });
         var entry = {
           id: topic.id,
           url: helpers.fmt("%@entries/%@", this.baseUrl(), topic.id),
@@ -217,15 +227,21 @@
     formatHcEntries: function(result){
       var slicedResult = result.slice(0, this.numberOfDisplayableEntries());
       var entries = _.inject(slicedResult, function(memo, entry) {
-        var title = entry.name;
+        var title = entry.name,
+            subdomainCache;
         if (this.isMultibrand) { title = entry.brand_name + ": " + title; }
 
-        var url = entry.html_url.replace(/^https:\/\/.*.zendesk(-staging|-gamma|-acceptance)?.com\//, this.baseUrl());
+        var url = entry.html_url.replace(this.urlRegex, function(str, subdomain) {
+          subdomainCache = subdomain;
+          return this.baseUrl(subdomain);
+        }.bind(this));
 
         memo.push({
           id: entry.id,
           url: url,
-          title: title
+          title: title,
+          subdomain: subdomainCache,
+          body: entry.body
         });
         return memo;
       }, [], this);
@@ -238,13 +254,13 @@
       if (query && query.length) { this.search(query); }
     },
 
-    baseUrl: function(){
+    baseUrl: function(subdomain) {
       if (this.setting('custom_host')) {
         var host = this.setting('custom_host');
         if (host[host.length - 1] !== '/') { host += '/'; }
         return host;
       }
-      return helpers.fmt("https://%@.zendesk.com/", this.currentAccount().subdomain());
+      return helpers.fmt("https://%@.zendesk.com/", subdomain || this.currentAccount().subdomain());
     },
 
     previewLink: function(event){
@@ -257,7 +273,7 @@
         link: $link.attr('href')
       }));
       $modal.modal();
-      this.getContentFor($link.attr('data-id'));
+      this.getContentFor($link);
     },
 
     copyLink: function(event) {
@@ -286,11 +302,15 @@
       if (this.isAgentOnlyContent(topic)) { this.renderAgentOnlyAlert(); }
     },
 
-    getContentFor: function(id) {
+    getContentFor: function($link) {
       if (this.setting('search_hc')) {
-        this.ajax('getHcArticle', id);
+        if ($link.data('subdomain') !== this.currentAccount().subdomain()) {
+          this.getHcArticleDone({ body: $link.data('articleBody'), diffDomain: true });
+        } else {
+          this.ajax('getHcArticle', $link.data('id'));
+        }
       } else {
-        this.renderTopicContent(id);
+        this.renderTopicContent($link.data('id'));
       }
     },
 
