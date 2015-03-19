@@ -59,14 +59,14 @@
         var locale = this.currentUser().locale(),
             limit =  this.queryLimit(),
             url = this.isMultibrand ? '/api/v2/search.json' : '/api/v2/help_center/articles/search.json',
-            query = this.isMultibrand ? 'type:article ' + query : query;
+            finalquery = this.isMultibrand ? 'type:article ' + query : query;
         return {
           url: url,
           type: 'GET',
           data: {
             per_page: limit,
             locale:   locale,
-            query:    query
+            query:    finalquery
           }
         };
       },
