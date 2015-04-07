@@ -3,6 +3,7 @@
     defaultState: 'spinner',
     defaultNumberOfEntriesToDisplay: 10,
     urlRegex: /^https:\/\/(.*?)\.(?:zendesk|zd-(?:dev|master|staging))\.com\//,
+    DEFAULT_LOGO_URL: '/images/logo_placeholder.png',
 
     events: {
       // APP EVENTS
@@ -247,7 +248,7 @@
           subdomain: subdomainCache,
           body: entry.body,
           brandName: entry.brand_name,
-          brandLogo: this.brandsInfo[entry.brand_name],
+          brandLogo: this.brandsInfo[entry.brand_name] || this.DEFAULT_LOGO_URL,
           isMultibrand: this.isMultibrand
         });
         return memo;
