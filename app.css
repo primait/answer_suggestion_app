@@ -60,3 +60,8 @@ section div.well.well-small {
 .brand-filter {
   margin-bottom: 5px;
 }
+
+.brand-logo {
+  width: 14px;
+  vertical-align: bottom;
+}

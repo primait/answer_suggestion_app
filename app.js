@@ -3,6 +3,7 @@
     defaultState: 'spinner',
     defaultNumberOfEntriesToDisplay: 10,
     urlRegex: /^https:\/\/(.*?)\.(?:zendesk|zd-(?:dev|master|staging))\.com\//,
+    DEFAULT_LOGO_URL: '/images/logo_placeholder.png',
 
     events: {
       // APP EVENTS
@@ -24,8 +25,7 @@
       'dragend a.main': 'copyLink',
       'click .toggle-app': 'toggleAppContainer',
       'keyup .custom-search input': function(event){
-        if(event.keyCode === 13)
-          return this.processSearchFromInput();
+        if (event.keyCode === 13) { return this.processSearchFromInput(); }
       },
       'click .custom-search .search-btn': 'processSearchFromInput'
     },
@@ -147,6 +147,10 @@
         );
         this.$('.brand-filter').zdSelectMenu();
       }
+
+      this.brandsInfo = _.object(_.map(data.brands, function(brand) {
+        return [brand.name, brand.logo && brand.logo.content_url];
+      }));
     },
 
     getHcArticleDone: function(data) {
@@ -231,7 +235,6 @@
       var entries = _.inject(slicedResult, function(memo, entry) {
         var title = entry.name,
             subdomainCache;
-        if (this.isMultibrand) { title = entry.brand_name + ": " + title; }
 
         var url = entry.html_url.replace(this.urlRegex, function(str, subdomain) {
           subdomainCache = subdomain;
@@ -241,9 +244,12 @@
         memo.push({
           id: entry.id,
           url: url,
-          title: title,
+          title: entry.name,
           subdomain: subdomainCache,
-          body: entry.body
+          body: entry.body,
+          brandName: entry.brand_name,
+          brandLogo: this.brandsInfo[entry.brand_name] || this.DEFAULT_LOGO_URL,
+          isMultibrand: this.isMultibrand
         });
         return memo;
       }, [], this);
