@@ -206,6 +206,7 @@
         this.switchTo('no_entries');
       } else {
         this.switchTo('list', data);
+        this.$('a.main').tooltip();
       }
     },
 
