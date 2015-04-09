@@ -249,7 +249,7 @@
           subdomain: subdomainCache,
           body: entry.body,
           brandName: entry.brand_name,
-          brandLogo: this.brandsInfo[entry.brand_name] || this.DEFAULT_LOGO_URL,
+          brandLogo: this.brandsInfo && this.brandsInfo[entry.brand_name] || this.DEFAULT_LOGO_URL,
           isMultibrand: this.isMultibrand
         });
         return memo;
