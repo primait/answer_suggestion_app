@@ -278,7 +278,7 @@
       $link.parent().parent().parent().removeClass('open');
       var $modal = this.$("#detailsModal");
       $modal.html(this.renderTemplate('modal', {
-        title: $link.attr('title'),
+        title: $link.closest('.entry').data('title'),
         link: $link.attr('href')
       }));
       $modal.modal();
