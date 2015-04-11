@@ -20,10 +20,11 @@
         </ul>
       </div>
       <div class="entry-text">
-        <a href="{{url}}" class="main preview_link" title="{{brandName}}" data-toggle="tooltip" data-placement="left"
+        <a href="{{url}}" class="main preview_link" title="{{title}}"
           data-id="{{id}}" data-subdomain="{{subdomain}}" data-article-body="{{body}}">
           {{#if isMultibrand}}
-            <img class="brand-logo" src="{{brandLogo}}" alt="{{brandName}}:">
+            <img class="brand-logo" src="{{brandLogo}}" alt="{{brandName}}:"
+              title="{{brandName}}" data-toggle="tooltip" data-placement="left">
           {{/if}}
           {{title}}
         </a>
