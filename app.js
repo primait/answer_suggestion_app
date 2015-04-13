@@ -2,7 +2,8 @@
   return {
     defaultState: 'spinner',
     defaultNumberOfEntriesToDisplay: 10,
-    urlRegex: /^https:\/\/(.*?)\.(?:zendesk|zd-(?:dev|master|staging))\.com\//,
+    urlRegex: /^https?:\/\/[^/]+\//,
+    zendeskRegex: /^https:\/\/(.*?)\.(?:zendesk|zd-(?:dev|master|staging))\.com\//,
     DEFAULT_LOGO_URL: '/images/logo_placeholder.png',
 
     events: {
@@ -235,10 +236,11 @@
       var slicedResult = result.slice(0, this.numberOfDisplayableEntries());
       var entries = _.inject(slicedResult, function(memo, entry) {
         var title = entry.name,
-            subdomainCache;
+            subdomain;
 
-        var url = entry.html_url.replace(this.urlRegex, function(str, subdomain) {
-          subdomainCache = subdomain;
+        var url = entry.html_url.replace(this.urlRegex, function(url) {
+          var zendeskUrl = url.match(this.zendeskRegex);
+          subdomain = zendeskUrl && zendeskUrl[1];
           return this.baseUrl(subdomain);
         }.bind(this));
 
@@ -246,7 +248,7 @@
           id: entry.id,
           url: url,
           title: entry.name,
-          subdomain: subdomainCache,
+          subdomain: subdomain,
           body: entry.body,
           brandName: entry.brand_name,
           brandLogo: this.brandsInfo && this.brandsInfo[entry.brand_name] || this.DEFAULT_LOGO_URL,
