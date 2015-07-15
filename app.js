@@ -2,7 +2,6 @@
   return {
     defaultState: 'spinner',
     defaultNumberOfEntriesToDisplay: 10,
-    urlRegex: /^https?:\/\/[^/]+\//,
     zendeskRegex: /^https:\/\/(.*?)\.(?:zendesk|zd-(?:dev|master|staging))\.com\//,
     DEFAULT_LOGO_URL: '/images/logo_placeholder.png',
 
@@ -155,18 +154,15 @@
     },
 
     getHcArticleDone: function(data) {
-      var modalContent;
-
       if (data.article && data.article.section_id) {
         this.ajax('getSectionAccessPolicy', data.article.section_id);
       }
 
-      if (data.diffDomain) {
-        modalContent = data.body;
-      } else {
-        modalContent = this.hcArticleLocaleContent(data);
-      }
+      var modalContent = this.hcArticleLocaleContent(data);
+      this.updateModalContent(modalContent);
+    },
 
+    updateModalContent: function(modalContent) {
       this.$('#detailsModal .modal-body .content-body').html(modalContent);
     },
 
@@ -236,17 +232,12 @@
       var slicedResult = result.slice(0, this.numberOfDisplayableEntries());
       var entries = _.inject(slicedResult, function(memo, entry) {
         var title = entry.name,
-            subdomain;
-
-        var url = entry.html_url.replace(this.urlRegex, function(url) {
-          var zendeskUrl = url.match(this.zendeskRegex);
-          subdomain = zendeskUrl && zendeskUrl[1];
-          return this.baseUrl(subdomain);
-        }.bind(this));
+            zendeskUrl = entry.html_url.match(this.zendeskRegex),
+            subdomain = zendeskUrl && zendeskUrl[1];
 
         memo.push({
           id: entry.id,
-          url: url,
+          url: entry.html_url,
           title: entry.name,
           subdomain: subdomain,
           body: entry.body,
@@ -265,13 +256,13 @@
       if (query && query.length) { this.search(query); }
     },
 
-    baseUrl: function(subdomain) {
+    baseUrl: function() {
       if (this.setting('custom_host')) {
         var host = this.setting('custom_host');
         if (host[host.length - 1] !== '/') { host += '/'; }
         return host;
       }
-      return helpers.fmt("https://%@.zendesk.com/", subdomain || this.currentAccount().subdomain());
+      return helpers.fmt("https://%@.zendesk.com/", this.currentAccount().subdomain());
     },
 
     previewLink: function(event){
@@ -309,14 +300,15 @@
       var topic = _.find(this.store('entries').entries, function(entry) {
         return entry.id == id;
       });
-      this.$('#detailsModal .modal-body .content-body').html(topic.body);
+      this.updateModalContent(topic.body);
       if (this.isAgentOnlyContent(topic)) { this.renderAgentOnlyAlert(); }
     },
 
     getContentFor: function($link) {
       if (this.setting('search_hc')) {
-        if ($link.data('subdomain') !== this.currentAccount().subdomain()) {
-          this.getHcArticleDone({ body: $link.data('articleBody'), diffDomain: true });
+        var subdomain = $link.data('subdomain');
+        if (!subdomain || subdomain !== this.currentAccount().subdomain()) {
+          this.updateModalContent($link.data('articleBody'));
         } else {
           this.ajax('getHcArticle', $link.data('id'));
         }
