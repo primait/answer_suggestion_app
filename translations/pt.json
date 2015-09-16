@@ -1,6 +1,6 @@
 {
   "app": {
-    "description": "Responda às sugestões de sua base de conhecimento.",
+    "description": "Sugestões de resposta de sua base de conhecimento.",
     "name": "Sugestões de resposta",
     "parameters": {
       "nb_entries": {
@@ -20,7 +20,7 @@
         "helpText": "Marque essa opção para pesquisar os artigos da Central de Ajuda."
       },
       "exclude_agent_only": {
-        "label": "Excluir tópicos \"apenas para agentes\"."
+        "label": "Apagar tópicos \"Apenas para agentes\". (apenas portal web)"
       }
     }
   },
@@ -39,6 +39,7 @@
   "help_text": "Clique no link para adicioná-la ao comentário:",
   "spinner": "carregando",
   "agents_only": "Privado",
+  "private_content_notice": "Os usuários finais não poderão acessar esse conteúdo.",
   "modal": {
     "close": "Fechar",
     "copy": "Adicionar ao comentário"

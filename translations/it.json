@@ -1,6 +1,6 @@
 {
   "app": {
-    "description": "Suggerimenti per la risposta provenienti dalla vostra base di conoscenza.",
+    "description": "Suggerimenti per le risposte provenienti dalla Knowledge base.",
     "name": "Suggeritore risposte",
     "parameters": {
       "nb_entries": {
@@ -16,11 +16,11 @@
         "helpText": "Copia il titolo dell’articolo oltre al link."
       },
       "search_hc": {
-        "label": "Utilizzate il centro assistenza?",
+        "label": "Utilizzate il Centro assistenza?",
         "helpText": "Selezionare questa opzione per cercare negli articoli del Centro assistenza."
       },
       "exclude_agent_only": {
-        "label": "Esclusi argomenti 'solo per agenti'."
+        "label": "Escludi argomenti “Solo agenti” (solo portale web)."
       }
     }
   },
@@ -39,6 +39,7 @@
   "help_text": "Fate clic sul link per aggiungerlo al commento:",
   "spinner": "caricamento in corso",
   "agents_only": "Privato",
+  "private_content_notice": "Gli utenti finali non potranno accedere a questo contenuto.",
   "modal": {
     "close": "Chiudi",
     "copy": "Aggiungi al commento"
