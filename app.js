@@ -98,7 +98,6 @@
 
     created: function() {
       this.isMultibrand = false;
-      this.filteredBrands = {};
       this.ajax('getBrands');
       this.initialize();
     },
@@ -138,11 +137,11 @@
     },
 
     getBrandsDone: function(data) {
-      var filteredBrands = this.filterBrands(brands);
+      var filteredBrands = this.filterBrands(data.brands);
       this.isMultibrand =  filteredBrands.length > 1;
 
       if (this.isMultibrand) {
-        var options = _.map(this.filteredBrands, function(brand) {
+        var options = _.map(filteredBrands, function(brand) {
           return { value: brand.id, label: brand.name };
         });
         this.$('.custom-search').before(
@@ -151,7 +150,7 @@
         this.$('.brand-filter').zdSelectMenu();
       }
 
-      this.brandsInfo = _.object(_.map(this.filteredBrands, function(brand) {
+      this.brandsInfo = _.object(_.map(filteredBrands, function(brand) {
         return [brand.name, brand.logo && brand.logo.content_url];
       }));
     },
