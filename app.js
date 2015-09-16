@@ -98,6 +98,7 @@
 
     created: function() {
       this.isMultibrand = false;
+      this.filteredBrands = {};
       this.ajax('getBrands');
       this.initialize();
     },
@@ -137,9 +138,10 @@
     },
 
     getBrandsDone: function(data) {
-      this.isMultibrand = data.brands.length > 1;
+      this.isMultibrand = this.doesAccountHaveMultibrand(data.brands);
+
       if (this.isMultibrand) {
-        var options = _.map(data.brands, function(brand) {
+        var options = _.map(this.filteredBrands, function(brand) {
           return { value: brand.id, label: brand.name };
         });
         this.$('.custom-search').before(
@@ -148,7 +150,7 @@
         this.$('.brand-filter').zdSelectMenu();
       }
 
-      this.brandsInfo = _.object(_.map(data.brands, function(brand) {
+      this.brandsInfo = _.object(_.map(this.filteredBrands, function(brand) {
         return [brand.name, brand.logo && brand.logo.content_url];
       }));
     },
@@ -392,6 +394,18 @@
         $container.show();
         $icon.prop('class', 'icon-minus');
       }
+    },
+
+    filterBrands: function(brands)
+    {
+      return _.filter(brands, function(element){
+        return element.active;
+      });
+    },
+
+    doesAccountHaveMultibrand: function(brands){
+      this.filteredBrands = this.filterBrands(brands);
+      return this.filteredBrands.length > 1;
     }
   };
 }());
