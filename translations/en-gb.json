@@ -16,11 +16,11 @@
         "helpText": "Copy the article title as well as the article link."
       },
       "search_hc": {
-        "label": "Are you using Help Center?",
-        "helpText": "Select this option to search Help Center articles."
+        "label": "Are you using Help Centre?",
+        "helpText": "Select this option to search Help Centre articles."
       },
       "exclude_agent_only": {
-        "label": "Exclude 'Agents Only' topics."
+        "label": "Exclude 'Agents only' topics. (Web Portal only)"
       }
     }
   },
@@ -39,6 +39,7 @@
   "help_text": "Click the link to add it to the comment:",
   "spinner": "loading",
   "agents_only": "Private",
+  "private_content_notice": "End users will not be able to access this content.",
   "modal": {
     "close": "Close",
     "copy": "Add to comment"

@@ -20,7 +20,7 @@
         "helpText": "Seleccione esta opción para buscar artículos del Centro de ayuda."
       },
       "exclude_agent_only": {
-        "label": "Excluir los temas que solo los agentes pueden ver."
+        "label": "Excluir los temas que solo los agentes pueden ver. (Solo portal web)"
       }
     }
   },
@@ -39,6 +39,7 @@
   "help_text": "Haga clic en el vínculo para agregarlo al comentario:",
   "spinner": "cargando",
   "agents_only": "Privada",
+  "private_content_notice": "Los usuarios finales no tendrán acceso a este contenido.",
   "modal": {
     "close": "Cerrar",
     "copy": "Agregar al comentario"

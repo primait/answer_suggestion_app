@@ -1,6 +1,6 @@
 {
   "app": {
-    "description": "Antwoordsuggesties uit onze knowledge base.",
+    "description": "Antwoordsuggesties uit onze kennisbank.",
     "name": "Antwoordsuggesties",
     "parameters": {
       "nb_entries": {
@@ -20,7 +20,7 @@
         "helpText": "Selecteer deze optie als u naar Helpcenter-artikelen wilt zoeken."
       },
       "exclude_agent_only": {
-        "label": "Zonder onderwerpen die zijn aangeduid met 'Alleen agenten'."
+        "label": "Zonder onderwerpen die zijn aangeduid met 'Alleen agenten'. (alleen webportal)"
       }
     }
   },
@@ -39,6 +39,7 @@
   "help_text": "Klik op de koppeling om deze aan de opmerking toe te voegen:",
   "spinner": "laden",
   "agents_only": "Privé",
+  "private_content_notice": "Eindgebruikers hebben geen toegang tot deze inhoud.",
   "modal": {
     "close": "Sluiten",
     "copy": "Toevoegen aan opmerking"

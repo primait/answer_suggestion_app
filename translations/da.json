@@ -1,6 +1,6 @@
 {
   "app": {
-    "description": "Svar og forslag fra din vidensbase.",
+    "description": "Forslag til svar fra din vidensbase.",
     "name": "Forslag til svar",
     "parameters": {
       "nb_entries": {
@@ -20,7 +20,7 @@
         "helpText": "Vælg denne indstilling for at søge i artikler i Help Center."
       },
       "exclude_agent_only": {
-        "label": "Udeluk 'Kun agenter'-emner."
+        "label": "Udeluk emnerne 'Kun agenter'. (Kun webportal)"
       }
     }
   },
@@ -39,6 +39,7 @@
   "help_text": "Klik på linket for at føje det til kommentaren:",
   "spinner": "indlæser",
   "agents_only": "Privat",
+  "private_content_notice": "Slutbrugere har ikke adgang til dette indhold.",
   "modal": {
     "close": "Luk",
     "copy": "Føj til kommentar"

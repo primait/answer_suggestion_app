@@ -1,47 +1,47 @@
 {
   "app": {
-    "description": "您知識庫中的答案建議。",
-    "name": "答案建議",
+    "description": "إجابات مقترحة من قاعدة معرفتك.",
+    "name": "إجابة مقترحة",
     "parameters": {
       "nb_entries": {
-        "label": "結果數目",
-        "helpText": "顯示結果數目（預設：10，最多：100）。"
+        "label": "عدد النتائج.",
+        "helpText": "عدد النتائج المراد عرضها (افتراضيًا: 10، الحد الأقصى: 100)."
       },
       "custom_host": {
-        "label": "自訂網域",
-        "helpText": "例如：https://支援.我的公司.com/"
+        "label": "نطاق مخصص",
+        "helpText": "أي: https://support.mybusiness.com/‎"
       },
       "include_title": {
-        "label": "複製文章標題？",
-        "helpText": "複製文章標題及文章連結。"
+        "label": "هل تريد نسخ عنوان الموضوع؟",
+        "helpText": "انسخ عنوان الموضوع إلى جانب رابط الموضوع."
       },
       "search_hc": {
-        "label": "您是否在使用客服中心？",
-        "helpText": "選取此選項搜尋客服中心文章。"
+        "label": "هل تستخدم مركز المساعدة؟",
+        "helpText": "حدد هذا الخيار للبحث في مواضيع مركز المساعدة."
       },
       "exclude_agent_only": {
-        "label": "排除「僅限代理」主題。（僅限入口網站）"
+        "label": "استثن مواضيع \"الوكلاء فقط\" (بوابة الويب فقط)"
       }
     }
   },
   "layout": {
-    "placeholder_text": "在此輸入您的搜尋",
-    "search_button": "搜尋"
+    "placeholder_text": "اكتب بحثك هنا",
+    "search_button": "بحث"
   },
   "list": {
-    "newtab_link": "在新索引標籤中開啟",
-    "copylink_link": "複製連結至評論",
-    "preview_link": "預覽文章"
+    "newtab_link": "فتح في علامة تبويب جديدة",
+    "copylink_link": "انسخ الرابط في التعليق",
+    "preview_link": "معاينة الموضوع"
   },
   "stop_words": "a, about, above, across, after, again, against, all, almost, alone, along, already, also, although, always, am, among, an, and, another, any, anybody, anyone, anything, anywhere, are, area, areas, aren't, around, as, ask, asked, asking, asks, at, away, b, back, backed, backing, backs, be, became, because, become, becomes, been, before, began, behind, being, beings, below, best, better, between, big, both, but, by, c, came, can, cannot, can't, case, cases, certain, certainly, clear, clearly, come, could, couldn't, d, did, didn't, differ, different, differently, do, does, doesn't, doing, done, don't, down, downed, downing, downs, during, e, each, early, either, end, ended, ending, ends, enough, even, evenly, ever, every, everybody, everyone, everything, everywhere, f, face, faces, fact, facts, far, felt, few, find, finds, first, for, four, from, full, fully, further, furthered, furthering, furthers, g, gave, general, generally, get, gets, give, given, gives, go, going, good, goods, got, great, greater, greatest, group, grouped, grouping, groups, h, had, hadn't, has, hasn't, have, haven't, having, he, he'd, he'll, her, here, here's, hers, herself, he's, high, higher, highest, him, himself, his, how, however, how's, i, i'd, if, i'll, i'm, important, in, interest, interested, interesting, interests, into, is, isn't, it, its, it's, itself, i've, j, just, k, keep, keeps, kind, knew, know, known, knows, l, large, largely, last, later, latest, least, less, let, lets, let's, like, likely, long, longer, longest, m, made, make, making, man, many, may, me, member, members, men, might, more, most, mostly, mr, mrs, much, must, mustn't, my, myself, n, necessary, need, needed, needing, needs, never, new, newer, newest, next, no, nobody, non, noone, nor, not, nothing, now, nowhere, number, numbers, o, of, off, often, old, older, oldest, on, once, one, only, open, opened, opening, opens, or, order, ordered, ordering, orders, other, others, ought, our, ours, ourselves, out, over, own, p, part, parted, parting, parts, per, perhaps, place, places, point, pointed, pointing, points, possible, present, presented, presenting, presents, problem, problems, put, puts, q, quite, r, rather, really, right, room, rooms, s, said, same, saw, say, says, second, seconds, see, seem, seemed, seeming, seems, sees, several, shall, shan't, she, she'd, she'll, she's, should, shouldn't, show, showed, showing, shows, side, sides, since, small, smaller, smallest, so, some, somebody, someone, something, somewhere, state, states, still, such, sure, t, take, taken, than, that, that's, the, their, theirs, them, themselves, then, there, therefore, there's, these, they, they'd, they'll, they're, they've, thing, things, think, thinks, this, those, though, thought, thoughts, three, through, thus, to, today, together, too, took, toward, turn, turned, turning, turns, two, u, under, until, up, upon, us, use, used, uses, v, very, w, want, wanted, wanting, wants, was, wasn't, way, ways, we, we'd, well, we'll, wells, went, were, we're, weren't, we've, what, what's, when, when's, where, where's, whether, which, while, who, whole, whom, who's, whose, why, why's, will, with, within, without, won't, work, worked, working, works, would, wouldn't, x, y, year, years, yes, yet, you, you'd, you'll, young, younger, youngest, your, you're, yours, yourself, yourselves, you've, z",
-  "no_entries": "此工單沒有建議。",
-  "no_subject": "標題定義等待中……",
-  "help_text": "按一下連結新增至評論：",
-  "spinner": "載入中",
-  "agents_only": "私人",
-  "private_content_notice": "終端使用者不能存取此內容。",
+  "no_entries": "لا توجد مقترحات لهذه التذكرة.",
+  "no_subject": "في انتظار تعريف موضوع...",
+  "help_text": "انقر فوق هذا الرابط لإضافته إلى التعليق:",
+  "spinner": "جارٍ التحميل",
+  "agents_only": "خاص",
+  "private_content_notice": "لن يتمكن المستخدمون النهائيون من الوصول إلى هذا المحتوى.",
   "modal": {
-    "close": "關閉",
-    "copy": "新增至評論"
+    "close": "إغلاق",
+    "copy": "إضافة إلى التعليق"
   }
 }
