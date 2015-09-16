@@ -137,9 +137,11 @@
     },
 
     getBrandsDone: function(data) {
-      this.isMultibrand = data.brands.length > 1;
+      var filteredBrands = this.filterBrands(data.brands);
+      this.isMultibrand =  filteredBrands.length > 1;
+
       if (this.isMultibrand) {
-        var options = _.map(data.brands, function(brand) {
+        var options = _.map(filteredBrands, function(brand) {
           return { value: brand.id, label: brand.name };
         });
         this.$('.custom-search').before(
@@ -148,7 +150,7 @@
         this.$('.brand-filter').zdSelectMenu();
       }
 
-      this.brandsInfo = _.object(_.map(data.brands, function(brand) {
+      this.brandsInfo = _.object(_.map(filteredBrands, function(brand) {
         return [brand.name, brand.logo && brand.logo.content_url];
       }));
     },
@@ -392,6 +394,12 @@
         $container.show();
         $icon.prop('class', 'icon-minus');
       }
-    }
+    },
+
+    filterBrands: function(brands){
+      return _.filter(brands, function(element){
+        return element.active;
+      });
+    },
   };
 }());
