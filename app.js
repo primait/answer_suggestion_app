@@ -398,7 +398,7 @@
 
     filterBrands: function(brands){
       return _.filter(brands, function(element){
-        return element.active;
+        return element.active && element.help_center_state === "enabled";
       });
     },
   };
