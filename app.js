@@ -138,7 +138,8 @@
     },
 
     getBrandsDone: function(data) {
-      this.isMultibrand = this.doesAccountHaveMultibrand(data.brands);
+      var filteredBrands = this.filterBrands(brands);
+      this.isMultibrand =  filteredBrands.length > 1;
 
       if (this.isMultibrand) {
         var options = _.map(this.filteredBrands, function(brand) {
@@ -396,16 +397,10 @@
       }
     },
 
-    filterBrands: function(brands)
-    {
+    filterBrands: function(brands){
       return _.filter(brands, function(element){
         return element.active;
       });
     },
-
-    doesAccountHaveMultibrand: function(brands){
-      this.filteredBrands = this.filterBrands(brands);
-      return this.filteredBrands.length > 1;
-    }
   };
 }());
