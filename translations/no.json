@@ -20,7 +20,7 @@
         "helpText": "Velg dette alternativet for å søke i kundesenterartiklene."
       },
       "exclude_agent_only": {
-        "label": "Utelat «Kun agenter»-emner."
+        "label": "Utelat emner av typen «Kun kundekonsulenter». (Bare i nettportalen)"
       }
     }
   },
@@ -39,6 +39,7 @@
   "help_text": "Klikk koblingen for å legge den til i kommentaren:",
   "spinner": "laster",
   "agents_only": "Privat",
+  "private_content_notice": "Sluttbrukere får ikke tilgang til dette innholdet.",
   "modal": {
     "close": "Lukk",
     "copy": "Legg til kommentar"

@@ -20,13 +20,13 @@
         "helpText": "Sélectionnez cette option pour effectuer des recherches dans les articles du centre d’aide."
       },
       "exclude_agent_only": {
-        "label": "Exclure les sujets réservés aux agents"
+        "label": "Exclure les sujets réservés aux agents (portail uniquement)"
       }
     }
   },
   "layout": {
     "placeholder_text": "Saisissez ce que vous voulez rechercher ici",
-    "search_button": "Rechercher"
+    "search_button": "Recherche"
   },
   "list": {
     "newtab_link": "Ouvrir dans un nouvel onglet",
@@ -39,6 +39,7 @@
   "help_text": "Cliquez sur le lien pour l’ajouter au commentaire :",
   "spinner": "chargement en cours",
   "agents_only": "Privée",
+  "private_content_notice": "Les utilisateurs finaux ne pourront pas accéder à ce contenu.",
   "modal": {
     "close": "Fermer",
     "copy": "Ajouter au commentaire"

@@ -1,46 +1,47 @@
 {
   "app": {
-    "description": "Answer Suggestions from your knowledge base.",
-    "name": "Answer Suggestion",
+    "description": "Förslag på svar från din kunskapsbas.",
+    "name": "Svarsförslag",
     "parameters": {
       "nb_entries": {
-        "label": "Number of results.",
-        "helpText": "Number of results to display (default: 10, max: 100)."
+        "label": "Antal träffar.",
+        "helpText": "Antal träffar som ska visas (förval: 10, max: 100)."
       },
       "custom_host": {
-        "label": "Custom Domain",
-        "helpText": "ie: https://support.mybusiness.com/"
+        "label": "Egen domän",
+        "helpText": "t.ex.: https://support.mybusiness.com/"
       },
       "include_title": {
-        "label": "Copy article title?",
-        "helpText": "Copy the article title as well as the article link."
+        "label": "Vill du kopiera artikelns titel?",
+        "helpText": "Kopiera artikelns titel såväl som artikellänken."
       },
       "search_hc": {
-        "label": "Are you using Help Center?",
-        "helpText": "Select this option to search Help Center articles."
+        "label": "Använder du Helpcenter?",
+        "helpText": "Välj detta alternativ för att söka efter Helpcenter-artiklar."
       },
       "exclude_agent_only": {
-        "label": "Exclude 'Agents Only' topics."
+        "label": "Uteslut Endast agenter-ämnen. (endast webbportalen)"
       }
     }
   },
   "layout": {
-    "placeholder_text": "Type your search here",
-    "search_button": "Search"
+    "placeholder_text": "Skriv din sökning här",
+    "search_button": "Sök"
   },
   "list": {
-    "newtab_link": "Open in a new tab",
-    "copylink_link": "Copy Link in comment",
-    "preview_link": "Preview article"
+    "newtab_link": "Öppna på en ny flik",
+    "copylink_link": "Kopiera länk till kommentar",
+    "preview_link": "Förhandsvisa artikeln"
   },
-  "stop_words": "a, about, above, across, after, again, against, all, almost, alone, along, already, also, although, always, am, among, an, and, another, any, anybody, anyone, anything, anywhere, are, area, areas, aren't, around, as, ask, asked, asking, asks, at, away, b, back, backed, backing, backs, be, became, because, become, becomes, been, before, began, behind, being, beings, below, best, better, between, big, both, but, by, c, came, can, cannot, can't, case, cases, certain, certainly, clear, clearly, come, could, couldn't, d, did, didn't, differ, different, differently, do, does, doesn't, doing, done, don't, down, downed, downing, downs, during, e, each, early, either, end, ended, ending, ends, enough, even, evenly, ever, every, everybody, everyone, everything, everywhere, f, face, faces, fact, facts, far, felt, few, find, finds, first, for, four, from, full, fully, further, furthered, furthering, furthers, g, gave, general, generally, get, gets, give, given, gives, go, going, good, goods, got, great, greater, greatest, group, grouped, grouping, groups, h, had, hadn't, has, hasn't, have, haven't, having, he, he'd, he'll, her, here, here's, hers, herself, he's, high, higher, highest, him, himself, his, how, however, how's, i, i'd, if, i'll, i'm, important, in, interest, interested, interesting, interests, into, is, isn't, it, its, it's, itself, i've, j, just, k, keep, keeps, kind, knew, know, known, knows, l, large, largely, last, later, latest, least, less, let, lets, let's, like, likely, long, longer, longest, m, made, make, making, man, many, may, me, member, members, men, might, more, most, mostly, mr, mrs, much, must, mustn't, my, myself, n, necessary, need, needed, needing, needs, never, new, newer, newest, next, no, nobody, non, noone, nor, not, nothing, now, nowhere, number, numbers, o, of, off, often, old, older, oldest, on, once, one, only, open, opened, opening, opens, or, order, ordered, ordering, orders, other, others, ought, our, ours, ourselves, out, over, own, p, part, parted, parting, parts, per, perhaps, place, places, point, pointed, pointing, points, possible, present, presented, presenting, presents, problem, problems, put, puts, q, quite, r, rather, really, right, room, rooms, s, said, same, saw, say, says, second, seconds, see, seem, seemed, seeming, seems, sees, several, shall, shan't, she, she'd, she'll, she's, should, shouldn't, show, showed, showing, shows, side, sides, since, small, smaller, smallest, so, some, somebody, someone, something, somewhere, state, states, still, such, sure, t, take, taken, than, that, that's, the, their, theirs, them, themselves, then, there, therefore, there's, these, they, they'd, they'll, they're, they've, thing, things, think, thinks, this, those, though, thought, thoughts, three, through, thus, to, today, together, too, took, toward, turn, turned, turning, turns, two, u, under, until, up, upon, us, use, used, uses, v, very, w, want, wanted, wanting, wants, was, wasn't, way, ways, we, we'd, well, we'll, wells, went, were, we're, weren't, we've, what, what's, when, when's, where, where's, whether, which, while, who, whole, whom, who's, whose, why, why's, will, with, within, without, won't, work, worked, working, works, would, wouldn't, x, y, year, years, yes, yet, you, you'd, you'll, young, younger, youngest, your, you're, yours, yourself, yourselves, you've, z",
-  "no_entries": "No suggestions for this ticket.",
-  "no_subject": "Waiting for a subject to be defined...",
-  "help_text": "Click the link to add it to the comment:",
-  "spinner": "loading",
-  "agents_only": "Private",
+  "stop_words": "zendesk,a,is,about,above,after,again,against,all,am,an,and,any,are,aren't,as,at,be,because,been,before,being,below,between,both,but,by,can't,cannot,could,couldn't,did,didn't,do,does,doesn't,doing,don't,down,during,each,few,for,from,further,had,hadn't,has,hasn't,have,haven't,having,he,he'd,he'll,he's,her,here,here's,hers,herself,him,himself,his,how,how's,i,i'd,i'll,i'm,i've,if,in,into,is,isn't,it,it's,its,itself,let's,me,more,most,mustn't,my,myself,no,nor,not,of,off,on,once,only,or,other,ought,our,ours,ourselves,out,over,own,same,shan't,she,she'd,she'll,she's,should,shouldn't,so,some,such,than,that,that's,the,their,theirs,them,themselves,then,there,there's,these,they,they'd,they'll,they're,they've,this,those,through,to,too,under,until,up,very,was,wasn't,we,we'd,we'll,we're,we've,were,weren't,what,what's,when,when's,where,where's,which,while,who,who's,whom,why,why's,with,won't,would,wouldn't,you,you'd,you'll,you're,you've,your,yours,yourself,yourselves",
+  "no_entries": "Inga förslag för detta ärende.",
+  "no_subject": "Väntar på att ett ämne ska definieras...",
+  "help_text": "Klicka på länken för att lägga till den i kommentaren:",
+  "spinner": "läser in",
+  "agents_only": "Privat",
+  "private_content_notice": "Slutanvändare kommer inte att ha åtkomst till detta innehåll.",
   "modal": {
-    "close": "Close",
-    "copy": "Add to comment"
+    "close": "Stäng",
+    "copy": "Lägg till i kommentar"
   }
 }
