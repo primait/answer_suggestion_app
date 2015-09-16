@@ -52,7 +52,7 @@
       "exclude_agent_only": {
         "label": {
           "title": "Check box to exclude topics only visible to agents",
-          "value": "Exclude 'Agents Only' topics. (Web Portal Only)"
+          "value": "Exclude 'Agents only' topics. (Web Portal only)"
         }
       }
     },
