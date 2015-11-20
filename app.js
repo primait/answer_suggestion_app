@@ -114,6 +114,7 @@
 
     settingsDone: function(data) {
       this.useMarkdown = data.settings.tickets.markdown_ticket_comments;
+      this.useRichText = data.settings.tickets.rich_text_comments;
     },
 
     hcArticleLocaleContent: function(data) {
@@ -284,16 +285,20 @@
       event.preventDefault();
       var content = "";
 
+      var title = event.target.title;
+      var link = event.target.href;
+
       if (this.useMarkdown) {
-        var title = event.target.title;
-        var link = event.target.href;
         content = helpers.fmt("[%@](%@)", title, link);
+      }
+      else if (this.useRichText){
+        content = helpers.fmt("<a href='%@' target='_blank'>%@</a>", link, title);
       }
       else {
         if (this.setting('include_title')) {
-          content = event.target.title + ' - ';
+          content = title + ' - ';
         }
-        content += event.currentTarget.href;
+        content += link;
       }
       return this.appendToComment(content);
     },
@@ -320,8 +325,7 @@
     },
 
     appendToComment: function(text){
-      var old_text = _.isEmpty(this.comment().text()) ? '' : this.comment().text() + '\n';
-      return this.comment().text( old_text + text);
+      return this.useRichText ? this.comment().appendHtml(text) : this.comment().appendText(text);
     },
 
     stop_words: _.memoize(function(){
