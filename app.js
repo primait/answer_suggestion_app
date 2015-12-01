@@ -21,8 +21,10 @@
       // DOM EVENTS
       'zd_ui_change .brand-filter': 'processSearchFromInput',
       'click a.preview_link': 'previewLink',
-      'dragend,click a.copy_link': 'copyLink',
-      'dragend a.main': 'copyLink',
+      'click a.copy_link': 'copyLink',
+      //rich text editor has built in drag and drop of links so we should only fire
+      //the dragend event when users are using Markdown or text.
+      'dragend': function(event){ if (!this.useRichText) this.copyLink(event); },
       'click .toggle-app': 'toggleAppContainer',
       'keyup .custom-search input': function(event){
         if (event.keyCode === 13) { return this.processSearchFromInput(); }
@@ -103,11 +105,11 @@
     },
 
     initialize: function(){
-      if (_.isEmpty(this.ticket().subject())) {
-        return this.switchTo('no_subject');
-      }
-
       this.ajax('settings').then(function() {
+        if (_.isEmpty(this.ticket().subject())) {
+          return this.switchTo('no_subject');
+        }
+
         this.search(this.subjectSearchQuery());
       }.bind(this));
     },
