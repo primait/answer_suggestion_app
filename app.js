@@ -116,7 +116,7 @@
 
     settingsDone: function(data) {
       this.useMarkdown = data.settings.tickets.markdown_ticket_comments;
-      this.useRichText = data.settings.tickets.rich_text_comments;
+      this.useRichText = this.ticket().comment().useRichText();
     },
 
     hcArticleLocaleContent: function(data) {
