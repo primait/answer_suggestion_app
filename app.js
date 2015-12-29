@@ -105,6 +105,8 @@
     },
 
     initialize: function(){
+      this.useRichText = this.ticket().comment().useRichText();
+
       this.ajax('settings').then(function() {
         if (_.isEmpty(this.ticket().subject())) {
           return this.switchTo('no_subject');
@@ -116,7 +118,6 @@
 
     settingsDone: function(data) {
       this.useMarkdown = data.settings.tickets.markdown_ticket_comments;
-      this.useRichText = data.settings.tickets.rich_text_comments;
     },
 
     hcArticleLocaleContent: function(data) {
