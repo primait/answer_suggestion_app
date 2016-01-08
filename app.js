@@ -13,13 +13,13 @@
       // AJAX EVENTS
       'searchHelpCenter.done': 'searchHelpCenterDone',
       'searchWebPortal.done': 'searchWebPortalDone',
-      'getBrands.done': 'getBrandsDone',
       'getHcArticle.done': 'getHcArticleDone',
       'getSectionAccessPolicy.done': 'getSectionAccessPolicyDone',
       'settings.done': 'settingsDone',
 
       // DOM EVENTS
       'zd_ui_change .brand-filter': 'processSearchFromInput',
+      'zd_ui_change .locale-filter': 'processSearchFromInput',
       'click a.preview_link': 'previewLink',
       'click a.copy_link': 'copyLink',
       //rich text editor has built in drag and drop of links so we should only fire
@@ -43,6 +43,11 @@
         type: 'GET'
       },
 
+      getLocales: {
+        url: '/api/v2/locales.json',
+        type: 'GET'
+      },
+
       getHcArticle: function(id) {
         return {
           url: helpers.fmt('/api/v2/help_center/articles/%@.json?include=translations', id),
@@ -58,17 +63,23 @@
       },
 
       searchHelpCenter: function(query) {
-        var locale = this.currentUser().locale(),
-            limit =  this.queryLimit(),
-            url = this.isMultibrand ? '/api/v2/search.json' : '/api/v2/help_center/articles/search.json',
-            finalquery = this.isMultibrand ? 'type:article ' + query : query;
+        var locale     = this.isMultilocale ? this.$('.locale-filter').zdSelectMenu('value') : undefined,
+
+            brand_id   = this.isMultibrand ? this.$('.brand-filter').zdSelectMenu('value') : undefined,
+            url        = this.isMultibrand ? '/api/v2/search.json' : '/api/v2/help_center/articles/search.json',
+
+            limit =  this.queryLimit();
+
+        query = this.isMultibrand ? 'type:article ' + query : query;
+        query = this.isMultibrand && brand_id !== 'any' ? 'brand:' + brand_id + ' ' + query : query;
+
         return {
           url: url,
           type: 'GET',
           data: {
             per_page: limit,
             locale:   locale,
-            query:    finalquery
+            query:    query
           }
         };
       },
@@ -99,8 +110,23 @@
     },
 
     created: function() {
+      this.isMultilocale = false;
       this.isMultibrand = false;
-      this.ajax('getBrands');
+
+      this.when(
+        this.ajax('getBrands'),
+        this.ajax('getLocales')
+      ).then(function(a, b) {
+        var brands = this.filterBrands(a[0].brands);
+        this.isMultibrand = brands.length > 1;
+
+        /* if multibrand, you can't search for locales */
+        this.isMultilocale = !this.isMultibrand && b[0].count > 1;
+
+        this.getBrandsDone(a[0]);
+        this.getLocalesDone(b[0]);
+      }.bind(this));
+
       this.initialize();
     },
 
@@ -112,7 +138,12 @@
           return this.switchTo('no_subject');
         }
 
-        this.search(this.subjectSearchQuery());
+        var subject = this.subjectSearchQuery();
+        if (subject) {
+          this.search(subject);
+        } else {
+          this.switchTo('list');
+        }
       }.bind(this));
     },
 
@@ -142,8 +173,6 @@
 
     getBrandsDone: function(data) {
       var filteredBrands = this.filterBrands(data.brands);
-      this.isMultibrand =  filteredBrands.length > 1;
-
       if (this.isMultibrand) {
         var options = _.map(filteredBrands, function(brand) {
           return { value: brand.id, label: brand.name };
@@ -157,6 +186,24 @@
       this.brandsInfo = _.object(_.map(filteredBrands, function(brand) {
         return [brand.name, brand.logo && brand.logo.content_url];
       }));
+    },
+
+    getLocalesDone: function(data) {
+      if (!this.isMultilocale) return;
+
+      var options = _.map(data.locales, function(locale) {
+        return {
+          value: locale.locale,
+          label: locale.name,
+          selected: this.currentUser().locale() === locale.locale ? 'selected' : undefined
+        };
+      }, this);
+
+      this.$('.custom-search').before(
+        this.renderTemplate('locale_filter', { options: options })
+      );
+
+      this.$('.locale-filter').zdSelectMenu();
     },
 
     getHcArticleDone: function(data) {
@@ -177,16 +224,7 @@
     },
 
     searchHelpCenterDone: function(data) {
-      var results = data.results;
-      if (this.isMultibrand) {
-        var brand = this.$('.brand-filter').zdSelectMenu('value');
-        if (brand !== 'any') {
-          results = _.filter(data.results, function (article) {
-            return article.brand_id == brand;
-          });
-        }
-      }
-      this.renderList(this.formatHcEntries(results));
+      this.renderList(this.formatHcEntries(data.results));
     },
 
     searchWebPortalDone: function(data){
@@ -378,7 +416,7 @@
         }
       }
 
-      return str;
+      return str.trim();
     },
 
     removePunctuation: function(str){
