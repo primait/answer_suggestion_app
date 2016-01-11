@@ -63,30 +63,31 @@
       },
 
       searchHelpCenter: function(query) {
-        var data = {
-              type: 'GET',
-              url: '/api/v2/help_center/articles/search.json',
-              data: {
-                per_page: this.queryLimit(),
-                query: query
-              }
+        var url = '/api/v2/help_center/articles/search.json',
+            data = {
+              per_page: this.queryLimit(),
+              query: query
             };
 
         if (this.isMultilocale) {
-          data.data.locale = this.$('.locale-filter').zdSelectMenu('value');
+          data.locale = this.$('.locale-filter').zdSelectMenu('value');
         }
 
         if (this.isMultibrand) {
-          data.url = '/api/v2/search.json';
-          data.data.brand_id = this.$('.brand-filter').zdSelectMenu('value');
-          data.data.query = 'type:article ' + data.data.query;
+          url = '/api/v2/search.json';
+          data.brand_id = this.$('.brand-filter').zdSelectMenu('value');
+          data.query = 'type:article ' + data.query;
 
-          if (data.data.brand_id !== 'any') {
-            data.data.query = 'brand:' + data.data.brand_id + ' ' + data.data.query;
+          if (data.brand_id !== 'any') {
+            data.query = 'brand:' + data.brand_id + ' ' + data.query;
           }
         }
 
-        return data;
+        return {
+          type: 'GET',
+          url: url,
+          data: data
+        };
       },
 
       searchWebPortal: function(query){
