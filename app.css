@@ -57,7 +57,7 @@ section div.well.well-small {
   margin-bottom: 0px;
 }
 
-.brand-filter {
+.brand-filter, .locale-filter {
   margin-bottom: 5px;
 }
 

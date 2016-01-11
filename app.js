@@ -13,13 +13,13 @@
       // AJAX EVENTS
       'searchHelpCenter.done': 'searchHelpCenterDone',
       'searchWebPortal.done': 'searchWebPortalDone',
-      'getBrands.done': 'getBrandsDone',
       'getHcArticle.done': 'getHcArticleDone',
       'getSectionAccessPolicy.done': 'getSectionAccessPolicyDone',
       'settings.done': 'settingsDone',
 
       // DOM EVENTS
       'zd_ui_change .brand-filter': 'processSearchFromInput',
+      'zd_ui_change .locale-filter': 'processSearchFromInput',
       'click a.preview_link': 'previewLink',
       'click a.copy_link': 'copyLink',
       //rich text editor has built in drag and drop of links so we should only fire
@@ -43,6 +43,11 @@
         type: 'GET'
       },
 
+      getLocales: {
+        url: '/api/v2/locales.json',
+        type: 'GET'
+      },
+
       getHcArticle: function(id) {
         return {
           url: helpers.fmt('/api/v2/help_center/articles/%@.json?include=translations', id),
@@ -58,18 +63,30 @@
       },
 
       searchHelpCenter: function(query) {
-        var locale = this.currentUser().locale(),
-            limit =  this.queryLimit(),
-            url = this.isMultibrand ? '/api/v2/search.json' : '/api/v2/help_center/articles/search.json',
-            finalquery = this.isMultibrand ? 'type:article ' + query : query;
-        return {
-          url: url,
-          type: 'GET',
-          data: {
-            per_page: limit,
-            locale:   locale,
-            query:    finalquery
+        var url = '/api/v2/help_center/articles/search.json',
+            data = {
+              per_page: this.queryLimit(),
+              query: query
+            };
+
+        if (this.isMultilocale) {
+          data.locale = this.$('.locale-filter').zdSelectMenu('value');
+        }
+
+        if (this.isMultibrand) {
+          url = '/api/v2/search.json';
+          data.brand_id = this.$('.brand-filter').zdSelectMenu('value');
+          data.query = 'type:article ' + data.query;
+
+          if (data.brand_id !== 'any') {
+            data.query = 'brand:' + data.brand_id + ' ' + data.query;
           }
+        }
+
+        return {
+          type: 'GET',
+          url: url,
+          data: data
         };
       },
 
@@ -99,8 +116,26 @@
     },
 
     created: function() {
+      this.isMultilocale = false;
       this.isMultibrand = false;
-      this.ajax('getBrands');
+
+      this.when(
+        this.ajax('getBrands'),
+        this.ajax('getLocales')
+      ).then(function(brandsResponse, localeResponse) {
+        var brandsData = brandsResponse[0],
+            localeData = localeResponse[0];
+
+        var brands = this.filterBrands(brandsData.brands);
+        this.isMultibrand = brands.length > 1;
+
+        /* if multibrand, you can't search for locales because the HC API doesn't support that */
+        this.isMultilocale = !this.isMultibrand && localeData.count > 1;
+
+        if (this.isMultibrand) { this.getBrandsDone(brandsData); }
+        if (this.isMultilocale) { this.getLocalesDone(localeData); }
+      }.bind(this));
+
       this.initialize();
     },
 
@@ -112,7 +147,12 @@
           return this.switchTo('no_subject');
         }
 
-        this.search(this.subjectSearchQuery());
+        var subject = this.subjectSearchQuery();
+        if (subject) {
+          this.search(subject);
+        } else {
+          this.switchTo('list');
+        }
       }.bind(this));
     },
 
@@ -142,8 +182,6 @@
 
     getBrandsDone: function(data) {
       var filteredBrands = this.filterBrands(data.brands);
-      this.isMultibrand =  filteredBrands.length > 1;
-
       if (this.isMultibrand) {
         var options = _.map(filteredBrands, function(brand) {
           return { value: brand.id, label: brand.name };
@@ -157,6 +195,25 @@
       this.brandsInfo = _.object(_.map(filteredBrands, function(brand) {
         return [brand.name, brand.logo && brand.logo.content_url];
       }));
+    },
+
+    getLocalesDone: function(data) {
+      if (!this.isMultilocale) return;
+
+      var options = _.map(data.locales, function(locale) {
+        var data = {
+          value: locale.locale,
+          label: locale.name
+        };
+        if (this.currentUser().locale() === locale.locale) { data.selected = 'selected'; }
+        return data;
+      }, this);
+
+      this.$('.custom-search').before(
+        this.renderTemplate('locale_filter', { options: options })
+      );
+
+      this.$('.locale-filter').zdSelectMenu();
     },
 
     getHcArticleDone: function(data) {
@@ -177,16 +234,7 @@
     },
 
     searchHelpCenterDone: function(data) {
-      var results = data.results;
-      if (this.isMultibrand) {
-        var brand = this.$('.brand-filter').zdSelectMenu('value');
-        if (brand !== 'any') {
-          results = _.filter(data.results, function (article) {
-            return article.brand_id == brand;
-          });
-        }
-      }
-      this.renderList(this.formatHcEntries(results));
+      this.renderList(this.formatHcEntries(data.results));
     },
 
     searchWebPortalDone: function(data){
@@ -378,7 +426,7 @@
         }
       }
 
-      return str;
+      return str.trim();
     },
 
     removePunctuation: function(str){

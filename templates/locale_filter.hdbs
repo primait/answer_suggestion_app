@@ -1,0 +1,5 @@
+<select class="locale-filter" name="locale" data-zd-type="select_menu">
+  {{#each options}}
+    <option value="{{value}}" {{selected}}>{{label}}</option>
+  {{/each}}
+</select>
