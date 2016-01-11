@@ -116,15 +116,18 @@
       this.when(
         this.ajax('getBrands'),
         this.ajax('getLocales')
-      ).then(function(a, b) {
-        var brands = this.filterBrands(a[0].brands);
+      ).then(function() {
+        var brandsResponse = arguments[0][0],
+            localeResponse = arguments[1][0];
+
+        var brands = this.filterBrands(brandsResponse.brands);
         this.isMultibrand = brands.length > 1;
 
-        /* if multibrand, you can't search for locales */
-        this.isMultilocale = !this.isMultibrand && b[0].count > 1;
+        /* if multibrand, you can't search for locales because the HC API doesn't support that */
+        this.isMultilocale = !this.isMultibrand && localeResponse.count > 1;
 
-        this.getBrandsDone(a[0]);
-        this.getLocalesDone(b[0]);
+        this.getBrandsDone(brandsResponse);
+        this.getLocalesDone(localeResponse);
       }.bind(this));
 
       this.initialize();
