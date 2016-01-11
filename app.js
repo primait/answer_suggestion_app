@@ -200,11 +200,12 @@
       if (!this.isMultilocale) return;
 
       var options = _.map(data.locales, function(locale) {
-        return {
+        var data = {
           value: locale.locale,
-          label: locale.name,
-          selected: this.currentUser().locale() === locale.locale ? 'selected' : undefined
+          label: locale.name
         };
+        if (this.currentUser().locale() === locale.locale) { data.selected = 'selected'; }
+        return data;
       }, this);
 
       this.$('.custom-search').before(
