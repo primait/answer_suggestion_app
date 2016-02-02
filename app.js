@@ -161,7 +161,7 @@
     },
 
     hcArticleLocaleContent: function(data) {
-      var currentLocale = this.currentUser().locale(),
+      var currentLocale = this.isMultilocale ? this.$('.locale-filter').zdSelectMenu('value') : this.currentUser().locale(),
           translations = data.article.translations;
 
       var localizedTranslation = _.find(translations, function(translation) {
