@@ -7,7 +7,9 @@
   "parameters": [
     {
       "name": "nb_entries",
-      "type": "number"
+      "type": "number",
+      "default": 10,
+      "required": true
     },
     {
       "name": "custom_host",
