@@ -20,7 +20,7 @@ parts:
   - translation:
       key: "txt.apps.answer_suggestion_app.app.parameters.nb_entries.helpText"
       title: "Help text for the number of result field"
-      value: "Number of results to display (default: 10, max: 100)."
+      value: "Number of results to display (default: 10, min: 1, max: 100)."
   - translation:
       key: "txt.apps.answer_suggestion_app.app.parameters.custom_host.label"
       title: "If the customer wants to specify a custom domain different than company.zendesk.com they can input their own domain here"
