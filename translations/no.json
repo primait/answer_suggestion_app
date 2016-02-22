@@ -5,7 +5,7 @@
     "parameters": {
       "nb_entries": {
         "label": "Antall resultater.",
-        "helpText": "Antall resultater som skal vises (standard: 10, maks: 100)."
+        "helpText": "Antall resultater som skal vises (standard: 10, min.: 1, maks.: 100)."
       },
       "custom_host": {
         "label": "Tilpasset domene",

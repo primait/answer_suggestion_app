@@ -5,7 +5,7 @@
     "parameters": {
       "nb_entries": {
         "label": "Número de resultados.",
-        "helpText": "Número de resultados a ser exibido (padrão: 10, máx.: 100)."
+        "helpText": "Número de resultados a ser exibido (padrão: 10, mín.: 1, máx.: 100)."
       },
       "custom_host": {
         "label": "Domínio personalizado",

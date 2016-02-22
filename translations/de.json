@@ -5,11 +5,11 @@
     "parameters": {
       "nb_entries": {
         "label": "Anzahl von Ergebnissen.",
-        "helpText": "Anzahl anzuzeigender Ergebnisse (Standardwert: 10, max.: 100)."
+        "helpText": "Anzahl anzuzeigender Ergebnisse (Standardwert: 10, min.: 1, max.: 100)."
       },
       "custom_host": {
         "label": "Angepasste Domäne",
-        "helpText": "d. h. https://support.meinefirma.com/"
+        "helpText": "Zum Beispiel: https://support.meinefirma.com/"
       },
       "include_title": {
         "label": "Beitragstitel kopieren?",
@@ -37,7 +37,7 @@
   "no_entries": "Keine Vorschläge zu diesem Ticket.",
   "no_subject": "Warten auf Angabe eines Betreffs...",
   "help_text": "Klicken Sie auf den Link, um ihn zum Kommentar hinzuzufügen:",
-  "spinner": "Laden",
+  "spinner": "Wird geladen",
   "agents_only": "Privat",
   "private_content_notice": "Endbenutzer können nicht auf diesen Inhalt zugreifen.",
   "modal": {

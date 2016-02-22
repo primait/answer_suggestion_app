@@ -5,7 +5,7 @@
     "parameters": {
       "nb_entries": {
         "label": "Tulosten lukumäärä.",
-        "helpText": "Esitettävien tulosten lukumäärä (oletus: 10, maksimi: 100)."
+        "helpText": "Esitettävien tulosten lukumäärä (oletus: 10, minimi: 1, maksimi: 100)."
       },
       "custom_host": {
         "label": "Asiakkaan toimialue",
