@@ -4,8 +4,8 @@
     "name": "Sugerowane odpowiedzi",
     "parameters": {
       "nb_entries": {
-        "label": "Liczba wyników.",
-        "helpText": "Liczba wyników do wyświetlenia (domyślnie: 10, maksymalnie: 100)."
+        "label": "Liczba wyników",
+        "helpText": "Liczba wyników do wyświetlenia (domyślnie: 10, min.: 1, maks.: 100)."
       },
       "custom_host": {
         "label": "Domena niestandardowa",

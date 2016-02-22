@@ -5,7 +5,7 @@
     "parameters": {
       "nb_entries": {
         "label": "Sonuç sayısı.",
-        "helpText": "Görüntülenecek sonuç sayısı (varsayılan: 10, maks: 100)."
+        "helpText": "Görüntülenecek sonuç sayısı (varsayılan: 10, min: 1, maks: 100)."
       },
       "custom_host": {
         "label": "Özel Etki Alanı",

@@ -5,7 +5,7 @@
     "parameters": {
       "nb_entries": {
         "label": "結果數目",
-        "helpText": "顯示結果數目（預設：10，最多：100）。"
+        "helpText": "顯示結果數目（預設：10，最少：1，最多：100）。"
       },
       "custom_host": {
         "label": "自訂網域",
@@ -29,7 +29,7 @@
     "search_button": "搜尋"
   },
   "list": {
-    "newtab_link": "在新索引標籤中開啟",
+    "newtab_link": "在新分頁中開啟",
     "copylink_link": "複製連結至評論",
     "preview_link": "預覽文章"
   },

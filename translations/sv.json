@@ -5,7 +5,7 @@
     "parameters": {
       "nb_entries": {
         "label": "Antal träffar.",
-        "helpText": "Antal träffar som ska visas (förval: 10, max: 100)."
+        "helpText": "Antal träffar som ska visas (förval: 10, min 1, max: 100)."
       },
       "custom_host": {
         "label": "Egen domän",
@@ -29,7 +29,7 @@
     "search_button": "Sök"
   },
   "list": {
-    "newtab_link": "Öppna på en ny flik",
+    "newtab_link": "Öppna i en ny flik",
     "copylink_link": "Kopiera länk till kommentar",
     "preview_link": "Förhandsvisa artikeln"
   },

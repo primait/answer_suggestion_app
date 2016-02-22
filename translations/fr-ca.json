@@ -5,7 +5,7 @@
     "parameters": {
       "nb_entries": {
         "label": "Nombre de résultats",
-        "helpText": "Nombre de résultats à afficher (par défaut : 10, max. : 100)."
+        "helpText": "Nombre de résultats à afficher (par défaut : 10, min. : 1, max. : 100)."
       },
       "custom_host": {
         "label": "Domaine personnalisé",
