@@ -9,5 +9,5 @@
 
 <div class="modal-footer">
   <button class="btn" data-dismiss="modal">{{t "modal.close"}}</button>
-  <a href="{{link}}" title="{{title}}" class="btn btn-primary copy_link" data-dismiss="modal">{{t "modal.copy"}}</a>
+  <a href="{{link}}" title="{{title}}" class="btn btn-primary copy_content" data-dismiss="modal">{{t "modal.copy"}}</a>
 </div>

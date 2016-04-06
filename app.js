@@ -22,6 +22,7 @@
       'zd_ui_change .locale-filter': 'processSearchFromInput',
       'click a.preview_link': 'previewLink',
       'click a.copy_link': 'copyLink',
+      'click a.copy_content': 'copyContent',
       //rich text editor has built in drag and drop of links so we should only fire
       //the dragend event when users are using Markdown or text.
       'dragend': function(event){ if (!this.useRichText) this.copyLink(event); },
@@ -351,6 +352,13 @@
         }
         content += link;
       }
+      return this.appendToComment(content);
+    },
+
+    copyContent: function(event) {
+      event.preventDefault();
+      var content = this.$('#detailsModal .modal-body .content-body').html();
+      content = content.replace(/(<([^>]+)>)/ig,"");
       return this.appendToComment(content);
     },
 
